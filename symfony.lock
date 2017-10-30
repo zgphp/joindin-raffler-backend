@@ -301,5 +301,8 @@
             "version": "2.2",
             "ref": "9d60c231a92e69c68b89897813ec4931d0697b1f"
         }
+    },
+    "squizlabs/php_codesniffer": {
+        "version": "3.1.1"
     }
 }
