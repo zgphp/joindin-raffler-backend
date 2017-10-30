@@ -304,5 +304,11 @@
     },
     "squizlabs/php_codesniffer": {
         "version": "3.1.1"
+    },
+    "pdepend/pdepend": {
+        "version": "2.5.0"
+    },
+    "phpmd/phpmd": {
+        "version": "2.6.0"
     }
 }
