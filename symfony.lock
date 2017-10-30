@@ -190,5 +190,14 @@
             "version": "4.7",
             "ref": "a5708058bd6f16863618096090e825c549a231e1"
         }
+    },
+    "symfony/process": {
+        "version": "v3.4.0-beta1"
+    },
+    "phpspec/php-diff": {
+        "version": "v1.1.0"
+    },
+    "phpspec/phpspec": {
+        "version": "4.2.0"
     }
 }
