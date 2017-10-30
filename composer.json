@@ -13,6 +13,7 @@
     },
     "require-dev": {
         "heroku/heroku-buildpack-php": "^126.0",
+        "phpspec/phpspec": "^4.2",
         "phpunit/phpunit": "^6.4"
     },
     "config": {
