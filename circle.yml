@@ -19,6 +19,18 @@ jobs:
           name: Lint all PHP code files
           command: find src/ -type f -name "*.php" -print0 | xargs -0 -n1 php -l
 
+      - run:
+          name: PHPSpec
+          command: ./vendor/bin/phpspec run
+
+      - run:
+          name: PHPUnit
+          command: ./vendor/bin/phpunit
+
+      - run:
+          name: Behat
+          command: ./vendor/bin/behat
+
       - save_cache:
           key: cache-v3-{{ checksum "composer.lock" }}
           paths:
