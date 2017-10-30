@@ -1,0 +1,31 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/php:7.1
+    parallel: 1
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: cache-v3-{{ checksum "composer.lock" }}
+          
+      - run:
+          name: Composer install
+          command: SYMFONY_ENV=test composer install --prefer-dist --no-interaction
+
+      - run:
+          name: Lint all PHP code files
+          command: find src/ -type f -name "*.php" -print0 | xargs -0 -n1 php -l
+
+      - save_cache:
+          key: cache-v3-{{ checksum "composer.lock" }}
+          paths:
+            - /home/circleci/project/vendor
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
