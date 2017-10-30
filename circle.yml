@@ -31,6 +31,14 @@ jobs:
           name: Behat
           command: ./vendor/bin/behat
 
+      - run:
+          name: PHPStan
+          command: ./vendor/bin/phing phpstan
+
+      - run:
+          name: Code standards
+          command: ./vendor/bin/phing check-codestandards
+
       - save_cache:
           key: cache-v3-{{ checksum "composer.lock" }}
           paths:
