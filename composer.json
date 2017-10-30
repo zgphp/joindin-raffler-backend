@@ -18,6 +18,7 @@
     },
     "require-dev": {
         "behat/symfony2-extension": "^2.1",
+        "doctrine/doctrine-fixtures-bundle": "^2.4",
         "friendsofphp/php-cs-fixer": "^2.7",
         "heroku/heroku-buildpack-php": "^126.0",
         "mockery/mockery": "^1.0",
