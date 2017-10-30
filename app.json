@@ -1,0 +1,6 @@
+{
+  "name": "ZgPHP Joind.in raffler",
+  "description": "A small Symfony 4 PHP app to run our Joind.in raffler",
+  "repository": "https://github.com/zgphp/joindin-raffler-backend",
+  "addons": []
+}
