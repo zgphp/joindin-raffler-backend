@@ -229,5 +229,11 @@
             "version": "2.1",
             "ref": "c7f17046c050428d9c3c7698861cc5edd045404d"
         }
+    },
+    "hamcrest/hamcrest-php": {
+        "version": "v2.0.0"
+    },
+    "mockery/mockery": {
+        "version": "1.0"
     }
 }
