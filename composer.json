@@ -12,7 +12,8 @@
         "symfony/yaml": "^3.4"
     },
     "require-dev": {
-        "heroku/heroku-buildpack-php": "^126.0"
+        "heroku/heroku-buildpack-php": "^126.0",
+        "phpunit/phpunit": "^6.4"
     },
     "config": {
         "preferred-install": {
