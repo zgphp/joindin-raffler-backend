@@ -30,3 +30,6 @@
 ###> composer ###
 composer.phar
 ###< composer ###
+###> behat/symfony2-extension ###
+behat.yml
+###< behat/symfony2-extension ###
