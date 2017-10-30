@@ -12,7 +12,7 @@
         "version": "1.0.2"
     },
     "symfony/debug": {
-        "version": "v4.0.0-beta1"
+        "version": "v3.4.0-beta1"
     },
     "symfony/polyfill-mbstring": {
         "version": "v1.6.0"
@@ -35,29 +35,38 @@
             "ref": "5b2f0ee78c90d671860ac6450e37dec10fbc0719"
         }
     },
+    "paragonie/random_compat": {
+        "version": "v2.0.11"
+    },
+    "symfony/polyfill-php70": {
+        "version": "v1.6.0"
+    },
     "symfony/http-foundation": {
-        "version": "v4.0.0-beta1"
+        "version": "v3.4.0-beta1"
     },
     "symfony/event-dispatcher": {
-        "version": "v4.0.0-beta1"
+        "version": "v3.4.0-beta1"
     },
     "symfony/http-kernel": {
-        "version": "v4.0.0-beta1"
+        "version": "v3.4.0-beta1"
     },
     "symfony/finder": {
-        "version": "v4.0.0-beta1"
+        "version": "v3.4.0-beta1"
     },
     "symfony/filesystem": {
-        "version": "v4.0.0-beta1"
+        "version": "v3.4.0-beta1"
     },
     "psr/container": {
         "version": "1.0.0"
     },
     "symfony/dependency-injection": {
-        "version": "v4.0.0-beta1"
+        "version": "v3.4.0-beta1"
     },
     "symfony/config": {
-        "version": "v4.0.0-beta1"
+        "version": "v3.4.0-beta1"
+    },
+    "symfony/class-loader": {
+        "version": "v3.4.0-beta1"
     },
     "psr/simple-cache": {
         "version": "1.0.0"
@@ -65,8 +74,11 @@
     "psr/cache": {
         "version": "1.0.1"
     },
+    "symfony/polyfill-apcu": {
+        "version": "v1.6.0"
+    },
     "symfony/cache": {
-        "version": "v4.0.0-beta1"
+        "version": "v3.4.0-beta1"
     },
     "symfony/framework-bundle": {
         "version": "3.3",
@@ -78,13 +90,13 @@
         }
     },
     "symfony/lts": {
-        "version": "4-dev"
+        "version": "v3"
     },
     "symfony/yaml": {
-        "version": "v4.0.0-beta1"
+        "version": "v3.4.0-beta1"
     },
     "symfony/dotenv": {
-        "version": "v4.0.0-beta1"
+        "version": "v3.4.0-beta1"
     },
     "heroku/heroku-buildpack-php": {
         "version": "v126"
