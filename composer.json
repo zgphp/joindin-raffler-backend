@@ -4,12 +4,12 @@
     "minimum-stability": "beta",
     "require": {
         "php": "^7.0.8",
-        "symfony/console": "^4.0",
-        "symfony/dotenv": "^4.0@beta",
+        "symfony/console": "^3.4",
+        "symfony/dotenv": "^3.4",
         "symfony/flex": "^1.0",
-        "symfony/framework-bundle": "^4.0",
-        "symfony/lts": "^4@dev",
-        "symfony/yaml": "^4.0"
+        "symfony/framework-bundle": "^3.4",
+        "symfony/lts": "^3",
+        "symfony/yaml": "^3.4"
     },
     "require-dev": {
         "heroku/heroku-buildpack-php": "^126.0"
@@ -47,7 +47,7 @@
     },
     "extra": {
         "symfony": {
-            "id": "01BXP5MFT75YC0V830PKVCXCBD",
+            "id": "01BXPH1Y4A3772BXEHCBN1XQEX",
             "allow-contrib": false
         }
     }
