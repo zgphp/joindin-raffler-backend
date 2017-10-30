@@ -199,5 +199,35 @@
     },
     "phpspec/phpspec": {
         "version": "4.2.0"
+    },
+    "symfony/translation": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "58f37511a2ceec2761716413ce679cbe118e37c3"
+        }
+    },
+    "container-interop/container-interop": {
+        "version": "1.2.0"
+    },
+    "behat/transliterator": {
+        "version": "v1.2.0"
+    },
+    "behat/gherkin": {
+        "version": "v4.5.1"
+    },
+    "behat/behat": {
+        "version": "v3.4.1"
+    },
+    "behat/symfony2-extension": {
+        "version": "2.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.1",
+            "ref": "c7f17046c050428d9c3c7698861cc5edd045404d"
+        }
     }
 }
