@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "49babc648ceb06d90dad3fcadc87c12b",
+    "content-hash": "a1557e2587c722aeb1a423531ea6160e",
     "packages": [
         {
             "name": "paragonie/random_compat",
@@ -894,16 +894,16 @@
         },
         {
             "name": "symfony/framework-bundle",
-            "version": "v3.4.0-BETA1",
+            "version": "3.4.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/framework-bundle.git",
-                "reference": "3a8a4c949db0ce728cb22e8f9c9c12d162676aae"
+                "reference": "53639a846bc9c31fd3017a9f85dcb8295f6b8bc7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/framework-bundle/zipball/3a8a4c949db0ce728cb22e8f9c9c12d162676aae",
-                "reference": "3a8a4c949db0ce728cb22e8f9c9c12d162676aae",
+                "url": "https://api.github.com/repos/symfony/framework-bundle/zipball/53639a846bc9c31fd3017a9f85dcb8295f6b8bc7",
+                "reference": "53639a846bc9c31fd3017a9f85dcb8295f6b8bc7",
                 "shasum": ""
             },
             "require": {
@@ -1005,7 +1005,7 @@
             ],
             "description": "Symfony FrameworkBundle",
             "homepage": "https://symfony.com",
-            "time": "2017-10-18T15:28:19+00:00"
+            "time": "2017-10-29T21:08:13+00:00"
         },
         {
             "name": "symfony/http-foundation",
@@ -4331,7 +4331,9 @@
     ],
     "aliases": [],
     "minimum-stability": "beta",
-    "stability-flags": [],
+    "stability-flags": {
+        "symfony/framework-bundle": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
