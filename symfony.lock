@@ -367,5 +367,26 @@
     },
     "symfony/orm-pack": {
         "version": "v1.0.3"
+    },
+    "zendframework/zend-eventmanager": {
+        "version": "3.2.0"
+    },
+    "zendframework/zend-code": {
+        "version": "3.3.0"
+    },
+    "ocramius/proxy-manager": {
+        "version": "2.1.1"
+    },
+    "doctrine/migrations": {
+        "version": "v1.5.0"
+    },
+    "doctrine/doctrine-migrations-bundle": {
+        "version": "1.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.2",
+            "ref": "c1431086fec31f17fbcfe6d6d7e92059458facc1"
+        }
     }
 }
