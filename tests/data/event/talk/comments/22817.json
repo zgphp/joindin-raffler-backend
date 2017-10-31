@@ -1,0 +1,23 @@
+{
+  "comments": [
+    {
+      "rating": 5,
+      "comment": "A nice overview of all the pros and cons of knowing a lot of stuff and how to learn a new technology and then use it in your daily routines",
+      "user_display_name": "Tony Mrakovcic",
+      "username": "tonymrakovcic",
+      "talk_title": "Fullstacking - 101",
+      "created_date": "2017-10-26T15:38:21+02:00",
+      "uri": "https://api.joind.in/v2.1/talk_comments/83645",
+      "verbose_uri": "https://api.joind.in/v2.1/talk_comments/83645?verbose=yes",
+      "talk_uri": "https://api.joind.in/v2.1/talks/22817",
+      "talk_comments_uri": "https://api.joind.in/v2.1/talks/22817/comments",
+      "reported_uri": "https://api.joind.in/v2.1/talk_comments/83645/reported",
+      "user_uri": "https://api.joind.in/v2.1/users/26764"
+    }
+  ],
+  "meta": {
+    "count": 1,
+    "total": 1,
+    "this_page": "https://api.joind.in/v2.1/talks/22817/comments?resultsperpage=20"
+  }
+}

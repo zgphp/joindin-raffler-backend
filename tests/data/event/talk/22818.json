@@ -1,0 +1,42 @@
+{
+  "talks": [
+    {
+      "talk_title": "HTTP caching - symfony, varnish, invalidation, naming",
+      "url_friendly_talk_title": "http-caching---symfony-varnish-invalidation-naming",
+      "talk_description": "Talk will provide entrance into world of http caching, and dig into its concepts, technology and implementation. Regardles if done on existing or new project, read heavy or fully dynamic project, this talk will provide you with info to get you confident with http caching and show you how to tackle common problems you will certinaly face.",
+      "type": "Talk",
+      "start_date": "2017-10-19T18:45:00+02:00",
+      "duration": 45,
+      "stub": "1fb4b",
+      "average_rating": 5,
+      "comments_enabled": 1,
+      "comment_count": 3,
+      "starred": false,
+      "starred_count": 0,
+      "slides_link": "",
+      "talk_media": null,
+      "language": "English - US",
+      "speakers": [
+        {
+          "speaker_name": "Alen Pokos",
+          "speaker_uri": "https://api.joind.in/v2.1/users/45087"
+        }
+      ],
+      "tracks": [],
+      "uri": "https://api.joind.in/v2.1/talks/22818",
+      "verbose_uri": "https://api.joind.in/v2.1/talks/22818?verbose=yes",
+      "website_uri": "https://joind.in/talk/1fb4b",
+      "starred_uri": "https://api.joind.in/v2.1/talks/22818/starred",
+      "tracks_uri": "https://api.joind.in/v2.1/talks/22818/tracks",
+      "comments_uri": "https://api.joind.in/v2.1/talks/22818/comments",
+      "verbose_comments_uri": "https://api.joind.in/v2.1/talks/22818/comments?verbose=yes",
+      "event_uri": "https://api.joind.in/v2.1/events/6674",
+      "speakers_uri": "https://api.joind.in/v2.1/talks/22818/speakers"
+    }
+  ],
+  "meta": {
+    "count": 1,
+    "total": 1,
+    "this_page": "https://api.joind.in/v2.1/talks/22818?verbose=yes&resultsperpage=20"
+  }
+}
