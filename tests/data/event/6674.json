@@ -1,0 +1,59 @@
+{
+  "events": [
+    {
+      "name": "ZgPHP 2017/10 meetup",
+      "url_friendly_name": "zgphp-201710-meetup",
+      "start_date": "2017-10-19T00:00:00+02:00",
+      "end_date": "2017-10-19T00:00:00+02:00",
+      "description": "Monthly Zagreb PHP meetup",
+      "stub": null,
+      "href": "https://www.meetup.com/ZgPHP-meetup/events/243277952/",
+      "icon": null,
+      "latitude": 45.81003255,
+      "longitude": 15.9742797,
+      "tz_continent": "Europe",
+      "tz_place": "Zagreb",
+      "location": "Mama",
+      "contact_name": "Zgphp meetup",
+      "hashtag": null,
+      "attendee_count": 2,
+      "attending": false,
+      "event_average_rating": 0,
+      "comments_enabled": 1,
+      "event_comments_count": 0,
+      "tracks_count": 0,
+      "talks_count": 2,
+      "cfp_start_date": null,
+      "cfp_end_date": null,
+      "cfp_url": null,
+      "talk_comments_count": 4,
+      "images": [],
+      "tags": [
+        "php"
+      ],
+      "uri": "https://api.joind.in/v2.1/events/6674",
+      "verbose_uri": "https://api.joind.in/v2.1/events/6674?verbose=yes",
+      "comments_uri": "https://api.joind.in/v2.1/events/6674/comments",
+      "talks_uri": "https://api.joind.in/v2.1/events/6674/talks",
+      "tracks_uri": "https://api.joind.in/v2.1/events/6674/tracks",
+      "attending_uri": "https://api.joind.in/v2.1/events/6674/attending",
+      "images_uri": "https://api.joind.in/v2.1/events/6674/images",
+      "website_uri": "https://joind.in/event/zgphp-201710-meetup",
+      "all_talk_comments_uri": "https://api.joind.in/v2.1/events/6674/talk_comments",
+      "hosts": [
+        {
+          "host_name": "Zgphp meetup",
+          "host_uri": "https://api.joind.in/v2.1/users/18487"
+        }
+      ],
+      "hosts_uri": "https://api.joind.in/v2.1/events/6674/hosts",
+      "attendees_uri": "https://api.joind.in/v2.1/events/6674/attendees",
+      "can_edit": false
+    }
+  ],
+  "meta": {
+    "count": 1,
+    "total": 1,
+    "this_page": "https://api.joind.in/v2.1/events/6674?verbose=yes&resultsperpage=20"
+  }
+}

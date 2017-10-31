@@ -1,0 +1,38 @@
+{
+  "talks": [
+    {
+      "talk_title": "Fullstacking - 101",
+      "url_friendly_talk_title": "fullstacking---101",
+      "talk_description": "We are gonna talk about pros and cons of being a fullstack developer and how that directly affects your mindset when you are working on a single platform. There will be a comparison of several platforms and their effects on other platforms. We will also stumble over how to approach the process of learning to be a fullstack developer.",
+      "type": "Talk",
+      "start_date": "2017-10-19T18:15:00+02:00",
+      "duration": 25,
+      "stub": "e8243",
+      "average_rating": 5,
+      "comments_enabled": 1,
+      "comment_count": 1,
+      "starred": false,
+      "starred_count": 0,
+      "speakers": [
+        {
+          "speaker_name": "Vilim Stubi\u010dan"
+        }
+      ],
+      "tracks": [],
+      "uri": "https://api.joind.in/v2.1/talks/22817",
+      "verbose_uri": "https://api.joind.in/v2.1/talks/22817?verbose=yes",
+      "website_uri": "https://joind.in/talk/e8243",
+      "starred_uri": "https://api.joind.in/v2.1/talks/22817/starred",
+      "tracks_uri": "https://api.joind.in/v2.1/talks/22817/tracks",
+      "comments_uri": "https://api.joind.in/v2.1/talks/22817/comments",
+      "verbose_comments_uri": "https://api.joind.in/v2.1/talks/22817/comments?verbose=yes",
+      "event_uri": "https://api.joind.in/v2.1/events/6674",
+      "speakers_uri": "https://api.joind.in/v2.1/talks/22817/speakers"
+    }
+  ],
+  "meta": {
+    "count": 1,
+    "total": 1,
+    "this_page": "https://api.joind.in/v2.1/talks/22817?resultsperpage=20"
+  }
+}

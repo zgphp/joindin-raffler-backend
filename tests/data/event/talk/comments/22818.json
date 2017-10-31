@@ -1,0 +1,51 @@
+{
+  "comments": [
+    {
+      "rating": 5,
+      "comment": "Great talk, some very useful Symfony HTTP cache tips and how-to were mentioned.",
+      "user_display_name": "Andrej Vitez",
+      "username": "tezvi",
+      "talk_title": "HTTP caching - symfony, varnish, invalidation, naming",
+      "created_date": "2017-10-25T19:57:21+02:00",
+      "uri": "https://api.joind.in/v2.1/talk_comments/83555",
+      "verbose_uri": "https://api.joind.in/v2.1/talk_comments/83555?verbose=yes",
+      "talk_uri": "https://api.joind.in/v2.1/talks/22818",
+      "talk_comments_uri": "https://api.joind.in/v2.1/talks/22818/comments",
+      "reported_uri": "https://api.joind.in/v2.1/talk_comments/83555/reported",
+      "user_uri": "https://api.joind.in/v2.1/users/45128"
+    },
+    {
+      "rating": 5,
+      "comment": "Great insight on how to use and implement http caching on a huge project. Really liked the small details and real life examples that happen in the real world :)",
+      "user_display_name": "Tony Mrakovcic",
+      "username": "tonymrakovcic",
+      "talk_title": "HTTP caching - symfony, varnish, invalidation, naming",
+      "created_date": "2017-10-26T15:41:56+02:00",
+      "uri": "https://api.joind.in/v2.1/talk_comments/83646",
+      "verbose_uri": "https://api.joind.in/v2.1/talk_comments/83646?verbose=yes",
+      "talk_uri": "https://api.joind.in/v2.1/talks/22818",
+      "talk_comments_uri": "https://api.joind.in/v2.1/talks/22818/comments",
+      "reported_uri": "https://api.joind.in/v2.1/talk_comments/83646/reported",
+      "user_uri": "https://api.joind.in/v2.1/users/26764"
+    },
+    {
+      "rating": 5,
+      "comment": "Great tech talk, both in theoretical and practical sense. Useful real world examples and described personal experiences.",
+      "user_display_name": "Rudolf Juri\u0161i\u0107",
+      "username": "rudolf.jurisic",
+      "talk_title": "HTTP caching - symfony, varnish, invalidation, naming",
+      "created_date": "2017-10-29T08:51:38+01:00",
+      "uri": "https://api.joind.in/v2.1/talk_comments/83943",
+      "verbose_uri": "https://api.joind.in/v2.1/talk_comments/83943?verbose=yes",
+      "talk_uri": "https://api.joind.in/v2.1/talks/22818",
+      "talk_comments_uri": "https://api.joind.in/v2.1/talks/22818/comments",
+      "reported_uri": "https://api.joind.in/v2.1/talk_comments/83943/reported",
+      "user_uri": "https://api.joind.in/v2.1/users/27432"
+    }
+  ],
+  "meta": {
+    "count": 3,
+    "total": 3,
+    "this_page": "https://api.joind.in/v2.1/talks/22818/comments?resultsperpage=20"
+  }
+}
