@@ -17,8 +17,9 @@ jobs:
           key: cache-v4-{{ checksum "composer.lock" }}
 
       - run:
-          name: Copy env file over
-          command: cp etc/circleci2/.env.dist .env
+          name: Setup
+          command: ./etc/circleci2/setup.sh
+
           
       - run:
           name: Composer install
@@ -39,11 +40,6 @@ jobs:
       - run:
           name: PHPUnit
           command: ./vendor/bin/phpunit
-
-      - run:
-          name: PHP server
-          command: php -S 127.0.0.1:8000 -t public
-          background: true
 
       - run:
           name: Behat
