@@ -88,6 +88,10 @@ services:
       - code
     links:
       - pgsql_dev
+      - nginx-dev
+    extra_hosts:
+      - "dev.raffler.loc:172.17.0.1"
+      - "test.raffler.loc:172.17.0.1"
     environment:
       APP_ENV: dev
       APP_DEBUG: 1
