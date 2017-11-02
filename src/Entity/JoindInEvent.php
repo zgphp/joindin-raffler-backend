@@ -28,14 +28,14 @@ class JoindInEvent implements \JsonSerializable
     private $name;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime", nullable=false)
      *
      * @var DateTime
      */
     private $startDate;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime", nullable=false)
      *
      * @var DateTime
      */
