@@ -3,7 +3,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/php:7.1
+      - image: msvrtan/square:0.2.2
     parallel: 1
     steps:
       - checkout
