@@ -28,12 +28,24 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+
+    App\Repository\JoindInEventRepository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+          - App\Entity\JoindInEvent
+        public: true
+
+
     App\Service\JoindInClient:
         public: true
 
     GuzzleHttp\Client:
         public: true
 
+
+    App\JoindIn\EventDataFactory:
+        public: true
 
     App\Service\JoindInEventRetrieval:
         public: true

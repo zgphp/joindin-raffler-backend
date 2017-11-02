@@ -2,6 +2,17 @@ homepage:
     path: /
     defaults: { _controller: 'App\Controller\HomepageController::index' }
 
+fetch:
+    path: /joindin/fetch
+    defaults: { _controller: 'App\Controller\JoindInEventController::fetch' }
+
+
+list:
+    path: /joindin/list
+    defaults: { _controller: 'App\Controller\JoindInEventController::eventList' }
+
+
+
 # first, run composer req annotations
 #controllers:
 #    resource: ../src/Controller/
