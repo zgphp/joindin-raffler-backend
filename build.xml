@@ -62,4 +62,18 @@
         <exec command="./vendor/bin/phpcs --standard=phpcs.xml ${path} -n" passthru="true" checkreturn="true"/>
     </target>
 
+    <target name="refresh-dev-db" description="Refresh dev DB">
+        <exec command="bin/console doctrine:database:drop --force --if-exists --env=dev" passthru="true" checkreturn="true"/>
+        <exec command="bin/console doctrine:database:create --env=dev" passthru="true" checkreturn="true"/>
+        <exec command="bin/console doctrine:migrations:migrate --no-interaction --env=dev" passthru="true"/>
+        <exec command="bin/console doctrine:fixtures:load --verbose --append --env=dev" passthru="true"/>
+    </target>
+
+    <target name="refresh-test-db" description="Refresh dev DB">
+        <exec command="bin/console doctrine:database:drop --force --if-exists --env=test" passthru="true" checkreturn="true"/>
+        <exec command="bin/console doctrine:database:create --env=test" passthru="true" checkreturn="true"/>
+        <exec command="bin/console doctrine:migrations:migrate --no-interaction --env=test" passthru="true"/>
+        <exec command="bin/console doctrine:fixtures:load --verbose --append --env=test" passthru="true"/>
+    </target>
+
 </project>
