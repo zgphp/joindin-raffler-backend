@@ -1,2 +1,6 @@
 formatter.name: progress
 extensions: ~
+suites:
+    acme_suite:
+        namespace: App
+        psr4_prefix: App
