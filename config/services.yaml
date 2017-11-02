@@ -34,3 +34,6 @@ services:
     GuzzleHttp\Client:
         public: true
 
+
+    App\Service\JoindInEventRetrieval:
+        public: true
