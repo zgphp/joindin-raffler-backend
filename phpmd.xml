@@ -8,9 +8,7 @@
         http://edorian.github.com/php-coding-standard-generator/
     </description>
     <exclude-pattern>cache/</exclude-pattern>
-    <exclude-pattern>SymfonyRequirements.php</exclude-pattern>
-    <exclude-pattern>AppKernel.php</exclude-pattern>
-    <exclude-pattern>DoctrineMigrations/Version*.php</exclude-pattern>
+    <exclude-pattern>Migrations/Version*.php</exclude-pattern>
     <exclude-pattern>DependencyInjection/Configuration.php</exclude-pattern>
     <exclude-pattern>DependencyInjection/*Extension.php</exclude-pattern>
     <exclude-pattern>src/AppBundle/Controller/DefaultController.php</exclude-pattern>
