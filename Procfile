@@ -1,1 +1,1 @@
-web: vendor/bin/heroku-php-apache2 public/
+web: bin/console doctrine:migrations:migrate --no-interaction --env=prod && vendor/bin/heroku-php-nginx -C nginx_app.conf public/
