@@ -4,20 +4,20 @@ namespace App\Service;
 
 use App\Entity\JoindInEvent;
 use App\Repository\JoindInEventRepository;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class JoindInEventRetrieval
 {
     /** @var JoindInClient */
     private $joindInClient;
-    /** @var EntityManager */
+    /** @var EntityManagerInterface */
     private $entityManager;
     /** @var JoindInEventRepository */
     private $eventRepository;
 
     public function __construct(
         JoindInClient $joindInClient,
-        EntityManager $entityManager,
+        EntityManagerInterface $entityManager,
         JoindInEventRepository $eventRepository)
     {
         $this->joindInClient   = $joindInClient;
