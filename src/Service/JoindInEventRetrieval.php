@@ -31,10 +31,12 @@ class JoindInEventRetrieval
             $entity = $this->eventRepository->find($eventData->getId());
 
             if (null === $entity) {
-                $entity = new JoindInEvent($eventData->getId(), $eventData->getName());
+                $entity = new JoindInEvent($eventData->getId(), $eventData->getName(), $eventData->getStartDate(), $eventData->getEndDate());
                 $this->entityManager->persist($entity);
             } else {
                 $entity->setName($eventData->getName());
+                $entity->setStartDate($eventData->getStartDate());
+                $entity->setEndDate($eventData->getEndDate());
             }
 
             $this->entityManager->flush();
