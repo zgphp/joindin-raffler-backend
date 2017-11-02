@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,15 +27,41 @@ class JoindInEvent implements \JsonSerializable
      */
     private $name;
 
-    public function __construct(int $id, string $name)
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @var DateTime
+     */
+    private $startDate;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @var DateTime
+     */
+    private $endDate;
+
+    public function __construct(int $id, string $name, DateTime $startDate, DateTime $endDate)
     {
-        $this->id   = $id;
-        $this->name = $name;
+        $this->id        = $id;
+        $this->name      = $name;
+        $this->startDate = $startDate;
+        $this->endDate   = $endDate;
     }
 
     public function setName(string $name)
     {
         $this->name = $name;
+    }
+
+    public function setStartDate(DateTime $startDate)
+    {
+        $this->startDate = $startDate;
+    }
+
+    public function setEndDate(DateTime $endDate)
+    {
+        $this->endDate = $endDate;
     }
 
     public function getId(): int
@@ -47,11 +74,23 @@ class JoindInEvent implements \JsonSerializable
         return $this->name;
     }
 
+    public function getStartDate(): DateTime
+    {
+        return $this->startDate;
+    }
+
+    public function getEndDate(): DateTime
+    {
+        return $this->endDate;
+    }
+
     public function jsonSerialize(): array
     {
         return [
-            'id'   => $this->id,
-            'name' => $this->name,
+            'id'        => $this->id,
+            'name'      => $this->name,
+            'startDate' => $this->startDate->format('c'),
+            'endDate'   => $this->endDate->format('c'),
         ];
     }
 }
