@@ -6,6 +6,12 @@ default:
                     kernel: '@kernel'
             filters:
                 tags: "@fetch"
+        api:
+            contexts:
+                - ApiContext:
+                    kernel: '@kernel'
+            filters:
+                tags: "@fetch && @api"
 
     extensions:
         Behat\Symfony2Extension:
