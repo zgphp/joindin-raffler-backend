@@ -7,6 +7,7 @@ use App\JoindIn\EventData;
 use App\Repository\JoindInEventRepository;
 use App\Service\JoindInClient;
 use App\Service\JoindInEventRetrieval;
+use DateTime;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -30,7 +31,9 @@ class JoindInEventRetrievalSpec extends ObjectBehavior
         JoindInClient $joindInClient,
         EntityManager $entityManager,
         JoindInEventRepository $eventRepository,
-        EventData $eventData
+        EventData $eventData,
+        DateTime $startDate,
+        DateTime $endDate
     ) {
         $joindInClient->fetchZgPhpEvents()
             ->shouldBeCalled()
@@ -43,6 +46,14 @@ class JoindInEventRetrievalSpec extends ObjectBehavior
         $eventData->getName()
             ->shouldBeCalled()
             ->willReturn('ZgPHP meetup #xx');
+
+        $eventData->getStartDate()
+            ->shouldBeCalled()
+            ->willReturn($startDate);
+
+        $eventData->getEndDate()
+            ->shouldBeCalled()
+            ->willReturn($endDate);
 
         $eventRepository->find(123)
             ->shouldBeCalled()
@@ -62,7 +73,9 @@ class JoindInEventRetrievalSpec extends ObjectBehavior
         EntityManager $entityManager,
         JoindInEventRepository $eventRepository,
         EventData $eventData,
-    JoindInEvent $storedJoindInEvent
+        JoindInEvent $storedJoindInEvent,
+        DateTime $startDate,
+        DateTime $endDate
     ) {
         $joindInClient->fetchZgPhpEvents()
             ->shouldBeCalled()
@@ -76,11 +89,25 @@ class JoindInEventRetrievalSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn('ZgPHP meetup #xx');
 
+        $eventData->getStartDate()
+            ->shouldBeCalled()
+            ->willReturn($startDate);
+
+        $eventData->getEndDate()
+            ->shouldBeCalled()
+            ->willReturn($endDate);
+
         $eventRepository->find(123)
             ->shouldBeCalled()
             ->willReturn($storedJoindInEvent);
 
         $storedJoindInEvent->setName('ZgPHP meetup #xx')
+            ->shouldBeCalled();
+
+        $storedJoindInEvent->setStartDate($startDate)
+            ->shouldBeCalled();
+
+        $storedJoindInEvent->setEndDate($endDate)
             ->shouldBeCalled();
 
         $entityManager->flush()
