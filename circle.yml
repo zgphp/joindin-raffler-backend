@@ -4,16 +4,29 @@ jobs:
   build:
     docker:
       - image: msvrtan/square:0.2.2
+      - image: postgres:10
+        environment:
+          - POSTGRES_USER=root
+          - POSTGRES_PASSWORD=n0p455
+    working_directory: /var/www
     parallel: 1
     steps:
       - checkout
 
       - restore_cache:
-          key: cache-v3-{{ checksum "composer.lock" }}
+          key: cache-v4-{{ checksum "composer.lock" }}
+
+      - run:
+          name: Copy env file over
+          command: cp etc/circleci2/.env.dist .env
           
       - run:
           name: Composer install
           command: SYMFONY_ENV=test composer install --prefer-dist --no-interaction
+
+      - run:
+          name: Set up the test database
+          command: ./vendor/bin/phing refresh-test-db
 
       - run:
           name: Lint all PHP code files
@@ -28,6 +41,11 @@ jobs:
           command: ./vendor/bin/phpunit
 
       - run:
+          name: PHP server
+          command: php -S 127.0.0.1:8000 -t public
+          background: true
+
+      - run:
           name: Behat
           command: ./vendor/bin/behat
 
@@ -40,9 +58,9 @@ jobs:
           command: ./vendor/bin/phing check-codestandards
 
       - save_cache:
-          key: cache-v3-{{ checksum "composer.lock" }}
+          key: cache-v4-{{ checksum "composer.lock" }}
           paths:
-            - /home/circleci/project/vendor
+            - /var/www/vendor
 
 workflows:
   version: 2
