@@ -1,9 +1,11 @@
 default:
     suites:
-        default:
+        application:
             contexts:
-                - FeatureContext:
+                - ApplicationContext:
                     kernel: '@kernel'
+            filters:
+                tags: "@fetch"
 
     extensions:
         Behat\Symfony2Extension:
