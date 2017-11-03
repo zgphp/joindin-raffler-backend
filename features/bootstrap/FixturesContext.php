@@ -1,8 +1,13 @@
 <?php
 
+use App\Entity\JoindInComment;
 use App\Entity\JoindInEvent;
 use App\Entity\JoindInTalk;
+use App\Entity\JoindInUser;
 use App\Repository\JoindInEventRepository;
+use App\Repository\JoindInTalkRepository;
+use App\Repository\JoindInUserRepository;
+use App\Repository\RaffleRepository;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use Doctrine\ORM\EntityManager;
@@ -53,7 +58,12 @@ class FixturesContext implements Context
         $this->thereAreNoMeetupsInTheSystem();
 
         foreach ($table as $row) {
-            $event = new JoindInEvent((int) $row['id'], $row['title'], new DateTime($row['startDate']), new DateTime($row['endDate']));
+            $event = new JoindInEvent(
+                (int) $row['id'],
+                $row['title'],
+                new DateTime($row['startDate']),
+                new DateTime($row['endDate'])
+            );
 
             $this->getEntityManager()->persist($event);
         }
@@ -76,6 +86,65 @@ class FixturesContext implements Context
             );
 
             $this->getEntityManager()->persist($talk);
+            $event->addTalk($talk);
+        }
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @Given there are no raffles in the system
+     */
+    public function thereAreNoRafflesInTheSystem()
+    {
+        foreach ($this->getRaffleRepository()->findAll() as $raffle) {
+            $this->getEntityManager()->remove($raffle);
+        }
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @Given there are no users in the system
+     */
+    public function thereAreNoUsersInTheSystem()
+    {
+        foreach ($this->getUserRepository()->findAll() as $user) {
+            $this->getEntityManager()->remove($user);
+        }
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @Given we have these users in the system
+     */
+    public function weHaveThisUsersInTheSystem(TableNode $table)
+    {
+        $this->thereAreNoUsersInTheSystem();
+
+        foreach ($table as $row) {
+            $user = new JoindInUser((int) $row['id'], $row['username'], $row['displayName']);
+
+            $this->getEntityManager()->persist($user);
+        }
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @Given we have each user commenting on each talk
+     */
+    public function weHaveEachUserCommentingOnEachTalk()
+    {
+        $users = $this->getUserRepository()->findAll();
+        $talks = $this->getTalkRepository()->findAll();
+
+        $cnt = 1;
+        foreach ($users as $user) {
+            foreach ($talks as $talk) {
+                ++$cnt;
+                $comment = new JoindInComment($cnt, 'Comment', 5, $user, $talk);
+
+                $this->getEntityManager()->persist($comment);
+                $talk->addComment($comment);
+            }
         }
         $this->getEntityManager()->flush();
     }
@@ -88,5 +157,20 @@ class FixturesContext implements Context
     private function getEventRepository(): JoindInEventRepository
     {
         return $this->kernel->getContainer()->get(JoindInEventRepository::class);
+    }
+
+    private function getTalkRepository(): JoindInTalkRepository
+    {
+        return $this->kernel->getContainer()->get(JoindInTalkRepository::class);
+    }
+
+    private function getRaffleRepository(): RaffleRepository
+    {
+        return $this->kernel->getContainer()->get(RaffleRepository::class);
+    }
+
+    private function getUserRepository(): JoindInUserRepository
+    {
+        return $this->kernel->getContainer()->get(JoindInUserRepository::class);
     }
 }

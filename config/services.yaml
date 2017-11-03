@@ -58,6 +58,14 @@ services:
         public: true
 
 
+    App\Repository\RaffleRepository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+          - App\Entity\Raffle
+        public: true
+
+
     App\Service\JoindInClient:
         public: true
 
