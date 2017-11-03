@@ -1,5 +1,13 @@
 default:
     suites:
+        raffle:
+            contexts:
+                - ApplicationContext:
+                    kernel: '@kernel'
+                - FixturesContext:
+                    kernel: '@kernel'
+            filters:
+                tags: "@raffle"
         application:
             contexts:
                 - ApplicationContext:
