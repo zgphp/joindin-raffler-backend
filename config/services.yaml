@@ -36,6 +36,13 @@ services:
           - App\Entity\JoindInEvent
         public: true
 
+    App\Repository\JoindInTalkRepository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+          - App\Entity\JoindInTalk
+        public: true
+
 
     App\Service\JoindInClient:
         public: true
