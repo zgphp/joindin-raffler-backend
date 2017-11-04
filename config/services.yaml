@@ -57,6 +57,9 @@ services:
     App\JoindIn\TalkDataFactory:
         public: true
 
+    App\JoindIn\CommentDataFactory:
+        public: true
+
     App\Service\JoindInEventRetrieval:
         public: true
 
