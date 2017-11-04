@@ -1,8 +1,12 @@
 <?php
 
 use App\Entity\JoindInEvent;
+use App\Entity\JoindInTalk;
+use App\Repository\JoindInCommentRepository;
 use App\Repository\JoindInEventRepository;
 use App\Repository\JoindInTalkRepository;
+use App\Repository\JoindInUserRepository;
+use App\Service\JoindInCommentRetrieval;
 use App\Service\JoindInEventRetrieval;
 use App\Service\JoindInTalkRetrieval;
 use Behat\Behat\Context\Context;
@@ -36,6 +40,10 @@ class ApplicationContext implements Context
     {
         foreach ($this->getEventRepository()->findAll() as $joindInEvent) {
             foreach ($joindInEvent->getTalks() as $joindInTalk) {
+                foreach ($joindInTalk->getComments() as $joindInComment) {
+                    $this->getEntityManager()->remove($joindInComment);
+                }
+
                 $this->getEntityManager()->remove($joindInTalk);
             }
 
@@ -55,6 +63,26 @@ class ApplicationContext implements Context
             $event = new JoindInEvent((int) $row['id'], $row['title'], new DateTime($row['startDate']), new DateTime($row['endDate']));
 
             $this->getEntityManager()->persist($event);
+        }
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @Given we have this talks in the system
+     */
+    public function weHaveThisTalksInTheSystem(TableNode $table)
+    {
+        foreach ($table as $row) {
+            $event = $this->getEventRepository()->find($row['eventId']);
+
+            $talk = new JoindInTalk(
+                (int) $row['id'],
+                $row['title'],
+                $event,
+                new DateTime($row['importedAt'])
+            );
+
+            $this->getEntityManager()->persist($talk);
         }
         $this->getEntityManager()->flush();
     }
@@ -82,6 +110,18 @@ class ApplicationContext implements Context
     }
 
     /**
+     * @When I fetch meetup talk comments from Joind.in
+     */
+    public function iFetchMeetupTalkCommentsFromJoindIn()
+    {
+        $service = $this->kernel->getContainer()->get(JoindInCommentRetrieval::class);
+
+        foreach ($this->getTalkRepository()->findAll() as $talk) {
+            $service->fetch($talk);
+        }
+    }
+
+    /**
      * @Then there should be :count ZgPHP meetups in system
      */
     public function thereShouldBeZgphpMeetupsInSystem(int $count)
@@ -97,6 +137,14 @@ class ApplicationContext implements Context
         Assert::count($this->getTalkRepository()->findAll(), $count);
     }
 
+    /**
+     * @Then there should be :count comment in system
+     */
+    public function thereShouldBeCommentInSystem(int $count)
+    {
+        Assert::count($this->getCommentRepository()->findAll(), $count);
+    }
+
     private function getEntityManager(): EntityManager
     {
         return $this->kernel->getContainer()->get('doctrine.orm.entity_manager');
@@ -110,5 +158,15 @@ class ApplicationContext implements Context
     private function getTalkRepository(): JoindInTalkRepository
     {
         return $this->kernel->getContainer()->get(JoindInTalkRepository::class);
+    }
+
+    private function getCommentRepository(): JoindInCommentRepository
+    {
+        return $this->kernel->getContainer()->get(JoindInCommentRepository::class);
+    }
+
+    private function getUserRepository(): JoindInUserRepository
+    {
+        return $this->kernel->getContainer()->get(JoindInUserRepository::class);
     }
 }
