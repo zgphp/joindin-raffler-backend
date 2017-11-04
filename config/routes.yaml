@@ -22,6 +22,16 @@ talks_list:
     defaults: { _controller: 'App\Controller\JoindInTalkController::talkList' }
 
 
+comments_fetch:
+    path: /joindin/comments/fetch
+    defaults: { _controller: 'App\Controller\JoindInCommentController::fetch' }
+
+
+comments_list:
+    path: /joindin/comments/
+    defaults: { _controller: 'App\Controller\JoindInCommentController::commentList' }
+
+
 
 # first, run composer req annotations
 #controllers:

@@ -1,7 +1,10 @@
 <?php
 
 use App\Entity\JoindInEvent;
+use App\Entity\JoindInTalk;
+use App\Repository\JoindInCommentRepository;
 use App\Repository\JoindInEventRepository;
+use App\Repository\JoindInUserRepository;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use Doctrine\ORM\EntityManager;
@@ -33,6 +36,10 @@ class ApiContext implements Context
     {
         foreach ($this->getEventRepository()->findAll() as $joindInEvent) {
             foreach ($joindInEvent->getTalks() as $joindInTalk) {
+                foreach ($joindInTalk->getComments() as $joindInComment) {
+                    $this->getEntityManager()->remove($joindInComment);
+                }
+
                 $this->getEntityManager()->remove($joindInTalk);
             }
 
@@ -57,6 +64,26 @@ class ApiContext implements Context
     }
 
     /**
+     * @Given we have this talks in the system
+     */
+    public function weHaveThisTalksInTheSystem(TableNode $table)
+    {
+        foreach ($table as $row) {
+            $event = $this->getEventRepository()->find($row['eventId']);
+
+            $talk = new JoindInTalk(
+                (int) $row['id'],
+                $row['title'],
+                $event,
+                new DateTime($row['importedAt'])
+            );
+
+            $this->getEntityManager()->persist($talk);
+        }
+        $this->getEntityManager()->flush();
+    }
+
+    /**
      * @When I fetch meetup data from Joind.in
      */
     public function iFetchMeetupDataFromJoindIn()
@@ -70,6 +97,14 @@ class ApiContext implements Context
     public function iFetchMeetupTalksFromJoindIn()
     {
         $this->getGuzzle()->get('http://test.raffler.loc:8000/joindin/talks/fetch');
+    }
+
+    /**
+     * @When I fetch meetup talk comments from Joind.in
+     */
+    public function iFetchMeetupTalkCommentsFromJoindIn()
+    {
+        $this->getGuzzle()->get('http://test.raffler.loc:8000/joindin/comments/fetch');
     }
 
     /**
@@ -96,6 +131,18 @@ class ApiContext implements Context
         Assert::count($data, $count);
     }
 
+    /**
+     * @Then there should be :count comment in system
+     */
+    public function thereShouldBeCommentInSystem(int $count)
+    {
+        $response = $this->getGuzzle()->get('http://test.raffler.loc:8000/joindin/comments/');
+
+        $data = json_decode($response->getBody()->getContents(), true);
+
+        Assert::count($data, $count);
+    }
+
     private function getGuzzle(): \GuzzleHttp\Client
     {
         return $this->kernel->getContainer()->get(\GuzzleHttp\Client::class);
@@ -109,5 +156,15 @@ class ApiContext implements Context
     private function getEventRepository(): JoindInEventRepository
     {
         return $this->kernel->getContainer()->get(JoindInEventRepository::class);
+    }
+
+    private function getCommentRepository(): JoindInCommentRepository
+    {
+        return $this->kernel->getContainer()->get(JoindInCommentRepository::class);
+    }
+
+    private function getUserRepository(): JoindInUserRepository
+    {
+        return $this->kernel->getContainer()->get(JoindInUserRepository::class);
     }
 }
