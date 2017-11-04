@@ -61,7 +61,7 @@ class ApiContext implements Context
      */
     public function iFetchMeetupDataFromJoindIn()
     {
-        $this->getGuzzle()->get('http://test.raffler.loc:8000/joindin/fetch');
+        $this->getGuzzle()->get('http://test.raffler.loc:8000/joindin/events/fetch');
     }
 
     /**
@@ -77,7 +77,7 @@ class ApiContext implements Context
      */
     public function thereShouldBeZgphpMeetupsInSystem(int $count)
     {
-        $response = $this->getGuzzle()->get('http://test.raffler.loc:8000/joindin/list');
+        $response = $this->getGuzzle()->get('http://test.raffler.loc:8000/joindin/events/');
 
         $data = json_decode($response->getBody()->getContents(), true);
 
