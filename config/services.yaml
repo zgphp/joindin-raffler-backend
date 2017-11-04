@@ -50,6 +50,13 @@ services:
           - App\Entity\JoindInUser
         public: true
 
+    App\Repository\JoindInCommentRepository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+          - App\Entity\JoindInComment
+        public: true
+
 
     App\Service\JoindInClient:
         public: true
