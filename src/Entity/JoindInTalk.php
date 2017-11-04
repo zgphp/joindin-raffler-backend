@@ -94,6 +94,11 @@ class JoindInTalk implements \JsonSerializable
         return $this->comments;
     }
 
+    public function addComment(JoindInComment $comment)
+    {
+        $this->comments->add($comment);
+    }
+
     public function jsonSerialize(): array
     {
         return [
