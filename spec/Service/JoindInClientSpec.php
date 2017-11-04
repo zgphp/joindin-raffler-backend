@@ -2,8 +2,11 @@
 
 namespace spec\App\Service;
 
+use App\Entity\JoindInEvent;
 use App\JoindIn\EventData;
 use App\JoindIn\EventDataFactory;
+use App\JoindIn\TalkData;
+use App\JoindIn\TalkDataFactory;
 use App\Service\JoindInClient;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
@@ -13,9 +16,9 @@ use Psr\Http\Message\StreamInterface;
 
 class JoindInClientSpec extends ObjectBehavior
 {
-    public function let(Client $client, EventDataFactory $eventDataFactory)
+    public function let(Client $client, EventDataFactory $eventDataFactory, TalkDataFactory $talkDataFactory)
     {
-        $this->beConstructedWith($client, $eventDataFactory);
+        $this->beConstructedWith($client, $eventDataFactory, $talkDataFactory);
     }
 
     public function it_is_initializable()
@@ -87,5 +90,58 @@ class JoindInClientSpec extends ObjectBehavior
 
         $this->fetchZgPhpEvents()
             ->shouldReturn([]);
+    }
+
+    public function it_will_return_talks_for_given_event(
+        Client $client,
+        TalkDataFactory $talkDataFactory,
+        Response $response,
+        StreamInterface $body,
+        JoindInEvent $event,
+        TalkData $talkData
+    ) {
+        $event->getId()
+            ->shouldBeCalled()
+            ->willReturn(2345);
+
+        $client->get('https://api.joind.in/v2.1/events/2345/talks')
+            ->shouldBeCalled()
+            ->willReturn($response);
+
+        $response->getBody()
+            ->shouldBeCalled()
+            ->willReturn($body);
+
+        $content = '
+{
+  "talks": [
+    {
+      "talk_title": "Talk about something",
+      "speakers": [
+        {
+          "speaker_name": "Speaker Name"
+        }
+      ],
+      "uri": "https://api.joind.in/v2.1/talks/2345"
+    }
+  ],
+  "meta": {
+    "count": 1,
+    "total": 1,
+    "this_page": "https://api.joind.in/v2.1/events/2345/talks?resultsperpage=20"
+  }
+}
+        ';
+
+        $body->getContents()
+            ->shouldBeCalled()
+            ->willReturn($content);
+
+        $talkDataFactory->create(Argument::any(), $event)
+            ->shouldBeCalled()
+            ->willReturn($talkData);
+
+        $this->fetchTalksForEvent($event)
+            ->shouldReturn([$talkData]);
     }
 }
