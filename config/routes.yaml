@@ -12,6 +12,16 @@ list:
     defaults: { _controller: 'App\Controller\JoindInEventController::eventList' }
 
 
+talks_fetch:
+    path: /joindin/talks/fetch
+    defaults: { _controller: 'App\Controller\JoindInTalkController::fetch' }
+
+
+talks_list:
+    path: /joindin/talks/
+    defaults: { _controller: 'App\Controller\JoindInTalkController::talkList' }
+
+
 
 # first, run composer req annotations
 #controllers:
