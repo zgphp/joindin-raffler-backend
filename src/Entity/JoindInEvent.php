@@ -99,6 +99,11 @@ class JoindInEvent implements \JsonSerializable
         return $this->talks;
     }
 
+    public function addTalk(JoindInTalk $talk)
+    {
+        $this->talks->add($talk);
+    }
+
     public function jsonSerialize(): array
     {
         return [
