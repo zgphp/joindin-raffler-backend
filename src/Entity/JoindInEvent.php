@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,12 +43,20 @@ class JoindInEvent implements \JsonSerializable
      */
     private $endDate;
 
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @ORM\OneToMany(targetEntity="App\Entity\JoindInTalk", mappedBy="event")
+     */
+    private $talks;
+
     public function __construct(int $id, string $name, DateTime $startDate, DateTime $endDate)
     {
         $this->id        = $id;
         $this->name      = $name;
         $this->startDate = $startDate;
         $this->endDate   = $endDate;
+
+        $this->talks = new ArrayCollection();
     }
 
     public function setName(string $name)
@@ -82,6 +92,11 @@ class JoindInEvent implements \JsonSerializable
     public function getEndDate(): DateTime
     {
         return $this->endDate;
+    }
+
+    public function getTalks(): Collection
+    {
+        return $this->talks;
     }
 
     public function jsonSerialize(): array
