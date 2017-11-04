@@ -42,7 +42,7 @@ class JoindInEventController
 
     public function eventList()
     {
-        $events = $this->eventRepository->findAll();
+        $events = $this->eventRepository->findAllSortedFromNewestToOldest();
 
         return new JsonResponse($events);
     }
