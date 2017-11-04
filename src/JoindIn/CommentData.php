@@ -46,6 +46,21 @@ class CommentData
         return $this->userData;
     }
 
+    public function getUserId(): int
+    {
+        return $this->userData->getId();
+    }
+
+    public function getUserName(): string
+    {
+        return $this->userData->getUsername();
+    }
+
+    public function getUserDisplayName(): string
+    {
+        return $this->userData->getDisplayName();
+    }
+
     public function getTalk(): JoindInTalk
     {
         return $this->talk;
