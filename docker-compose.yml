@@ -65,7 +65,7 @@ services:
       DATABASE_SERVER_VERSION: 10.0
       DATABASE_HOST: pgsql_dev
       DATABASE_PORT: 5432
-      DATABASE_NAME: raffler_dev
+      DATABASE_NAME: raffler_test
       DATABASE_USER: root
       DATABASE_PASSWORD: n0p455
     links:
