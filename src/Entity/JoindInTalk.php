@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,12 +43,20 @@ class JoindInTalk implements \JsonSerializable
      */
     private $importedAt;
 
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @ORM\OneToMany(targetEntity="App\Entity\JoindInComment", mappedBy="talk")
+     */
+    private $comments;
+
     public function __construct(int $id, string $title, JoindInEvent $event)
     {
         $this->id         = $id;
         $this->title      = $title;
         $this->event      = $event;
         $this->importedAt = new DateTime();
+
+        $this->comments = new ArrayCollection();
     }
 
     public function setTitle(string $title)
@@ -77,6 +87,11 @@ class JoindInTalk implements \JsonSerializable
     public function getCreatedAt(): DateTime
     {
         return $this->importedAt;
+    }
+
+    public function getComments(): Collection
+    {
+        return $this->comments;
     }
 
     public function jsonSerialize(): array
