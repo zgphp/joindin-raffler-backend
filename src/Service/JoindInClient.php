@@ -85,7 +85,9 @@ class JoindInClient
         $results = [];
 
         foreach ($raw['comments'] as $item) {
-            $results[] = $this->commentDataFactory->create($item, $talk);
+            if (false === empty($item['user_uri'])) {
+                $results[] = $this->commentDataFactory->create($item, $talk);
+            }
         }
 
         return $results;
