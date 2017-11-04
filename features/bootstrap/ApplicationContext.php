@@ -53,7 +53,7 @@ class ApplicationContext implements Context
     }
 
     /**
-     * @Given we have this meetups in the system
+     * @Given we have these meetups in the system
      */
     public function weHaveThisMeetupsInTheSystem(TableNode $table)
     {
@@ -68,7 +68,7 @@ class ApplicationContext implements Context
     }
 
     /**
-     * @Given we have this talks in the system
+     * @Given we have these talks in the system
      */
     public function weHaveThisTalksInTheSystem(TableNode $table)
     {
