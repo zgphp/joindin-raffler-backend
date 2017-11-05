@@ -106,9 +106,16 @@ class Raffle implements \JsonSerializable
 
     public function jsonSerialize(): array
     {
+        $events = [];
+
+        foreach ($this->events as $event) {
+            $events[] = $event->jsonSerialize();
+        }
+
         return [
             'id'        => $this->id,
             'createdAt' => $this->createdAt->format('c'),
+            'events'    => $events,
         ];
     }
 
