@@ -8,6 +8,14 @@ default:
                     kernel: '@kernel'
             filters:
                 tags: "@raffle"
+        raffle_api:
+            contexts:
+                - ApiContext:
+                    kernel: '@kernel'
+                - FixturesContext:
+                    kernel: '@kernel'
+            filters:
+                tags: "@raffle && @api"
         application:
             contexts:
                 - ApplicationContext:

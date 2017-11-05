@@ -5,6 +5,7 @@ use App\Repository\JoindInEventRepository;
 use App\Repository\JoindInUserRepository;
 use Behat\Behat\Context\Context;
 use Doctrine\ORM\EntityManager;
+use GuzzleHttp\Client;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Webmozart\Assert\Assert;
 
@@ -20,6 +21,9 @@ class ApiContext implements Context
      * @var KernelInterface
      */
     private $kernel;
+
+    /** @var string */
+    private $raffleId;
 
     public function __construct(KernelInterface $kernel)
     {
@@ -48,6 +52,22 @@ class ApiContext implements Context
     public function iFetchMeetupTalkCommentsFromJoindIn()
     {
         $this->getGuzzle()->get('http://test.raffler.loc:8000/joindin/comments/fetch');
+    }
+
+    /**
+     * @When organizer picks to raffle meetups: :eventIdList
+     */
+    public function organizerPicksToRaffleMeetups(string $eventIdList)
+    {
+        $options = [
+            'json' => ['events'=> explode(',', $eventIdList)],
+        ];
+
+        $response = $this->getGuzzle()->post('http://test.raffler.loc:8000/api/raffle/start', $options);
+
+        $data = json_decode($response->getBody()->getContents(), true);
+
+        $this->raffleId = $data;
     }
 
     /**
@@ -86,9 +106,33 @@ class ApiContext implements Context
         Assert::count($data, $count);
     }
 
-    private function getGuzzle(): \GuzzleHttp\Client
+    /**
+     * @Then there should be :count events on the raffle
+     */
+    public function thereShouldBeEventsOnTheRaffle(int $count)
     {
-        return $this->kernel->getContainer()->get(\GuzzleHttp\Client::class);
+        $response = $this->getGuzzle()->get('http://test.raffler.loc:8000/api/raffle/'.$this->raffleId);
+
+        $data = json_decode($response->getBody()->getContents(), true);
+
+        Assert::count($data['events'], $count);
+    }
+
+    /**
+     * @Then there should be :count comments on the raffle
+     */
+    public function thereShouldBeCommentsOnTheRaffle(int $count)
+    {
+        $response = $this->getGuzzle()->get('http://test.raffler.loc:8000/api/raffle/'.$this->raffleId.'/comments');
+
+        $data = json_decode($response->getBody()->getContents(), true);
+
+        Assert::count($data, $count);
+    }
+
+    private function getGuzzle(): Client
+    {
+        return $this->kernel->getContainer()->get(Client::class);
     }
 
     private function getEntityManager(): EntityManager
