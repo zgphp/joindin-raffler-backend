@@ -32,6 +32,20 @@ comments_list:
     defaults: { _controller: 'App\Controller\JoindInCommentController::commentList' }
 
 
+raffle_api_start:
+    path: /api/raffle/start
+    methods: [POST]
+    defaults: { _controller: 'App\Controller\RaffleApiController::start' }
+
+
+raffle_api_show:
+    path: /api/raffle/{id}
+    defaults: { _controller: 'App\Controller\RaffleApiController::show' }
+
+raffle_api_comments:
+    path: /api/raffle/{id}/comments
+    defaults: { _controller: 'App\Controller\RaffleApiController::comments' }
+
 
 # first, run composer req annotations
 #controllers:
