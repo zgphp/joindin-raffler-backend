@@ -2,16 +2,10 @@
 
 use App\Entity\JoindInUser;
 use App\Entity\Raffle;
-use App\Repository\JoindInCommentRepository;
-use App\Repository\JoindInEventRepository;
-use App\Repository\JoindInTalkRepository;
-use App\Repository\JoindInUserRepository;
-use App\Repository\RaffleRepository;
 use App\Service\JoindInCommentRetrieval;
 use App\Service\JoindInEventRetrieval;
 use App\Service\JoindInTalkRetrieval;
 use Behat\Behat\Context\Context;
-use Doctrine\ORM\EntityManager;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Webmozart\Assert\Assert;
@@ -22,7 +16,7 @@ use Webmozart\Assert\Assert;
  *
  * @see http://behat.org/en/latest/quick_start.html
  */
-class ApplicationContext implements Context
+class ApplicationContext extends BaseContext
 {
     /**
      * @var KernelInterface
@@ -44,7 +38,7 @@ class ApplicationContext implements Context
      */
     public function iFetchMeetupDataFromJoindIn()
     {
-        $service = $this->kernel->getContainer()->get(JoindInEventRetrieval::class);
+        $service = $this->getService(JoindInEventRetrieval::class);
 
         $service->fetch();
     }
@@ -54,7 +48,7 @@ class ApplicationContext implements Context
      */
     public function iFetchMeetupTalksFromJoindIn()
     {
-        $service = $this->kernel->getContainer()->get(JoindInTalkRetrieval::class);
+        $service = $this->getService(JoindInTalkRetrieval::class);
 
         foreach ($this->getEventRepository()->findAll() as $event) {
             $service->fetch($event);
@@ -66,7 +60,7 @@ class ApplicationContext implements Context
      */
     public function iFetchMeetupTalkCommentsFromJoindIn()
     {
-        $service = $this->kernel->getContainer()->get(JoindInCommentRetrieval::class);
+        $service = $this->getService(JoindInCommentRetrieval::class);
 
         foreach ($this->getTalkRepository()->findAll() as $talk) {
             $service->fetch($talk);
@@ -126,7 +120,7 @@ class ApplicationContext implements Context
     {
         $raffle = $this->loadRaffle($this->raffleId);
 
-        $this->picked =  $raffle->pick();
+        $this->picked = $raffle->pick();
     }
 
     /**
@@ -198,46 +192,8 @@ class ApplicationContext implements Context
         Assert::notEmpty($this->picked);
     }
 
-    /**
-     * @Transform :user
-     */
-    public function castToUser(string $username): JoindInUser
+    protected function getService(string $name)
     {
-        return $this->getUserRepository()->findOneByUsername($username);
-    }
-
-    private function getEntityManager(): EntityManager
-    {
-        return $this->kernel->getContainer()->get('doctrine.orm.entity_manager');
-    }
-
-    private function loadRaffle(string $raffleId): Raffle
-    {
-        return $this->getRaffleRepository()->find($raffleId);
-    }
-
-    private function getEventRepository(): JoindInEventRepository
-    {
-        return $this->kernel->getContainer()->get(JoindInEventRepository::class);
-    }
-
-    private function getTalkRepository(): JoindInTalkRepository
-    {
-        return $this->kernel->getContainer()->get(JoindInTalkRepository::class);
-    }
-
-    private function getCommentRepository(): JoindInCommentRepository
-    {
-        return $this->kernel->getContainer()->get(JoindInCommentRepository::class);
-    }
-
-    private function getUserRepository(): JoindInUserRepository
-    {
-        return $this->kernel->getContainer()->get(JoindInUserRepository::class);
-    }
-
-    private function getRaffleRepository(): RaffleRepository
-    {
-        return $this->kernel->getContainer()->get(RaffleRepository::class);
+        return $this->kernel->getContainer()->get($name);
     }
 }

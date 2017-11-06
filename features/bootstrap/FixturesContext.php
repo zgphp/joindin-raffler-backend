@@ -4,13 +4,8 @@ use App\Entity\JoindInComment;
 use App\Entity\JoindInEvent;
 use App\Entity\JoindInTalk;
 use App\Entity\JoindInUser;
-use App\Repository\JoindInEventRepository;
-use App\Repository\JoindInTalkRepository;
-use App\Repository\JoindInUserRepository;
-use App\Repository\RaffleRepository;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
@@ -19,7 +14,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
  *
  * @see http://behat.org/en/latest/quick_start.html
  */
-class FixturesContext implements Context
+class FixturesContext extends BaseContext
 {
     /**
      * @var KernelInterface
@@ -149,28 +144,8 @@ class FixturesContext implements Context
         $this->getEntityManager()->flush();
     }
 
-    private function getEntityManager(): EntityManager
+    protected function getService(string $name)
     {
-        return $this->kernel->getContainer()->get('doctrine.orm.entity_manager');
-    }
-
-    private function getEventRepository(): JoindInEventRepository
-    {
-        return $this->kernel->getContainer()->get(JoindInEventRepository::class);
-    }
-
-    private function getTalkRepository(): JoindInTalkRepository
-    {
-        return $this->kernel->getContainer()->get(JoindInTalkRepository::class);
-    }
-
-    private function getRaffleRepository(): RaffleRepository
-    {
-        return $this->kernel->getContainer()->get(RaffleRepository::class);
-    }
-
-    private function getUserRepository(): JoindInUserRepository
-    {
-        return $this->kernel->getContainer()->get(JoindInUserRepository::class);
+        return $this->kernel->getContainer()->get($name);
     }
 }

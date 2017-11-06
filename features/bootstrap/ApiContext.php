@@ -1,11 +1,7 @@
 <?php
 
 use App\Entity\JoindInUser;
-use App\Repository\JoindInCommentRepository;
-use App\Repository\JoindInEventRepository;
-use App\Repository\JoindInUserRepository;
 use Behat\Behat\Context\Context;
-use Doctrine\ORM\EntityManager;
 use GuzzleHttp\Client;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Webmozart\Assert\Assert;
@@ -16,7 +12,7 @@ use Webmozart\Assert\Assert;
  *
  * @see http://behat.org/en/latest/quick_start.html
  */
-class ApiContext implements Context
+class ApiContext extends BaseContext
 {
     /**
      * @var KernelInterface
@@ -38,7 +34,6 @@ class ApiContext implements Context
     {
         $this->kernel = $kernel;
     }
-
 
     /**
      * @When I fetch meetup data from Joind.in
@@ -176,15 +171,6 @@ class ApiContext implements Context
         Assert::eq($found, $count);
     }
 
-    /**
-     * @Transform :user
-     */
-    public function castToUser(string $username) : JoindInUser
-    {
-        return $this->getUserRepository()->findOneByUsername($username);
-    }
-
-
     private function apiGetJson(string $url)
     {
         $response = $this->getGuzzle()->get($this->testApiUrl.$url);
@@ -199,29 +185,13 @@ class ApiContext implements Context
         return json_decode($response->getBody()->getContents(), true);
     }
 
-
-    private function getGuzzle() : Client
+    private function getGuzzle(): Client
     {
-        return $this->kernel->getContainer()->get(Client::class);
+        return $this->getService(Client::class);
     }
 
-    private function getEntityManager() : EntityManager
+    protected function getService(string $name)
     {
-        return $this->kernel->getContainer()->get('doctrine.orm.entity_manager');
-    }
-
-    private function getEventRepository() : JoindInEventRepository
-    {
-        return $this->kernel->getContainer()->get(JoindInEventRepository::class);
-    }
-
-    private function getCommentRepository() : JoindInCommentRepository
-    {
-        return $this->kernel->getContainer()->get(JoindInCommentRepository::class);
-    }
-
-    private function getUserRepository() : JoindInUserRepository
-    {
-        return $this->kernel->getContainer()->get(JoindInUserRepository::class);
+        return $this->kernel->getContainer()->get($name);
     }
 }
