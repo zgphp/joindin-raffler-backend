@@ -69,12 +69,7 @@ class FixturesContext extends BaseContext
         foreach ($table as $row) {
             $event = $this->getEventRepository()->find($row['eventId']);
 
-            $talk = new JoindInTalk(
-                (int) $row['id'],
-                $row['title'],
-                $event,
-                new DateTime($row['importedAt'])
-            );
+            $talk = new JoindInTalk((int) $row['id'], $row['title'], $event, new DateTime());
 
             $this->getEntityManager()->persist($talk);
             $event->addTalk($talk);
