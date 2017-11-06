@@ -5,7 +5,7 @@
 @fetch @api
 Feature:
   In order to pick meetups to raffle
-  As a organizer
+  As an organizer
   I need to have all meetups,talks and comments in
 
   Scenario: It fetches meetups from Joind.in
