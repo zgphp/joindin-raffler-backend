@@ -21,7 +21,7 @@ Feature:
       | id | username | displayName |
       | 1  | User1    | User 1      |
       | 2  | User2    | User 2      |
-      | 3  | User3    | User 2      |
+      | 3  | User3    | User 3      |
     And we have each user commenting on each talk
 
   Scenario: Organizer can pick which meetups to include in raffle
