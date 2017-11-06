@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\JoindInUser;
 use App\Entity\Raffle;
 use App\Repository\JoindInEventRepository;
 use App\Repository\RaffleRepository;
@@ -59,6 +60,14 @@ class RaffleApiController
         return new JsonResponse($raffle);
     }
 
+    public function pick(string $id)
+    {
+        $raffle = $this->loadRaffle($id);
+
+        $user = $raffle->pick();
+
+        return new JsonResponse($user);
+    }
     public function comments(string $id)
     {
         $raffle = $this->loadRaffle($id);

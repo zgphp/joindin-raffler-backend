@@ -71,6 +71,21 @@ class ApiContext implements Context
     }
 
     /**
+     * @var array|null
+     */
+    private $picked;
+
+    /**
+     * @When we pick
+     */
+    public function wePick()
+    {
+        $options =[];
+
+        $response = $this->getGuzzle()->post('http://test.raffler.loc:8000/api/raffle/'.$this->raffleId.'/pick', $options);
+
+        $this->picked = json_decode($response->getBody()->getContents(), true);
+    }
      * @Then there should be :count ZgPHP meetups in system
      */
     public function thereShouldBeZgphpMeetupsInSystem(int $count)
@@ -128,6 +143,14 @@ class ApiContext implements Context
         $data = json_decode($response->getBody()->getContents(), true);
 
         Assert::count($data, $count);
+    }
+
+    /**
+     * @Then we should get back one of the members that left feedback
+     */
+    public function weShouldGetBackOneOfTheMembersThatLeftFeedback()
+    {
+        Assert::notNull($this->picked);
     }
 
     private function getGuzzle(): Client

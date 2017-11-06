@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Exception\NoCommentsToRaffleException;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -92,6 +93,21 @@ class Raffle implements \JsonSerializable
         }
 
         return $comments;
+    }
+
+    /**
+     * @throws NoCommentsToRaffleException
+     */
+    public function pick(): JoindInUser
+    {
+        $comments = $this->getCommentsEligibleForRaffling()->getValues();
+
+        if (0 === count($comments)) {
+            throw NoCommentsToRaffleException::forRaffle($this->id);
+        }
+        shuffle($comments);
+
+        return $comments[0]->getUser();
     }
 
     public function userWon(JoindInUser $user)
