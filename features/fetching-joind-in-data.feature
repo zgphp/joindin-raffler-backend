@@ -15,15 +15,15 @@ Feature:
 
   Scenario: It fetches talks from Joind.in meetups we have in our system
     Given we have these meetups in the system
-      | id   | title         | startDate  | endDate    |
-      | 6674 | ZgPHP 2017/10 | 2017-10-19 | 2017-10-19 |
+      | id   | title         | date       |
+      | 6674 | ZgPHP 2017/10 | 2017-10-19 |
     When I fetch meetup talks from Joind.in
     Then there should be 2 talks in system
 
   Scenario: It fetches comments from Joind.in talks we have in our system
     Given we have these meetups in the system
-      | id   | title         | startDate  | endDate    |
-      | 6674 | ZgPHP 2017/10 | 2017-10-19 | 2017-10-19 |
+      | id   | title         | date       |
+      | 6674 | ZgPHP 2017/10 | 2017-10-19 |
     And we have these talks in the system
       | id    | title              | eventId | importedAt          |
       | 22817 | Fullstacking - 101 | 6674    | 2020-01-02 11:22:33 |

@@ -6,10 +6,10 @@ Feature:
 
   Background:
     Given we have these meetups in the system
-      | id | title     | startDate  | endDate    |
-      | 1  | Meetup #1 | 2017-01-19 | 2017-01-19 |
-      | 2  | Meetup #2 | 2017-02-19 | 2017-02-19 |
-      | 3  | Meetup #3 | 2017-03-19 | 2017-03-19 |
+      | id | title     | date   |
+      | 1  | Meetup #1 | 2017-01-19  |
+      | 2  | Meetup #2 | 2017-02-19  |
+      | 3  | Meetup #3 | 2017-03-19  |
     And we have these talks in the system
       | id  | title    | eventId | importedAt          |
       | 101 | Talk 101 | 1       | 2020-01-02 11:22:33 |

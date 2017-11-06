@@ -53,12 +53,8 @@ class FixturesContext extends BaseContext
         $this->thereAreNoMeetupsInTheSystem();
 
         foreach ($table as $row) {
-            $event = new JoindInEvent(
-                (int) $row['id'],
-                $row['title'],
-                new DateTime($row['startDate']),
-                new DateTime($row['endDate'])
-            );
+            $date  = new DateTime($row['date']);
+            $event = new JoindInEvent((int) $row['id'], $row['title'], $date, $date);
 
             $this->getEntityManager()->persist($event);
         }
