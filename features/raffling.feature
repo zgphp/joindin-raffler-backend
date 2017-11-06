@@ -26,19 +26,19 @@ Feature:
     And organizer picks to raffle meetups: "2,3"
 
 
-  Scenario: ...
+  Scenario: Running a raffle with events that have comments on talks selects a user as a winner
     When we pick
     Then we should get back one of the members that left feedback
 
-  Scenario: ...
+  Scenario: Selecting a user who submitted 3 comments removes 3 comments from the raffle
     When user "User1" wins
     Then there should be 6 comments on the raffle
 
-  Scenario: ...
+  Scenario: Selecting a user who are not currently present removes their comments from the current raffle
     When user "User1" is no show
     Then there should be 6 comments on the raffle
 
-  Scenario: ...
+  Scenario: Leaving comments for multiple talks on the same meetup increases the chances to win the raffle
     Then "User1" user should be 3 times in the list
     And "User2" user should be 3 times in the list
     And "User3" user should be 3 times in the list
