@@ -3,32 +3,32 @@ homepage:
     defaults: { _controller: 'App\Controller\HomepageController::index' }
 
 joindin_events_fetch:
-    path: /joindin/events/fetch
+    path: /api/joindin/events/fetch
     defaults: { _controller: 'App\Controller\JoindInEventController::fetch' }
 
 
 joindin_events_list:
-    path: /joindin/events/
+    path: /api/joindin/events/
     defaults: { _controller: 'App\Controller\JoindInEventController::eventList' }
 
 
 talks_fetch:
-    path: /joindin/talks/fetch
+    path: /api/joindin/talks/fetch
     defaults: { _controller: 'App\Controller\JoindInTalkController::fetch' }
 
 
 talks_list:
-    path: /joindin/talks/
+    path: /api/joindin/talks/
     defaults: { _controller: 'App\Controller\JoindInTalkController::talkList' }
 
 
 comments_fetch:
-    path: /joindin/comments/fetch
+    path: /api/joindin/comments/fetch
     defaults: { _controller: 'App\Controller\JoindInCommentController::fetch' }
 
 
 comments_list:
-    path: /joindin/comments/
+    path: /api/joindin/comments/
     defaults: { _controller: 'App\Controller\JoindInCommentController::commentList' }
 
 

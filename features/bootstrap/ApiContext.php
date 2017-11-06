@@ -40,7 +40,7 @@ class ApiContext extends BaseContext
      */
     public function iFetchMeetupDataFromJoindIn()
     {
-        $this->apiGetJson('/joindin/events/fetch');
+        $this->apiGetJson('/api/joindin/events/fetch');
     }
 
     /**
@@ -48,7 +48,7 @@ class ApiContext extends BaseContext
      */
     public function iFetchMeetupTalksFromJoindIn()
     {
-        $this->apiGetJson('/joindin/talks/fetch');
+        $this->apiGetJson('/api/joindin/talks/fetch');
     }
 
     /**
@@ -56,7 +56,7 @@ class ApiContext extends BaseContext
      */
     public function iFetchMeetupTalkCommentsFromJoindIn()
     {
-        $this->apiGetJson('/joindin/comments/fetch');
+        $this->apiGetJson('/api/joindin/comments/fetch');
     }
 
     /**
@@ -106,7 +106,7 @@ class ApiContext extends BaseContext
      */
     public function thereShouldBeZgphpMeetupsInSystem(int $count)
     {
-        Assert::count($this->apiGetJson('/joindin/events/'), $count);
+        Assert::count($this->apiGetJson('/api/joindin/events/'), $count);
     }
 
     /**
@@ -114,7 +114,7 @@ class ApiContext extends BaseContext
      */
     public function thereShouldBeTalksInSystem(int $count)
     {
-        Assert::count($this->apiGetJson('/joindin/talks/'), $count);
+        Assert::count($this->apiGetJson('/api/joindin/talks/'), $count);
     }
 
     /**
@@ -122,7 +122,7 @@ class ApiContext extends BaseContext
      */
     public function thereShouldBeCommentInSystem(int $count)
     {
-        $data = $this->apiGetJson('/joindin/comments/');
+        $data = $this->apiGetJson('/api/joindin/comments/');
 
         Assert::count($data, $count);
     }
