@@ -1,4 +1,4 @@
-@raffle
+@raffle @api
 Feature:
   In order to give away cool prizes to our members that leave feedback
   As a organizer
@@ -24,6 +24,11 @@ Feature:
     And we have each user commenting on each talk
     And there are no raffles in the system
     And organizer picks to raffle meetups: "2,3"
+
+
+  Scenario: ...
+    When we pick
+    Then we should get back one of the members that left feedback
 
   Scenario: ...
     When user "User1" wins

@@ -38,6 +38,11 @@ raffle_api_start:
     defaults: { _controller: 'App\Controller\RaffleApiController::start' }
 
 
+raffle_api_pick:
+    path: /api/raffle/{id}/pick
+    methods: [POST]
+    defaults: { _controller: 'App\Controller\RaffleApiController::pick' }
+
 raffle_api_show:
     path: /api/raffle/{id}
     defaults: { _controller: 'App\Controller\RaffleApiController::show' }

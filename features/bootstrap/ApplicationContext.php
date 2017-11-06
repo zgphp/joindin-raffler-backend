@@ -117,6 +117,18 @@ class ApplicationContext implements Context
         $this->getEntityManager()->flush();
     }
 
+    private $picked;
+
+    /**
+     * @When we pick
+     */
+    public function wePick()
+    {
+        $raffle = $this->loadRaffle($this->raffleId);
+
+        $this->picked =  $raffle->pick();
+    }
+
     /**
      * @Then there should be :count ZgPHP meetups in system
      */
@@ -176,6 +188,14 @@ class ApplicationContext implements Context
         }
 
         Assert::eq($found, $count);
+    }
+
+    /**
+     * @Then we should get back one of the members that left feedback
+     */
+    public function weShouldGetBackOneOfTheMembersThatLeftFeedback()
+    {
+        Assert::notEmpty($this->picked);
     }
 
     /**
