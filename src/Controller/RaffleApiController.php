@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\JoindInUser;
 use App\Entity\Raffle;
 use App\Repository\JoindInEventRepository;
+use App\Repository\JoindInUserRepository;
 use App\Repository\RaffleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,15 +21,19 @@ class RaffleApiController
     private $eventRepository;
     /** @var RaffleRepository */
     private $raffleRepository;
+    /** @var JoindInUserRepository */
+    private $userRepository;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         JoindInEventRepository $eventRepository,
-        RaffleRepository $raffleRepository
+        RaffleRepository $raffleRepository,
+        JoindInUserRepository $userRepository
     ) {
         $this->entityManager    = $entityManager;
         $this->eventRepository  = $eventRepository;
         $this->raffleRepository = $raffleRepository;
+        $this->userRepository   = $userRepository;
     }
 
     public function start(Request $request)
@@ -68,6 +73,29 @@ class RaffleApiController
 
         return new JsonResponse($user);
     }
+
+    public function winner(string $id, string $userId)
+    {
+        $raffle = $this->loadRaffle($id);
+        $user   = $this->loadUser($userId);
+
+        $raffle->userWon($user);
+        $this->entityManager->flush();
+
+        return new JsonResponse('OK');
+    }
+
+    public function noShow(string $id, string $userId)
+    {
+        $raffle = $this->loadRaffle($id);
+        $user   = $this->loadUser($userId);
+
+        $raffle->userIsNoShow($user);
+        $this->entityManager->flush();
+
+        return new JsonResponse('OK');
+    }
+
     public function comments(string $id)
     {
         $raffle = $this->loadRaffle($id);
@@ -84,5 +112,10 @@ class RaffleApiController
     private function loadRaffle(string $id): Raffle
     {
         return $this->raffleRepository->find($id);
+    }
+
+    private function loadUser(string $id): JoindInUser
+    {
+        return $this->userRepository->find($id);
     }
 }

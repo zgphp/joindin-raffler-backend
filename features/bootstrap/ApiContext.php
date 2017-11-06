@@ -1,5 +1,6 @@
 <?php
 
+use App\Entity\JoindInUser;
 use App\Repository\JoindInCommentRepository;
 use App\Repository\JoindInEventRepository;
 use App\Repository\JoindInUserRepository;
@@ -86,6 +87,34 @@ class ApiContext implements Context
 
         $this->picked = json_decode($response->getBody()->getContents(), true);
     }
+
+    /**
+     * @When user :user wins
+     */
+    public function userWins(JoindInUser $user)
+    {
+        $options =[];
+        $url     = 'http://test.raffler.loc:8000/api/raffle/'.$this->raffleId.'/winner/'.$user->getId();
+
+        $response = $this->getGuzzle()->post($url, $options);
+
+        json_decode($response->getBody()->getContents(), true);
+    }
+
+    /**
+     * @When user :user is no show
+     */
+    public function userIsNoShow(JoindInUser $user)
+    {
+        $options =[];
+        $url     = 'http://test.raffler.loc:8000/api/raffle/'.$this->raffleId.'/no_show/'.$user->getId();
+
+        $response = $this->getGuzzle()->post($url, $options);
+
+        json_decode($response->getBody()->getContents(), true);
+    }
+
+    /**
      * @Then there should be :count ZgPHP meetups in system
      */
     public function thereShouldBeZgphpMeetupsInSystem(int $count)
@@ -151,6 +180,34 @@ class ApiContext implements Context
     public function weShouldGetBackOneOfTheMembersThatLeftFeedback()
     {
         Assert::notNull($this->picked);
+    }
+
+    /**
+     * @Then :user user should be :count times in the list
+     */
+    public function userShouldBeTimesInTheList(JoindInUser $user, int $count)
+    {
+        $response = $this->getGuzzle()->get('http://test.raffler.loc:8000/api/raffle/'.$this->raffleId.'/comments');
+
+        $data = json_decode($response->getBody()->getContents(), true);
+
+        $found  = 0;
+
+        foreach ($data as $comment) {
+            if ($comment['user']['id'] === $user->getId()) {
+                ++$found;
+            }
+        }
+
+        Assert::eq($found, $count);
+    }
+
+    /**
+     * @Transform :user
+     */
+    public function castToUser(string $username): JoindInUser
+    {
+        return $this->getUserRepository()->findOneByUsername($username);
     }
 
     private function getGuzzle(): Client

@@ -43,6 +43,17 @@ raffle_api_pick:
     methods: [POST]
     defaults: { _controller: 'App\Controller\RaffleApiController::pick' }
 
+raffle_api_winner:
+    path: /api/raffle/{id}/winner/{userId}
+    methods: [POST]
+    defaults: { _controller: 'App\Controller\RaffleApiController::winner' }
+
+raffle_api_no_show:
+    path: /api/raffle/{id}/no_show/{userId}
+    methods: [POST]
+    defaults: { _controller: 'App\Controller\RaffleApiController::noShow' }
+
+
 raffle_api_show:
     path: /api/raffle/{id}
     defaults: { _controller: 'App\Controller\RaffleApiController::show' }
