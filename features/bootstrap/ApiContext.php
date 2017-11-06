@@ -23,20 +23,29 @@ class ApiContext implements Context
      */
     private $kernel;
 
-    /** @var string */
+    /**
+     * @var string
+     */
+    private $testApiUrl = 'http://test.raffler.loc:8000';
+
+    /** @var string|null */
     private $raffleId;
+
+    /** @var array|null */
+    private $picked;
 
     public function __construct(KernelInterface $kernel)
     {
         $this->kernel = $kernel;
     }
 
+
     /**
      * @When I fetch meetup data from Joind.in
      */
     public function iFetchMeetupDataFromJoindIn()
     {
-        $this->getGuzzle()->get('http://test.raffler.loc:8000/joindin/events/fetch');
+        $this->apiGetJson('/joindin/events/fetch');
     }
 
     /**
@@ -44,7 +53,7 @@ class ApiContext implements Context
      */
     public function iFetchMeetupTalksFromJoindIn()
     {
-        $this->getGuzzle()->get('http://test.raffler.loc:8000/joindin/talks/fetch');
+        $this->apiGetJson('/joindin/talks/fetch');
     }
 
     /**
@@ -52,7 +61,7 @@ class ApiContext implements Context
      */
     public function iFetchMeetupTalkCommentsFromJoindIn()
     {
-        $this->getGuzzle()->get('http://test.raffler.loc:8000/joindin/comments/fetch');
+        $this->apiGetJson('/joindin/comments/fetch');
     }
 
     /**
@@ -61,31 +70,20 @@ class ApiContext implements Context
     public function organizerPicksToRaffleMeetups(string $eventIdList)
     {
         $options = [
-            'json' => ['events'=> explode(',', $eventIdList)],
+            'json' => ['events' => explode(',', $eventIdList)],
         ];
 
-        $response = $this->getGuzzle()->post('http://test.raffler.loc:8000/api/raffle/start', $options);
-
-        $data = json_decode($response->getBody()->getContents(), true);
+        $data = $this->apiPostJson('/api/raffle/start', $options);
 
         $this->raffleId = $data;
     }
-
-    /**
-     * @var array|null
-     */
-    private $picked;
 
     /**
      * @When we pick
      */
     public function wePick()
     {
-        $options =[];
-
-        $response = $this->getGuzzle()->post('http://test.raffler.loc:8000/api/raffle/'.$this->raffleId.'/pick', $options);
-
-        $this->picked = json_decode($response->getBody()->getContents(), true);
+        $this->picked = $this->apiPostJson('/api/raffle/'.$this->raffleId.'/pick');
     }
 
     /**
@@ -93,12 +91,9 @@ class ApiContext implements Context
      */
     public function userWins(JoindInUser $user)
     {
-        $options =[];
-        $url     = 'http://test.raffler.loc:8000/api/raffle/'.$this->raffleId.'/winner/'.$user->getId();
+        $url = '/api/raffle/'.$this->raffleId.'/winner/'.$user->getId();
 
-        $response = $this->getGuzzle()->post($url, $options);
-
-        json_decode($response->getBody()->getContents(), true);
+        Assert::eq('OK', $this->apiPostJson($url));
     }
 
     /**
@@ -106,12 +101,9 @@ class ApiContext implements Context
      */
     public function userIsNoShow(JoindInUser $user)
     {
-        $options =[];
-        $url     = 'http://test.raffler.loc:8000/api/raffle/'.$this->raffleId.'/no_show/'.$user->getId();
+        $url = '/api/raffle/'.$this->raffleId.'/no_show/'.$user->getId();
 
-        $response = $this->getGuzzle()->post($url, $options);
-
-        json_decode($response->getBody()->getContents(), true);
+        Assert::eq('OK', $this->apiPostJson($url));
     }
 
     /**
@@ -119,11 +111,7 @@ class ApiContext implements Context
      */
     public function thereShouldBeZgphpMeetupsInSystem(int $count)
     {
-        $response = $this->getGuzzle()->get('http://test.raffler.loc:8000/joindin/events/');
-
-        $data = json_decode($response->getBody()->getContents(), true);
-
-        Assert::count($data, $count);
+        Assert::count($this->apiGetJson('/joindin/events/'), $count);
     }
 
     /**
@@ -131,11 +119,7 @@ class ApiContext implements Context
      */
     public function thereShouldBeTalksInSystem(int $count)
     {
-        $response = $this->getGuzzle()->get('http://test.raffler.loc:8000/joindin/talks/');
-
-        $data = json_decode($response->getBody()->getContents(), true);
-
-        Assert::count($data, $count);
+        Assert::count($this->apiGetJson('/joindin/talks/'), $count);
     }
 
     /**
@@ -143,9 +127,7 @@ class ApiContext implements Context
      */
     public function thereShouldBeCommentInSystem(int $count)
     {
-        $response = $this->getGuzzle()->get('http://test.raffler.loc:8000/joindin/comments/');
-
-        $data = json_decode($response->getBody()->getContents(), true);
+        $data = $this->apiGetJson('/joindin/comments/');
 
         Assert::count($data, $count);
     }
@@ -155,9 +137,7 @@ class ApiContext implements Context
      */
     public function thereShouldBeEventsOnTheRaffle(int $count)
     {
-        $response = $this->getGuzzle()->get('http://test.raffler.loc:8000/api/raffle/'.$this->raffleId);
-
-        $data = json_decode($response->getBody()->getContents(), true);
+        $data = $this->apiGetJson('/api/raffle/'.$this->raffleId);
 
         Assert::count($data['events'], $count);
     }
@@ -167,11 +147,7 @@ class ApiContext implements Context
      */
     public function thereShouldBeCommentsOnTheRaffle(int $count)
     {
-        $response = $this->getGuzzle()->get('http://test.raffler.loc:8000/api/raffle/'.$this->raffleId.'/comments');
-
-        $data = json_decode($response->getBody()->getContents(), true);
-
-        Assert::count($data, $count);
+        Assert::count($this->apiGetJson('/api/raffle/'.$this->raffleId.'/comments'), $count);
     }
 
     /**
@@ -187,11 +163,9 @@ class ApiContext implements Context
      */
     public function userShouldBeTimesInTheList(JoindInUser $user, int $count)
     {
-        $response = $this->getGuzzle()->get('http://test.raffler.loc:8000/api/raffle/'.$this->raffleId.'/comments');
+        $data = $this->apiGetJson('/api/raffle/'.$this->raffleId.'/comments');
 
-        $data = json_decode($response->getBody()->getContents(), true);
-
-        $found  = 0;
+        $found = 0;
 
         foreach ($data as $comment) {
             if ($comment['user']['id'] === $user->getId()) {
@@ -205,32 +179,48 @@ class ApiContext implements Context
     /**
      * @Transform :user
      */
-    public function castToUser(string $username): JoindInUser
+    public function castToUser(string $username) : JoindInUser
     {
         return $this->getUserRepository()->findOneByUsername($username);
     }
 
-    private function getGuzzle(): Client
+
+    private function apiGetJson(string $url)
+    {
+        $response = $this->getGuzzle()->get($this->testApiUrl.$url);
+
+        return json_decode($response->getBody()->getContents(), true);
+    }
+
+    private function apiPostJson(string $url, array $options = [])
+    {
+        $response = $this->getGuzzle()->post($this->testApiUrl.$url, $options);
+
+        return json_decode($response->getBody()->getContents(), true);
+    }
+
+
+    private function getGuzzle() : Client
     {
         return $this->kernel->getContainer()->get(Client::class);
     }
 
-    private function getEntityManager(): EntityManager
+    private function getEntityManager() : EntityManager
     {
         return $this->kernel->getContainer()->get('doctrine.orm.entity_manager');
     }
 
-    private function getEventRepository(): JoindInEventRepository
+    private function getEventRepository() : JoindInEventRepository
     {
         return $this->kernel->getContainer()->get(JoindInEventRepository::class);
     }
 
-    private function getCommentRepository(): JoindInCommentRepository
+    private function getCommentRepository() : JoindInCommentRepository
     {
         return $this->kernel->getContainer()->get(JoindInCommentRepository::class);
     }
 
-    private function getUserRepository(): JoindInUserRepository
+    private function getUserRepository() : JoindInUserRepository
     {
         return $this->kernel->getContainer()->get(JoindInUserRepository::class);
     }
