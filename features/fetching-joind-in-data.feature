@@ -25,7 +25,7 @@ Feature:
       | id   | title         | date       |
       | 6674 | ZgPHP 2017/10 | 2017-10-19 |
     And we have these talks in the system
-      | id    | title              | eventId | importedAt          |
-      | 22817 | Fullstacking - 101 | 6674    | 2020-01-02 11:22:33 |
+      | id    | title              | eventId |
+      | 22817 | Fullstacking - 101 | 6674    |
     When I fetch meetup talk comments from Joind.in
     Then there should be 1 comment in system

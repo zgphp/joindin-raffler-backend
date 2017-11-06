@@ -11,11 +11,11 @@ Feature:
       | 2  | Meetup #2 | 2017-02-19  |
       | 3  | Meetup #3 | 2017-03-19  |
     And we have these talks in the system
-      | id  | title    | eventId | importedAt          |
-      | 101 | Talk 101 | 1       | 2020-01-02 11:22:33 |
-      | 201 | Talk 201 | 2       | 2020-01-02 11:22:33 |
-      | 202 | Talk 202 | 2       | 2020-01-02 11:22:33 |
-      | 301 | Talk 301 | 3       | 2020-01-02 11:22:33 |
+      | id  | title    | eventId |
+      | 101 | Talk 101 | 1       |
+      | 201 | Talk 201 | 2       |
+      | 202 | Talk 202 | 2       |
+      | 301 | Talk 301 | 3       |
     And we have these users in the system
       | id | username | displayName |
       | 1  | User1    | User 1      |
