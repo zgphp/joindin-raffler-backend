@@ -27,31 +27,10 @@ class FixturesContext extends BaseContext
     }
 
     /**
-     * @Given there are no meetups in the system
-     */
-    public function thereAreNoMeetupsInTheSystem()
-    {
-        foreach ($this->getEventRepository()->findAll() as $joindInEvent) {
-            foreach ($joindInEvent->getTalks() as $joindInTalk) {
-                foreach ($joindInTalk->getComments() as $joindInComment) {
-                    $this->getEntityManager()->remove($joindInComment);
-                }
-
-                $this->getEntityManager()->remove($joindInTalk);
-            }
-
-            $this->getEntityManager()->remove($joindInEvent);
-        }
-        $this->getEntityManager()->flush();
-    }
-
-    /**
      * @Given we have these meetups in the system
      */
     public function weHaveThisMeetupsInTheSystem(TableNode $table)
     {
-        $this->thereAreNoMeetupsInTheSystem();
-
         foreach ($table as $row) {
             $date  = new DateTime($row['date']);
             $event = new JoindInEvent((int) $row['id'], $row['title'], $date, $date);
@@ -78,34 +57,10 @@ class FixturesContext extends BaseContext
     }
 
     /**
-     * @Given there are no raffles in the system
-     */
-    public function thereAreNoRafflesInTheSystem()
-    {
-        foreach ($this->getRaffleRepository()->findAll() as $raffle) {
-            $this->getEntityManager()->remove($raffle);
-        }
-        $this->getEntityManager()->flush();
-    }
-
-    /**
-     * @Given there are no users in the system
-     */
-    public function thereAreNoUsersInTheSystem()
-    {
-        foreach ($this->getUserRepository()->findAll() as $user) {
-            $this->getEntityManager()->remove($user);
-        }
-        $this->getEntityManager()->flush();
-    }
-
-    /**
      * @Given we have these users in the system
      */
     public function weHaveThisUsersInTheSystem(TableNode $table)
     {
-        $this->thereAreNoUsersInTheSystem();
-
         foreach ($table as $row) {
             $user = new JoindInUser((int) $row['id'], $row['username'], $row['displayName']);
 

@@ -8,10 +8,42 @@ use App\Repository\JoindInTalkRepository;
 use App\Repository\JoindInUserRepository;
 use App\Repository\RaffleRepository;
 use Behat\Behat\Context\Context;
+use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Doctrine\ORM\EntityManager;
 
 abstract class BaseContext implements Context
 {
+    /**
+     * @BeforeScenario
+     */
+    public function cleanDB(BeforeScenarioScope $scope)
+    {
+        // Remove all meetups, talks & comments.
+        foreach ($this->getEventRepository()->findAll() as $joindInEvent) {
+            foreach ($joindInEvent->getTalks() as $joindInTalk) {
+                foreach ($joindInTalk->getComments() as $joindInComment) {
+                    $this->getEntityManager()->remove($joindInComment);
+                }
+
+                $this->getEntityManager()->remove($joindInTalk);
+            }
+
+            $this->getEntityManager()->remove($joindInEvent);
+        }
+
+        // Remove all raffles.
+        foreach ($this->getRaffleRepository()->findAll() as $raffle) {
+            $this->getEntityManager()->remove($raffle);
+        }
+
+        // Remove all users.
+        foreach ($this->getUserRepository()->findAll() as $user) {
+            $this->getEntityManager()->remove($user);
+        }
+
+        $this->getEntityManager()->flush();
+    }
+
     /**
      * @Transform :user
      */
