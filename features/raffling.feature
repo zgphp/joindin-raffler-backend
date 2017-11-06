@@ -22,7 +22,6 @@ Feature:
       | 2  | User2    | User 2      |
       | 3  | User3    | User 2      |
     And we have each user commenting on each talk
-    And there are no raffles in the system
     And organizer picks to raffle meetups: "2,3"
 
 

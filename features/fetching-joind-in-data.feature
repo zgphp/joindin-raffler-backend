@@ -9,7 +9,6 @@ Feature:
   I need to have all meetups,talks and comments in
 
   Scenario: It fetches meetups from Joind.in
-    Given there are no meetups in the system
     When I fetch meetup data from Joind.in
     Then there should be 24 ZgPHP meetups in system
 
