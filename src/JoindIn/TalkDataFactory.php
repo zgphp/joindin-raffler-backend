@@ -19,8 +19,7 @@ class TalkDataFactory
     {
         if (preg_match('|https://api.joind.in/v2.1/talks/(?<id>[\d]*)$|', $uri, $matches)) {
             return (int) $matches['id'];
-        } else {
-            throw new \Exception('Unparsable '.$uri);
         }
+        throw new \Exception('Unparsable '.$uri);
     }
 }
