@@ -26,7 +26,7 @@ Feature:
 
 
   Scenario: Running a raffle with events that have comments on talks selects a user as a winner
-    When we pick
+    When I pick a winner
     Then we should get back one of the members that left feedback
 
   Scenario: Selecting a user who submitted 3 comments removes 3 comments from the raffle
