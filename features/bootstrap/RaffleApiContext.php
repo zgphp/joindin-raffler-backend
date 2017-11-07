@@ -18,7 +18,7 @@ class RaffleApiContext extends BaseContext
     private $picked;
 
     /** @var string */
-    private $testApiUrl = 'http://test.raffler.loc:8000';
+    private $testApiUrl = 'http://test.raffler.loc:8000/api';
 
     public function __construct(KernelInterface $kernel)
     {
@@ -34,7 +34,7 @@ class RaffleApiContext extends BaseContext
             'json' => ['events' => explode(',', $eventIdList)],
         ];
 
-        $data = $this->apiPostJson('/api/raffle/start', $options);
+        $data = $this->apiPostJson('/raffle/start', $options);
 
         $this->raffleId = $data;
     }
@@ -44,7 +44,7 @@ class RaffleApiContext extends BaseContext
      */
     public function wePick()
     {
-        $this->picked = $this->apiPostJson('/api/raffle/'.$this->raffleId.'/pick');
+        $this->picked = $this->apiPostJson('/raffle/'.$this->raffleId.'/pick');
     }
 
     /**
@@ -52,7 +52,7 @@ class RaffleApiContext extends BaseContext
      */
     public function userWins(JoindInUser $user)
     {
-        $url = '/api/raffle/'.$this->raffleId.'/winner/'.$user->getId();
+        $url = '/raffle/'.$this->raffleId.'/winner/'.$user->getId();
 
         Assert::eq('OK', $this->apiPostJson($url));
     }
@@ -62,7 +62,7 @@ class RaffleApiContext extends BaseContext
      */
     public function userIsNoShow(JoindInUser $user)
     {
-        $url = '/api/raffle/'.$this->raffleId.'/no_show/'.$user->getId();
+        $url = '/raffle/'.$this->raffleId.'/no_show/'.$user->getId();
 
         Assert::eq('OK', $this->apiPostJson($url));
     }
@@ -72,7 +72,7 @@ class RaffleApiContext extends BaseContext
      */
     public function thereShouldBeEventsOnTheRaffle(int $count)
     {
-        $data = $this->apiGetJson('/api/raffle/'.$this->raffleId);
+        $data = $this->apiGetJson('/raffle/'.$this->raffleId);
 
         Assert::count($data['events'], $count);
     }
@@ -82,7 +82,7 @@ class RaffleApiContext extends BaseContext
      */
     public function thereShouldBeCommentsOnTheRaffle(int $count)
     {
-        Assert::count($this->apiGetJson('/api/raffle/'.$this->raffleId.'/comments'), $count);
+        Assert::count($this->apiGetJson('/raffle/'.$this->raffleId.'/comments'), $count);
     }
 
     /**
@@ -98,7 +98,7 @@ class RaffleApiContext extends BaseContext
      */
     public function userShouldBeTimesInTheList(JoindInUser $user, int $count)
     {
-        $data = $this->apiGetJson('/api/raffle/'.$this->raffleId.'/comments');
+        $data = $this->apiGetJson('/raffle/'.$this->raffleId.'/comments');
 
         $found = 0;
 
