@@ -122,6 +122,14 @@ class RaffleContext extends BaseContext
         Assert::notEmpty($this->picked);
     }
 
+    /**
+     * @Then we should get :user as a winner
+     */
+    public function weShouldGetAsAWinner(JoindInUser $user)
+    {
+        Assert::eq($user, $this->picked);
+    }
+
     protected function getService(string $name)
     {
         return $this->kernel->getContainer()->get($name);
