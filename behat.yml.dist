@@ -18,9 +18,9 @@ default:
                     kernel: '@kernel'
             filters:
                 tags: "@fetch"
-        api:
+        joindin_api:
             contexts:
-                - ApiContext:
+                - JoindInApiContext:
                     kernel: '@kernel'
             filters:
                 tags: "@fetch && @api"
