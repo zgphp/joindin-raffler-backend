@@ -86,6 +86,22 @@ class RaffleApiContext extends BaseContext
     }
 
     /**
+     * @Then we should get one of :userNames as a winner
+     */
+    public function weShouldGetOneOfAsAWinner(string $userNames)
+    {
+        $users = $this->loadMultipleUsers($userNames);
+
+        foreach ($users as $user) {
+            if ($user->getId() === $this->picked['id']) {
+                return;
+            }
+        }
+
+        throw new Exception('Picked user is not in the expected list');
+    }
+
+    /**
      * @Then we should get back one of the members that left feedback
      */
     public function weShouldGetBackOneOfTheMembersThatLeftFeedback()
