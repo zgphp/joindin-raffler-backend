@@ -427,5 +427,14 @@
             "version": "3.3",
             "ref": "f75ac166398e107796ca94cc57fa1edaa06ec47f"
         }
+    },
+    "symfony/dom-crawler": {
+        "version": "v3.4.0-beta3"
+    },
+    "symfony/browser-kit": {
+        "version": "v3.4.0-beta3"
+    },
+    "behat/mink-browserkit-driver": {
+        "version": "v1.3.2"
     }
 }
