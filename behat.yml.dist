@@ -4,15 +4,11 @@ default:
             contexts:
                 - ApplicationContext:
                     kernel: '@kernel'
-                - FixturesContext:
-                    kernel: '@kernel'
             filters:
                 tags: "@raffle"
         raffle_api:
             contexts:
                 - ApiContext:
-                    kernel: '@kernel'
-                - FixturesContext:
                     kernel: '@kernel'
             filters:
                 tags: "@raffle && @api"
@@ -20,15 +16,11 @@ default:
             contexts:
                 - ApplicationContext:
                     kernel: '@kernel'
-                - FixturesContext:
-                    kernel: '@kernel'
             filters:
                 tags: "@fetch"
         api:
             contexts:
                 - ApiContext:
-                    kernel: '@kernel'
-                - FixturesContext:
                     kernel: '@kernel'
             filters:
                 tags: "@fetch && @api"

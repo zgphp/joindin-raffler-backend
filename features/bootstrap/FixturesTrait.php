@@ -4,32 +4,14 @@ use App\Entity\JoindInComment;
 use App\Entity\JoindInEvent;
 use App\Entity\JoindInTalk;
 use App\Entity\JoindInUser;
-use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
-use Symfony\Component\HttpKernel\KernelInterface;
 
-/**
- * This context class contains the definitions of the steps used by the demo
- * feature file. Learn how to get started with Behat and BDD on Behat's website.
- *
- * @see http://behat.org/en/latest/quick_start.html
- */
-class FixturesContext extends BaseContext
+trait FixturesTrait
 {
-    /**
-     * @var KernelInterface
-     */
-    private $kernel;
-
-    public function __construct(KernelInterface $kernel)
-    {
-        $this->kernel = $kernel;
-    }
-
     /**
      * @Given we have these meetups in the system
      */
-    public function weHaveThisMeetupsInTheSystem(TableNode $table)
+    public function weHaveTheseMeetupsInTheSystem(TableNode $table)
     {
         foreach ($table as $row) {
             $date  = new DateTime($row['date']);
@@ -43,7 +25,7 @@ class FixturesContext extends BaseContext
     /**
      * @Given we have these talks in the system
      */
-    public function weHaveThisTalksInTheSystem(TableNode $table)
+    public function weHaveTheseTalksInTheSystem(TableNode $table)
     {
         foreach ($table as $row) {
             $event = $this->getEventRepository()->find($row['eventId']);
@@ -59,7 +41,7 @@ class FixturesContext extends BaseContext
     /**
      * @Given we have these users in the system
      */
-    public function weHaveThisUsersInTheSystem(TableNode $table)
+    public function weHaveTheseUsersInTheSystem(TableNode $table)
     {
         foreach ($table as $row) {
             $user = new JoindInUser((int) $row['id'], $row['username'], $row['displayName']);
@@ -88,10 +70,5 @@ class FixturesContext extends BaseContext
             }
         }
         $this->getEntityManager()->flush();
-    }
-
-    protected function getService(string $name)
-    {
-        return $this->kernel->getContainer()->get($name);
     }
 }
