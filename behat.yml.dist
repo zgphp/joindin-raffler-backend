@@ -8,7 +8,7 @@ default:
                 tags: "@raffle"
         raffle_api:
             contexts:
-                - ApiContext:
+                - RaffleApiContext:
                     kernel: '@kernel'
             filters:
                 tags: "@raffle && @api"
