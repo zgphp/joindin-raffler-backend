@@ -2,7 +2,7 @@ default:
     suites:
         raffle:
             contexts:
-                - ApplicationContext:
+                - RaffleContext:
                     kernel: '@kernel'
             filters:
                 tags: "@raffle"
