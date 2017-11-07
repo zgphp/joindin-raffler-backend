@@ -41,10 +41,21 @@ class RaffleApiContext extends BaseContext
 
     /**
      * @When I pick a winner
+     * @When I pick another winner
      */
     public function wePick()
     {
         $this->picked = $this->apiPostJson('/raffle/'.$this->raffleId.'/pick');
+    }
+
+    /**
+     * @When I confirm him or her as a winner
+     */
+    public function iConfirmHimOrHerAsAWinner()
+    {
+        $url = '/raffle/'.$this->raffleId.'/winner/'.$this->picked['id'];
+
+        Assert::eq('OK', $this->apiPostJson($url));
     }
 
     /**
@@ -133,6 +144,27 @@ class RaffleApiContext extends BaseContext
     public function weShouldGetAsAWinner(JoindInUser $user)
     {
         Assert::eq($user->getId(), $this->picked['id']);
+    }
+
+    /**
+     * @Then we should have :count eligible comment for next prize
+     * @Then we should have :count eligible comments for next prize
+     */
+    public function weShouldHaveEligibleCommentForNextPrize(int $count)
+    {
+        $data = $this->apiGetJson('/raffle/'.$this->raffleId.'/comments');
+
+        Assert::count($data, $count);
+    }
+
+    /**
+     * @Then we cannot continue raffling
+     */
+    public function weCannotContinueRaffling()
+    {
+        $response = $this->apiPostJson('/raffle/'.$this->raffleId.'/pick');
+
+        Assert::true($response['error']);
     }
 
     private function apiGetJson(string $url)

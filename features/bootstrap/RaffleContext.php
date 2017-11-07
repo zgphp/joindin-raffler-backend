@@ -2,6 +2,7 @@
 
 use App\Entity\JoindInUser;
 use App\Entity\Raffle;
+use App\Exception\NoCommentsToRaffleException;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Webmozart\Assert\Assert;
@@ -45,12 +46,25 @@ class RaffleContext extends BaseContext
 
     /**
      * @When I pick a winner
+     * @When I pick another winner
      */
     public function wePick()
     {
         $raffle = $this->loadRaffle($this->raffleId);
 
         $this->picked = $raffle->pick();
+    }
+
+    /**
+     * @When I confirm him or her as a winner
+     */
+    public function iConfirmHimOrHerAsAWinner()
+    {
+        $raffle = $this->loadRaffle($this->raffleId);
+
+        $raffle->userWon($this->picked);
+
+        $this->getEntityManager()->flush();
     }
 
     /**
@@ -144,6 +158,36 @@ class RaffleContext extends BaseContext
     public function weShouldGetAsAWinner(JoindInUser $user)
     {
         Assert::eq($user, $this->picked);
+    }
+
+    /**
+     * @Then we should have :count eligible comment for next prize
+     * @Then we should have :count eligible comments for next prize
+     */
+    public function weShouldHaveEligibleCommentForNextPrize(int $count)
+    {
+        $raffle = $this->loadRaffle($this->raffleId);
+
+        Assert::count($raffle->getCommentsEligibleForRaffling()->getValues(), $count);
+    }
+
+    /**
+     * @Then we cannot continue raffling
+     */
+    public function weCannotContinueRaffling()
+    {
+        try {
+            $raffle = $this->loadRaffle($this->raffleId);
+
+            $raffle->pick();
+
+            throw new Exception('Raffling was supposed to throw an error');
+        } catch (NoCommentsToRaffleException $exception) {
+            //We expect this exception to happen as there are no comments eligible for raffling.
+            return;
+        } catch (Exception $exception) {
+            throw $exception;
+        }
     }
 
     protected function getService(string $name)
