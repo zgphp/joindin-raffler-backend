@@ -111,6 +111,14 @@ class RaffleApiContext extends BaseContext
         Assert::eq($found, $count);
     }
 
+    /**
+     * @Then we should get :user as a winner
+     */
+    public function weShouldGetAsAWinner(JoindInUser $user)
+    {
+        Assert::eq($user->getId(), $this->picked['id']);
+    }
+
     private function apiGetJson(string $url)
     {
         $response = $this->getGuzzle()->get($this->testApiUrl.$url);
