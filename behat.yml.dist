@@ -12,9 +12,9 @@ default:
                     kernel: '@kernel'
             filters:
                 tags: "@raffle && @api"
-        application:
+        joindin:
             contexts:
-                - ApplicationContext:
+                - JoindInContext:
                     kernel: '@kernel'
             filters:
                 tags: "@fetch"
