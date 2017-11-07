@@ -26,7 +26,7 @@ class JoindInTalkRetrieval
         $this->talkRepository = $talkRepository;
     }
 
-    public function fetch(JoindInEvent $event)
+    public function fetch(JoindInEvent $event): void
     {
         foreach ($this->joindInClient->fetchTalksForEvent($event) as $talkData) {
             $entity = $this->talkRepository->find($talkData->getId());

@@ -25,7 +25,7 @@ class JoindInEventRetrieval
         $this->eventRepository = $eventRepository;
     }
 
-    public function fetch()
+    public function fetch(): void
     {
         foreach ($this->joindInClient->fetchZgPhpEvents() as $eventData) {
             $entity = $this->eventRepository->find($eventData->getId());

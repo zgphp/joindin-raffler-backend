@@ -26,7 +26,7 @@ class JoindInCommentController
         $this->talkRepository           = $talkRepository;
     }
 
-    public function fetch()
+    public function fetch(): JsonResponse
     {
         foreach ($this->talkRepository->findAll() as $talk) {
             $this->joindInCommentRetrieval->fetch($talk);
@@ -35,7 +35,7 @@ class JoindInCommentController
         return new JsonResponse('OK');
     }
 
-    public function commentList()
+    public function commentList(): JsonResponse
     {
         $comments = $this->joindInCommentRepository->findAll();
 

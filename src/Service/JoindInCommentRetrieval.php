@@ -32,7 +32,7 @@ class JoindInCommentRetrieval
         $this->userRepository    = $userRepository;
     }
 
-    public function fetch(JoindInTalk $talk)
+    public function fetch(JoindInTalk $talk): void
     {
         $comments = $this->joindInClient->fetchCommentsForTalk($talk);
 
