@@ -59,6 +59,16 @@ class RaffleApiContext extends BaseContext
     }
 
     /**
+     * @When I mark him or her as a no show
+     */
+    public function iMarkHimOrHerAsANoShow()
+    {
+        $url = '/raffle/'.$this->raffleId.'/no_show/'.$this->picked['id'];
+
+        Assert::eq('OK', $this->apiPostJson($url));
+    }
+
+    /**
      * @When user :user wins
      */
     public function userWins(JoindInUser $user)
