@@ -1753,16 +1753,16 @@
         },
         {
             "name": "ramsey/uuid-doctrine",
-            "version": "1.4.1",
+            "version": "1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid-doctrine.git",
-                "reference": "d9002c7fe2cc5507e9292fe90d78d1e89b9d985e"
+                "reference": "9417136e9ff2028b1d4821b62e783ddb186a6a2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid-doctrine/zipball/d9002c7fe2cc5507e9292fe90d78d1e89b9d985e",
-                "reference": "d9002c7fe2cc5507e9292fe90d78d1e89b9d985e",
+                "url": "https://api.github.com/repos/ramsey/uuid-doctrine/zipball/9417136e9ff2028b1d4821b62e783ddb186a6a2f",
+                "reference": "9417136e9ff2028b1d4821b62e783ddb186a6a2f",
                 "shasum": ""
             },
             "require": {
@@ -1805,7 +1805,7 @@
                 "identifier",
                 "uuid"
             ],
-            "time": "2017-07-18T16:21:14+00:00"
+            "time": "2017-11-06T16:18:06+00:00"
         },
         {
             "name": "symfony/cache",
