@@ -18,7 +18,7 @@ class JoindInApiContext extends BaseContext
     private $picked;
 
     /** @var string */
-    private $testApiUrl = 'http://test.raffler.loc:8000';
+    private $testApiUrl = 'http://test.raffler.loc:8000/api';
 
     public function __construct(KernelInterface $kernel)
     {
@@ -30,7 +30,7 @@ class JoindInApiContext extends BaseContext
      */
     public function iFetchMeetupDataFromJoindIn()
     {
-        $this->apiGetJson('/api/joindin/events/fetch');
+        $this->apiGetJson('/joindin/events/fetch');
     }
 
     /**
@@ -38,7 +38,7 @@ class JoindInApiContext extends BaseContext
      */
     public function iFetchMeetupTalksFromJoindIn()
     {
-        $this->apiGetJson('/api/joindin/talks/fetch');
+        $this->apiGetJson('/joindin/talks/fetch');
     }
 
     /**
@@ -46,7 +46,7 @@ class JoindInApiContext extends BaseContext
      */
     public function iFetchMeetupTalkCommentsFromJoindIn()
     {
-        $this->apiGetJson('/api/joindin/comments/fetch');
+        $this->apiGetJson('/joindin/comments/fetch');
     }
 
     /**
@@ -54,7 +54,7 @@ class JoindInApiContext extends BaseContext
      */
     public function thereShouldBeZgphpMeetupsInSystem(int $count)
     {
-        Assert::count($this->apiGetJson('/api/joindin/events/'), $count);
+        Assert::count($this->apiGetJson('/joindin/events/'), $count);
     }
 
     /**
@@ -62,7 +62,7 @@ class JoindInApiContext extends BaseContext
      */
     public function thereShouldBeTalksInSystem(int $count)
     {
-        Assert::count($this->apiGetJson('/api/joindin/talks/'), $count);
+        Assert::count($this->apiGetJson('/joindin/talks/'), $count);
     }
 
     /**
@@ -70,7 +70,7 @@ class JoindInApiContext extends BaseContext
      */
     public function thereShouldBeCommentInSystem(int $count)
     {
-        $data = $this->apiGetJson('/api/joindin/comments/');
+        $data = $this->apiGetJson('/joindin/comments/');
 
         Assert::count($data, $count);
     }
