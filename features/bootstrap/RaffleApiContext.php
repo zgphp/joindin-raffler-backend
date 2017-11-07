@@ -40,7 +40,7 @@ class RaffleApiContext extends BaseContext
     }
 
     /**
-     * @When we pick
+     * @When I pick a winner
      */
     public function wePick()
     {
