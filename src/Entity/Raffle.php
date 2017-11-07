@@ -7,6 +7,7 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RaffleRepository")
@@ -61,6 +62,11 @@ class Raffle implements \JsonSerializable
         $this->createdAt = new DateTime();
         $this->winners   = new ArrayCollection();
         $this->noShows   = new ArrayCollection();
+    }
+
+    public static function create(array $events): self
+    {
+        return new self(Uuid::uuid4()->toString(), new ArrayCollection($events));
     }
 
     public function getId(): string
