@@ -18,6 +18,7 @@ use Webmozart\Assert\Assert;
  */
 class ApplicationContext extends BaseContext
 {
+    use FixturesTrait;
     /**
      * @var KernelInterface
      */

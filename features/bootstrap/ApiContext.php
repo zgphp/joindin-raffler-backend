@@ -14,6 +14,7 @@ use Webmozart\Assert\Assert;
  */
 class ApiContext extends BaseContext
 {
+    use FixturesTrait;
     /**
      * @var KernelInterface
      */
