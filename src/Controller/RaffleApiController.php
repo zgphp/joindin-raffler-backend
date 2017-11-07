@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\JoindInUser;
 use App\Entity\Raffle;
+use App\Exception\NoCommentsToRaffleException;
 use App\Repository\JoindInEventRepository;
 use App\Repository\JoindInUserRepository;
 use App\Repository\RaffleRepository;
@@ -69,7 +70,11 @@ class RaffleApiController
     {
         $raffle = $this->loadRaffle($id);
 
-        $user = $raffle->pick();
+        try {
+            $user = $raffle->pick();
+        } catch (NoCommentsToRaffleException $exception) {
+            return new JsonResponse(['error' => true, 'message' => $exception->getMessage()]);
+        }
 
         return new JsonResponse($user);
     }
