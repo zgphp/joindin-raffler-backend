@@ -52,6 +52,17 @@ abstract class BaseContext implements Context
         return $this->getUserRepository()->findOneByUsername($username);
     }
 
+    protected function loadMultipleUsers(string $userNames): array
+    {
+        $users = [];
+
+        foreach (explode(',', $userNames) as $userName) {
+            $users[] = $this->getUserRepository()->findOneByUsername($userName);
+        }
+
+        return $users;
+    }
+
     protected function getEntityManager(): EntityManager
     {
         return $this->getService('doctrine.orm.entity_manager');

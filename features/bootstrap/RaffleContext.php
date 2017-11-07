@@ -98,6 +98,22 @@ class RaffleContext extends BaseContext
     }
 
     /**
+     * @Then we should get one of :userNames as a winner
+     */
+    public function weShouldGetOneOfAsAWinner(string $userNames)
+    {
+        $users = $this->loadMultipleUsers($userNames);
+
+        foreach ($users as $user) {
+            if ($user === $this->picked) {
+                return;
+            }
+        }
+
+        throw new Exception('Picked user is not in the expected list');
+    }
+
+    /**
      * @Then :user user should be :count times in the list
      */
     public function userShouldBeTimesInTheList(JoindInUser $user, int $count)
