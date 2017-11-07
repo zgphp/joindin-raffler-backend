@@ -68,6 +68,18 @@ class RaffleContext extends BaseContext
     }
 
     /**
+     * @When I mark him or her as a no show
+     */
+    public function iMarkHimOrHerAsANoShow()
+    {
+        $raffle = $this->loadRaffle($this->raffleId);
+
+        $raffle->userIsNoShow($this->picked);
+
+        $this->getEntityManager()->flush();
+    }
+
+    /**
      * @When user :user wins
      */
     public function userWins(JoindInUser $user)
