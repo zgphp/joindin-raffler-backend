@@ -26,7 +26,7 @@ class JoindInTalkController
         $this->talkRepository       = $talkRepository;
     }
 
-    public function fetch()
+    public function fetch(): JsonResponse
     {
         foreach ($this->eventRepository->findAll() as $event) {
             $this->joindInTalkRetrieval->fetch($event);
@@ -35,7 +35,7 @@ class JoindInTalkController
         return new JsonResponse('OK');
     }
 
-    public function talkList()
+    public function talkList(): JsonResponse
     {
         $talks = $this->talkRepository->findAll();
 

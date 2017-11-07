@@ -37,7 +37,7 @@ class RaffleApiController
         $this->userRepository   = $userRepository;
     }
 
-    public function start(Request $request)
+    public function start(Request $request): JsonResponse
     {
         $eventIds = json_decode($request->getContent(), true)['events'];
 
@@ -59,14 +59,14 @@ class RaffleApiController
         return new JsonResponse($raffle->getId());
     }
 
-    public function show(string $id)
+    public function show(string $id): JsonResponse
     {
         $raffle = $this->loadRaffle($id);
 
         return new JsonResponse($raffle);
     }
 
-    public function pick(string $id)
+    public function pick(string $id): JsonResponse
     {
         $raffle = $this->loadRaffle($id);
 
@@ -79,7 +79,7 @@ class RaffleApiController
         return new JsonResponse($user);
     }
 
-    public function winner(string $id, string $userId)
+    public function winner(string $id, string $userId): JsonResponse
     {
         $raffle = $this->loadRaffle($id);
         $user   = $this->loadUser($userId);
@@ -90,7 +90,7 @@ class RaffleApiController
         return new JsonResponse('OK');
     }
 
-    public function noShow(string $id, string $userId)
+    public function noShow(string $id, string $userId): JsonResponse
     {
         $raffle = $this->loadRaffle($id);
         $user   = $this->loadUser($userId);
@@ -101,7 +101,7 @@ class RaffleApiController
         return new JsonResponse('OK');
     }
 
-    public function comments(string $id)
+    public function comments(string $id): JsonResponse
     {
         $raffle = $this->loadRaffle($id);
 

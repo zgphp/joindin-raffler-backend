@@ -108,6 +108,7 @@ class Raffle implements \JsonSerializable
      */
     public function pick(): JoindInUser
     {
+        /** @var JoindInComment[] */
         $comments = $this->getCommentsEligibleForRaffling()->getValues();
 
         if (0 === count($comments)) {

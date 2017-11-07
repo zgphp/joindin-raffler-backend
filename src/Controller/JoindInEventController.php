@@ -26,14 +26,14 @@ class JoindInEventController
         $this->joindInEventRetrieval = $joindInEventRetrieval;
     }
 
-    public function fetch()
+    public function fetch(): JsonResponse
     {
         $this->joindInEventRetrieval->fetch();
 
         return new JsonResponse('OK');
     }
 
-    public function eventList()
+    public function eventList(): JsonResponse
     {
         $events = $this->eventRepository->findAllSortedFromNewestToOldest();
 
