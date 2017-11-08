@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Entity\JoindInUser;
 use App\Entity\Raffle;
 use App\Repository\JoindInCommentRepository;

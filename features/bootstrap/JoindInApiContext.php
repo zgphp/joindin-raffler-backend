@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use GuzzleHttp\Client;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Webmozart\Assert\Assert;
