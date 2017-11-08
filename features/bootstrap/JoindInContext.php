@@ -5,12 +5,14 @@ declare(strict_types=1);
 use App\Service\JoindInCommentRetrieval;
 use App\Service\JoindInEventRetrieval;
 use App\Service\JoindInTalkRetrieval;
+use Behat\Behat\Context\Context;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Webmozart\Assert\Assert;
 
-class JoindInContext extends BaseContext
+class JoindInContext implements Context
 {
     use FixturesTrait;
+    use HelperTrait;
 
     /** @var KernelInterface */
     private $kernel;

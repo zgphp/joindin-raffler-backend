@@ -3,13 +3,15 @@
 declare(strict_types=1);
 
 use App\Entity\JoindInUser;
+use Behat\Behat\Context\Context;
 use GuzzleHttp\Client;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Webmozart\Assert\Assert;
 
-class RaffleApiContext extends BaseContext
+class RaffleApiContext implements Context
 {
     use FixturesTrait;
+    use HelperTrait;
 
     /** @var KernelInterface */
     private $kernel;

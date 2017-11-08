@@ -2,13 +2,16 @@
 
 declare(strict_types=1);
 
+use Behat\Behat\Context\Context;
 use GuzzleHttp\Client;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Webmozart\Assert\Assert;
 
-class JoindInApiContext extends BaseContext
+class JoindInApiContext implements Context
 {
     use FixturesTrait;
+    use HelperTrait;
+
     /**
      * @var KernelInterface
      */

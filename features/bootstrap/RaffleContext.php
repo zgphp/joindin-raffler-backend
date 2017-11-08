@@ -5,13 +5,15 @@ declare(strict_types=1);
 use App\Entity\JoindInUser;
 use App\Entity\Raffle;
 use App\Exception\NoCommentsToRaffleException;
+use Behat\Behat\Context\Context;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Webmozart\Assert\Assert;
 
-class RaffleContext extends BaseContext
+class RaffleContext implements Context
 {
     use FixturesTrait;
+    use HelperTrait;
 
     /** @var KernelInterface */
     private $kernel;

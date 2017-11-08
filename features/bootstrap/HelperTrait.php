@@ -9,11 +9,10 @@ use App\Repository\JoindInEventRepository;
 use App\Repository\JoindInTalkRepository;
 use App\Repository\JoindInUserRepository;
 use App\Repository\RaffleRepository;
-use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Doctrine\ORM\EntityManager;
 
-abstract class BaseContext implements Context
+trait HelperTrait
 {
     /**
      * @BeforeScenario
@@ -99,6 +98,4 @@ abstract class BaseContext implements Context
     {
         return $this->getService(RaffleRepository::class);
     }
-
-    abstract protected function getService(string $name);
 }
