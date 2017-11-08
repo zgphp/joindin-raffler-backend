@@ -181,14 +181,14 @@ class RaffleApiContext extends BaseContext
     {
         $response = $this->getGuzzle()->get($this->testApiUrl.$url);
 
-        return json_decode($response->getBody(), true);
+        return json_decode($response->getBody()->getContents(), true);
     }
 
     private function apiPostJson(string $url, array $options = [])
     {
         $response = $this->getGuzzle()->post($this->testApiUrl.$url, $options);
 
-        return json_decode($response->getBody(), true);
+        return json_decode($response->getBody()->getContents(), true);
     }
 
     private function getGuzzle(): Client
