@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\App\JoindIn;
 
 use App\Entity\JoindInTalk;

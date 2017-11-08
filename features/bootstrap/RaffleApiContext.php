@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Entity\JoindInUser;
 use GuzzleHttp\Client;
 use Symfony\Component\HttpKernel\KernelInterface;
