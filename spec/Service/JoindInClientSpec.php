@@ -15,6 +15,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Psr\Http\Message\StreamInterface;
 
 class JoindInClientSpec extends ObjectBehavior
 {
@@ -31,12 +32,17 @@ class JoindInClientSpec extends ObjectBehavior
     public function it_will_return_zgphp_events(
         Client $client,
         Response $response,
+        StreamInterface $body,
         EventDataFactory $eventDataFactory,
         EventData $eventData
     ) {
         $client->get('https://api.joind.in/v2.1/events?title=zgphp&resultsperpage=30')
             ->shouldBeCalled()
             ->willReturn($response);
+
+        $response->getBody()
+            ->shouldBeCalled()
+            ->willReturn($body);
 
         $content = '
         {
@@ -56,7 +62,7 @@ class JoindInClientSpec extends ObjectBehavior
 }
         ';
 
-        $response->getBody()
+        $body->getContents()
             ->shouldBeCalled()
             ->willReturn($content);
 
@@ -70,13 +76,18 @@ class JoindInClientSpec extends ObjectBehavior
 
     public function it_will_return_empty_array_when_no_events_found(
         Client $client,
-        Response $response
+        Response $response,
+        StreamInterface $body
     ) {
         $client->get('https://api.joind.in/v2.1/events?title=zgphp&resultsperpage=30')
             ->shouldBeCalled()
             ->willReturn($response);
 
         $response->getBody()
+            ->shouldBeCalled()
+            ->willReturn($body);
+
+        $body->getContents()
             ->shouldBeCalled()
             ->willReturn('{"events": []}');
 
@@ -88,6 +99,7 @@ class JoindInClientSpec extends ObjectBehavior
         Client $client,
         TalkDataFactory $talkDataFactory,
         Response $response,
+        StreamInterface $body,
         JoindInEvent $event,
         TalkData $talkData
     ) {
@@ -98,6 +110,10 @@ class JoindInClientSpec extends ObjectBehavior
         $client->get('https://api.joind.in/v2.1/events/2345/talks')
             ->shouldBeCalled()
             ->willReturn($response);
+
+        $response->getBody()
+            ->shouldBeCalled()
+            ->willReturn($body);
 
         $content = '
 {
@@ -120,7 +136,7 @@ class JoindInClientSpec extends ObjectBehavior
 }
         ';
 
-        $response->getBody()
+        $body->getContents()
             ->shouldBeCalled()
             ->willReturn($content);
 
@@ -136,6 +152,7 @@ class JoindInClientSpec extends ObjectBehavior
         Client $client,
         CommentDataFactory $commentDataFactory,
         Response $response,
+        StreamInterface $body,
         JoindInTalk $talk,
         CommentData $commentData
     ) {
@@ -146,6 +163,10 @@ class JoindInClientSpec extends ObjectBehavior
         $client->get('https://api.joind.in/v2.1/talks/2345/comments')
             ->shouldBeCalled()
             ->willReturn($response);
+
+        $response->getBody()
+            ->shouldBeCalled()
+            ->willReturn($body);
 
         $content = '
 {
@@ -162,7 +183,7 @@ class JoindInClientSpec extends ObjectBehavior
 }
         ';
 
-        $response->getBody()
+        $body->getContents()
             ->shouldBeCalled()
             ->willReturn($content);
 
