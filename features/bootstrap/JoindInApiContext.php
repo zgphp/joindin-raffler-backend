@@ -80,7 +80,7 @@ class JoindInApiContext extends BaseContext
         $guzzle   = $this->getService(Client::class);
         $response = $guzzle->get($this->testApiUrl.$url);
 
-        return json_decode($response->getBody(), true);
+        return json_decode($response->getBody()->getContents(), true);
     }
 
     protected function getService(string $name)
