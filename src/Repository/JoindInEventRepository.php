@@ -13,6 +13,6 @@ class JoindInEventRepository extends EntityRepository
      */
     public function findAllSortedFromNewestToOldest(): array
     {
-        return $this->findBy([], ['startDate' => 'DESC']);
+        return $this->findBy([], ['date' => 'DESC']);
     }
 }

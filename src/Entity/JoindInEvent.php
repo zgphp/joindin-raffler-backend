@@ -36,14 +36,7 @@ class JoindInEvent implements \JsonSerializable
      *
      * @var DateTime
      */
-    private $startDate;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=false)
-     *
-     * @var DateTime
-     */
-    private $endDate;
+    private $date;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
@@ -51,12 +44,11 @@ class JoindInEvent implements \JsonSerializable
      */
     private $talks;
 
-    public function __construct(int $id, string $name, DateTime $startDate, DateTime $endDate)
+    public function __construct(int $id, string $name, DateTime $date)
     {
         $this->id        = $id;
         $this->name      = $name;
-        $this->startDate = $startDate;
-        $this->endDate   = $endDate;
+        $this->date      = $date;
 
         $this->talks = new ArrayCollection();
     }
@@ -66,14 +58,9 @@ class JoindInEvent implements \JsonSerializable
         $this->name = $name;
     }
 
-    public function setStartDate(DateTime $startDate)
+    public function setDate(DateTime $date)
     {
-        $this->startDate = $startDate;
-    }
-
-    public function setEndDate(DateTime $endDate)
-    {
-        $this->endDate = $endDate;
+        $this->date = $date;
     }
 
     public function getId(): int
@@ -86,14 +73,9 @@ class JoindInEvent implements \JsonSerializable
         return $this->name;
     }
 
-    public function getStartDate(): DateTime
+    public function getDate(): DateTime
     {
-        return $this->startDate;
-    }
-
-    public function getEndDate(): DateTime
-    {
-        return $this->endDate;
+        return $this->date;
     }
 
     public function getTalks(): Collection
@@ -111,8 +93,7 @@ class JoindInEvent implements \JsonSerializable
         return [
             'id'        => $this->id,
             'name'      => $this->name,
-            'startDate' => $this->startDate->format('c'),
-            'endDate'   => $this->endDate->format('c'),
+            'date'      => $this->date->format('c'),
         ];
     }
 }
