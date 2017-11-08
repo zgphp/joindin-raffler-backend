@@ -30,6 +30,7 @@ class JoindInTalkRetrievalSpec extends ObjectBehavior
     public function it_will_add_new_talk_when_fetching_event_talks(
         JoindInClient $joindInClient,
         EntityManager $entityManager,
+        JoindInTalkRepository $talkRepository,
         JoindInEvent $event,
         TalkData $talkData
     ) {

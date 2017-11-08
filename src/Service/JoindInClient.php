@@ -44,7 +44,7 @@ class JoindInClient
 
         $response = $this->client->get($url);
 
-        $raw = json_decode($response->getBody(), true);
+        $raw = json_decode($response->getBody()->getContents(), true);
 
         $results = [];
 
@@ -62,7 +62,7 @@ class JoindInClient
 
         $response = $this->client->get($url);
 
-        $raw = json_decode($response->getBody(), true);
+        $raw = json_decode($response->getBody()->getContents(), true);
 
         $results = [];
 
@@ -80,7 +80,7 @@ class JoindInClient
 
         $response = $this->client->get($url);
 
-        $raw = json_decode($response->getBody(), true);
+        $raw = json_decode($response->getBody()->getContents(), true);
 
         $results = [];
 
