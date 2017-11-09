@@ -13,16 +13,13 @@ class EventData
     /** @var string */
     private $name;
     /** @var DateTime */
-    private $startDate;
-    /** @var DateTime */
-    private $endDate;
+    private $date;
 
-    public function __construct(int $id, string $name, DateTime $startDate, DateTime $endDate)
+    public function __construct(int $id, string $name, DateTime $date)
     {
         $this->id        = $id;
         $this->name      = $name;
-        $this->startDate = $startDate;
-        $this->endDate   = $endDate;
+        $this->date      = $date;
     }
 
     public function getId(): int
@@ -35,13 +32,8 @@ class EventData
         return $this->name;
     }
 
-    public function getStartDate(): DateTime
+    public function getDate(): DateTime
     {
-        return $this->startDate;
-    }
-
-    public function getEndDate(): DateTime
-    {
-        return $this->endDate;
+        return $this->date;
     }
 }
