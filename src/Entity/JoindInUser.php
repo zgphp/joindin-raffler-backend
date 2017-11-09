@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -34,6 +35,12 @@ class JoindInUser implements \JsonSerializable
      * @var string
      */
     private $displayName;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @ORM\OneToMany(targetEntity="App\Entity\JoindInComment", mappedBy="user")
+     */
+    private $comments;
 
     public function __construct(int $id, string $username, string $displayName)
     {
@@ -74,5 +81,21 @@ class JoindInUser implements \JsonSerializable
             'username'    => $this->username,
             'displayName' => $this->displayName,
         ];
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param JoindInComment $comment
+     */
+    public function addComment(JoindInComment $comment)
+    {
+        $this->comments->add($comment);
     }
 }
