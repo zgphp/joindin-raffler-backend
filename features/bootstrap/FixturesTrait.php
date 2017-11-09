@@ -20,7 +20,7 @@ trait FixturesTrait
     {
         foreach ($table as $row) {
             $date  = new DateTime($row['date']);
-            $event = new JoindInEvent((int) $row['id'], $row['title'], $date, $date);
+            $event = new JoindInEvent((int) $row['id'], $row['title'], $date);
 
             $this->getEntityManager()->persist($event);
         }
@@ -82,7 +82,7 @@ trait FixturesTrait
      */
     public function weHaveARaffleWithASingleCommentComingFrom(string $userName)
     {
-        $event   = new JoindInEvent(1, 'Meetup #1', new DateTime('today'), new DateTime('today'));
+        $event   = new JoindInEvent(1, 'Meetup #1', new DateTime('today'));
         $talk    = new JoindInTalk(1, 'Talk on meetup #1', $event);
         $user    = new JoindInUser(1, $userName, $userName);
         $comment = new JoindInComment(1, 'Great talk', 5, $user, $talk);
