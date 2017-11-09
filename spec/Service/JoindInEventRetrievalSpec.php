@@ -34,8 +34,7 @@ class JoindInEventRetrievalSpec extends ObjectBehavior
         EntityManager $entityManager,
         JoindInEventRepository $eventRepository,
         EventData $eventData,
-        DateTime $startDate,
-        DateTime $endDate
+        DateTime $date
     ) {
         $joindInClient->fetchZgPhpEvents()
             ->shouldBeCalled()
@@ -49,13 +48,9 @@ class JoindInEventRetrievalSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn('ZgPHP meetup #xx');
 
-        $eventData->getStartDate()
+        $eventData->getDate()
             ->shouldBeCalled()
-            ->willReturn($startDate);
-
-        $eventData->getEndDate()
-            ->shouldBeCalled()
-            ->willReturn($endDate);
+            ->willReturn($date);
 
         $eventRepository->find(123)
             ->shouldBeCalled()
@@ -76,8 +71,7 @@ class JoindInEventRetrievalSpec extends ObjectBehavior
         JoindInEventRepository $eventRepository,
         EventData $eventData,
         JoindInEvent $storedJoindInEvent,
-        DateTime $startDate,
-        DateTime $endDate
+        DateTime $date
     ) {
         $joindInClient->fetchZgPhpEvents()
             ->shouldBeCalled()
@@ -91,13 +85,9 @@ class JoindInEventRetrievalSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn('ZgPHP meetup #xx');
 
-        $eventData->getStartDate()
+        $eventData->getDate()
             ->shouldBeCalled()
-            ->willReturn($startDate);
-
-        $eventData->getEndDate()
-            ->shouldBeCalled()
-            ->willReturn($endDate);
+            ->willReturn($date);
 
         $eventRepository->find(123)
             ->shouldBeCalled()
@@ -106,10 +96,7 @@ class JoindInEventRetrievalSpec extends ObjectBehavior
         $storedJoindInEvent->setName('ZgPHP meetup #xx')
             ->shouldBeCalled();
 
-        $storedJoindInEvent->setStartDate($startDate)
-            ->shouldBeCalled();
-
-        $storedJoindInEvent->setEndDate($endDate)
+        $storedJoindInEvent->setDate($date)
             ->shouldBeCalled();
 
         $entityManager->flush()
