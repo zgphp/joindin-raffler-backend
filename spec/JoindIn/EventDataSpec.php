@@ -9,13 +9,12 @@ use PhpSpec\ObjectBehavior;
 
 class EventDataSpec extends ObjectBehavior
 {
-    public function let(\DateTime $startDate, \DateTime $endDate)
+    public function let(\DateTime $date)
     {
         $this->beConstructedWith(
             $id = 123,
             $name = 'ZgPHPMeetup',
-            $startDate,
-            $endDate
+            $date
         );
     }
 

@@ -22,7 +22,6 @@ class EventDataFactorySpec extends ObjectBehavior
                 'uri'        => 'https://api.joind.in/v2.1/events/123',
                 'name'       => 'ZgPHP meetup #xxx',
                 'start_date' => '2017-12-14T00:00:00+01:00',
-                'end_date'   => '2017-12-14T00:00:00+01:00',
             ]
         )->shouldReturnAnInstanceOf(EventData::class);
     }

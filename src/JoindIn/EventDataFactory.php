@@ -11,8 +11,7 @@ class EventDataFactory
         return new EventData(
             $this->extractIdFromUri($input['uri']),
             $input['name'],
-            new \DateTime($input['start_date']),
-            new \DateTime($input['end_date'])
+            new \DateTime($input['start_date'])
         );
     }
 
