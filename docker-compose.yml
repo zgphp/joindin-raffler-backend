@@ -44,8 +44,12 @@ services:
       DATABASE_NAME: raffler_dev
       DATABASE_USER: root
       DATABASE_PASSWORD: n0p455
+      API_BASE_URL: http://dev.raffler.loc:8000/api/
     links:
       - pgsql_dev
+    extra_hosts:
+      - "dev.raffler.loc:172.17.0.1"
+      - "test.raffler.loc:172.17.0.1"
 
   php7fpm-test:
     container_name: php7fpm-test
@@ -68,8 +72,12 @@ services:
       DATABASE_NAME: raffler_test
       DATABASE_USER: root
       DATABASE_PASSWORD: n0p455
+      API_BASE_URL: http://test.raffler.loc:8000/api/
     links:
       - pgsql_dev
+    extra_hosts:
+      - "dev.raffler.loc:172.17.0.1"
+      - "test.raffler.loc:172.17.0.1"
 
   pgsql_dev:
     image: postgres:10.0
@@ -103,6 +111,7 @@ services:
       DATABASE_NAME: raffler_dev
       DATABASE_USER: root
       DATABASE_PASSWORD: n0p455
+      API_BASE_URL: http://test.raffler.loc:8000/api/
 
   xdebug:
     container_name: xdebug
