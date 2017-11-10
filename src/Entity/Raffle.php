@@ -133,16 +133,22 @@ class Raffle implements \JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $events = [];
+        $events  = [];
+        $comments=[];
 
         foreach ($this->events as $event) {
             $events[] = $event->jsonSerialize();
         }
 
+        foreach ($this->getCommentsEligibleForRaffling() as $comment) {
+            $comments[] = $comment->jsonSerialize();
+        }
+
         return [
-            'id'        => $this->id,
-            'createdAt' => $this->createdAt->format('c'),
-            'events'    => $events,
+            'id'                          => $this->id,
+            'createdAt'                   => $this->createdAt->format('c'),
+            'events'                      => $events,
+            'commentsEligibleForRaffling' => $comments,
         ];
     }
 
