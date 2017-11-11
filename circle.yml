@@ -57,6 +57,9 @@ jobs:
           key: cache-v4-{{ checksum "composer.lock" }}
           paths:
             - /var/www/vendor
+      - run:
+          name: Ship codecoverage to codecov.io
+          command: bash <(curl -s https://codecov.io/bash)      
 
 workflows:
   version: 2
