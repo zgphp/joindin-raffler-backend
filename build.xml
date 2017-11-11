@@ -76,4 +76,12 @@
         <exec command="bin/console doctrine:fixtures:load --verbose --append --env=test" passthru="true"/>
     </target>
 
+    <target name="check-test-schema" description="Check test db schema">
+        <exec command="bin/console doctrine:schema:validate --env=test" passthru="true" checkreturn="true"/>
+    </target>
+
+    <target name="check-dev-schema" description="Check dev db schema">
+        <exec command="bin/console doctrine:schema:validate --env=dev" passthru="true" checkreturn="true"/>
+    </target>
+
 </project>
