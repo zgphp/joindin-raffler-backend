@@ -21,14 +21,6 @@ trait HelperTrait
     {
         // Remove all meetups, talks & comments.
         foreach ($this->getEventRepository()->findAll() as $joindInEvent) {
-            foreach ($joindInEvent->getTalks() as $joindInTalk) {
-                foreach ($joindInTalk->getComments() as $joindInComment) {
-                    $this->getEntityManager()->remove($joindInComment);
-                }
-
-                $this->getEntityManager()->remove($joindInTalk);
-            }
-
             $this->getEntityManager()->remove($joindInEvent);
         }
 
