@@ -44,6 +44,7 @@ class JoindInComment implements \JsonSerializable
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\JoindInTalk", inversedBy="comments")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      *
      * @var JoindInTalk
      */
