@@ -33,6 +33,7 @@ class JoindInTalk implements \JsonSerializable
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\JoindInEvent", inversedBy="talks")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      *
      * @var JoindInEvent
      */
