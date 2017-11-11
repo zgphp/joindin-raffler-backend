@@ -47,10 +47,9 @@ class Version20171104183806 extends AbstractMigration
      */
     public function down(Schema $schema)
     {
-        // this down() migration is auto-generated, please modify it to your needs
+        // this down() migration is modified as to not try to recreate an existing 'public' schema
         $this->abortIf('postgresql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'postgresql\'.');
 
-        $this->addSql('CREATE SCHEMA public');
         $this->addSql('ALTER TABLE raffleEvents DROP CONSTRAINT FK_6A5D398CDBEC4B1F');
         $this->addSql('ALTER TABLE raffleWinners DROP CONSTRAINT FK_8E84A987DBEC4B1F');
         $this->addSql('ALTER TABLE raffleNoShows DROP CONSTRAINT FK_A6A1C1FFDBEC4B1F');

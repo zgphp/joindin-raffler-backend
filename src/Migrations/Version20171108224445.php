@@ -28,11 +28,11 @@ class Version20171108224445 extends AbstractMigration
      */
     public function down(Schema $schema)
     {
-        // this down() migration is modified to preserve the already present data in table and revert the the column
-        // name and null value acceptance
+        // this down() migration is modified to preserve the already present data in table, revert the the column
+        // name and null value acceptance, and to not try to recreate an existing 'public' schema
+
         $this->abortIf('postgresql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'postgresql\'.');
 
-        $this->addSql('CREATE SCHEMA public');
         $this->addSql('ALTER TABLE joindinEvents RENAME COLUMN date TO startdate');
         $this->addSql('ALTER TABLE joindinevents ALTER COLUMN enddate SET NOT NULL;');
     }
