@@ -30,6 +30,10 @@ jobs:
           command: ./vendor/bin/phing refresh-test-db
 
       - run:
+          name: Validate database schema
+          command: ./vendor/bin/phing check-test-schema
+
+      - run:
           name: Lint all PHP code files
           command: find src/ -type f -name "*.php" -print0 | xargs -0 -n1 php -l
 
