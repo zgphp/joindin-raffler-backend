@@ -29,10 +29,9 @@ class Version20171111002932 extends AbstractMigration
      */
     public function down(Schema $schema)
     {
-        // this down() migration is modified so as not to recreate the 'enddate' column, which still holds orphan data
+        // this down() migration is modified as to not try to recreate an existing 'public' schema
         $this->abortIf('postgresql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'postgresql\'.');
 
-        $this->addSql('CREATE SCHEMA public');
         $this->addSql('ALTER TABLE joindinTalks DROP CONSTRAINT fk_fb7fc5ea71f7e88b');
         $this->addSql('ALTER TABLE joindinTalks ADD CONSTRAINT fk_fb7fc5ea71f7e88b FOREIGN KEY (event_id) REFERENCES joindinevents (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE joindinComments DROP CONSTRAINT fk_fa3ad44e6f0601d5');
