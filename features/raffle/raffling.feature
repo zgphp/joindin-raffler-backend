@@ -24,3 +24,17 @@ Feature:
     And organizer picks to raffle meetups: "1"
     When I pick a winner
     Then we should get one of "User1,User2" as a winner
+
+  Scenario: Organizer's comments will not be eligible for raffle
+    Given we have these meetups in the system
+      | id | title     | date       |
+      | 1  | Meetup #1 | 2017-01-19 |
+    And we have these talks in the system
+      | id | title             | eventId |
+      | 10 | Talk on meetup #1 | 1       |
+    And we have these users in the system
+      | id    | username   | displayName |
+      | 18486 | Organizer1 | Organizer 1 |
+    And we have each user commenting on each talk
+    When organizer picks to raffle meetups: "1"
+    Then there should be 0 comments on the raffle

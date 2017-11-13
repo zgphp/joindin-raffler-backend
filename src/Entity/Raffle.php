@@ -158,6 +158,9 @@ class Raffle implements \JsonSerializable
      */
     private function userAlreadyWonOrIsNoShow(JoindInUser $user): bool
     {
+        if (in_array($user->getId(), [18486, 31686])) {
+            return true;
+        }
         foreach ($this->winners as $winner) {
             if ($winner === $user) {
                 return true;
