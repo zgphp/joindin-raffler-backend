@@ -66,6 +66,10 @@ class RaffleContext implements Context
     {
         $raffle = $this->loadRaffle($this->raffleId);
 
+        if (null === $this->picked) {
+            throw new \Exception('There is no picked user');
+        }
+
         $raffle->userWon($this->picked);
 
         $this->getEntityManager()->flush();
@@ -77,6 +81,10 @@ class RaffleContext implements Context
     public function iMarkHimOrHerAsANoShow()
     {
         $raffle = $this->loadRaffle($this->raffleId);
+
+        if (null === $this->picked) {
+            throw new \Exception('There is no picked user');
+        }
 
         $raffle->userIsNoShow($this->picked);
 
