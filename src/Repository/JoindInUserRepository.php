@@ -8,4 +8,8 @@ use Doctrine\ORM\EntityRepository;
 
 class JoindInUserRepository extends EntityRepository
 {
+    public function findOneByUsername(string $username)
+    {
+        return parent::findOneByUsername($username);
+    }
 }
