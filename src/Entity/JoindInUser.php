@@ -35,6 +35,12 @@ class JoindInUser implements \JsonSerializable
      * @var string
      */
     private $displayName;
+    /**
+     * @ORM\Column(type="boolean", nullable=false, options={"default":false})
+     *
+     * @var bool
+     */
+    private $organizer;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
@@ -42,21 +48,12 @@ class JoindInUser implements \JsonSerializable
      */
     private $comments;
 
-    public function __construct(int $id, string $username, string $displayName)
+    public function __construct(int $id, string $username, string $displayName, bool $isOrganizer = false)
     {
         $this->id          = $id;
         $this->username    = $username;
         $this->displayName = $displayName;
-    }
-
-    public function setUsername(string $username)
-    {
-        $this->username = $username;
-    }
-
-    public function setDisplayName(string $displayName)
-    {
-        $this->displayName = $displayName;
+        $this->organizer   = $isOrganizer;
     }
 
     public function getId(): int
@@ -69,9 +66,19 @@ class JoindInUser implements \JsonSerializable
         return $this->username;
     }
 
+    public function setUsername(string $username)
+    {
+        $this->username = $username;
+    }
+
     public function getDisplayName(): string
     {
         return $this->displayName;
+    }
+
+    public function setDisplayName(string $displayName)
+    {
+        $this->displayName = $displayName;
     }
 
     public function jsonSerialize(): array
@@ -97,5 +104,18 @@ class JoindInUser implements \JsonSerializable
     public function addComment(JoindInComment $comment)
     {
         $this->comments->add($comment);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isOrganizer(): bool
+    {
+        return $this->organizer;
+    }
+
+    public function promoteToOrganizer()
+    {
+        $this->organizer = true;
     }
 }
