@@ -30,7 +30,7 @@
     </target>
 
     <target name="phpstan" description="Run phpstan">
-        <exec command="./vendor/bin/phpstan analyse -l 7 -c phpstan.neon src tests" passthru="true" checkreturn="true"/>
+        <exec command="./vendor/bin/phpstan analyse -l 7 -c phpstan.neon src tests features" passthru="true" checkreturn="true"/>
     </target>
 
     <target name="php-cs-fixer-check" description="Run php-cs-fixer check">
