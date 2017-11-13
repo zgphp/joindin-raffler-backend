@@ -17,11 +17,6 @@ class JoindInApiContext implements Context
      */
     private $kernel;
 
-    /** @var string|null */
-    private $raffleId;
-    /** @var array|null */
-    private $picked;
-
     /** @var string */
     private $testApiUrl = 'http://test.raffler.loc:8000/api';
 
