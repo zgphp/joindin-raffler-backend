@@ -35,7 +35,7 @@ trait FixturesTrait
         foreach ($table as $row) {
             $event = $this->getEventRepository()->find($row['eventId']);
 
-            $talk = new JoindInTalk((int) $row['id'], $row['title'], $event, new DateTime());
+            $talk = new JoindInTalk((int) $row['id'], $row['title'], $event);
 
             $this->getEntityManager()->persist($talk);
             $event->addTalk($talk);
