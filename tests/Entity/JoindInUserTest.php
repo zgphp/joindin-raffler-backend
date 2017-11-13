@@ -21,13 +21,16 @@ class JoindInUserTest extends TestCase
     private $displayName;
     /** @var JoindInUser */
     private $joindInUser;
+    /** @var bool */
+    private $organizer;
 
     public function setUp()
     {
         $this->id          = 1;
         $this->username    = 'username';
         $this->displayName = 'displayName';
-        $this->joindInUser = new JoindInUser($this->id, $this->username, $this->displayName);
+        $this->organizer   = false;
+        $this->joindInUser = new JoindInUser($this->id, $this->username, $this->displayName, $this->organizer);
     }
 
     public function testSetUsername()
@@ -38,6 +41,17 @@ class JoindInUserTest extends TestCase
     public function testSetDisplayName()
     {
         $this->markTestSkipped('Skipping');
+    }
+
+    public function testPromoteToOrganizer()
+    {
+        $this->joindInUser->promoteToOrganizer();
+        self::assertEquals(true, $this->joindInUser->isOrganizer());
+    }
+
+    public function testIsOrganizer()
+    {
+        self::assertEquals($this->organizer, $this->joindInUser->isOrganizer());
     }
 
     public function testGetId()

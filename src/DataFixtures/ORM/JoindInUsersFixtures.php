@@ -14,8 +14,10 @@ class JoindInUsersFixtures extends AbstractFixture implements OrderedFixtureInte
     public function load(ObjectManager $manager)
     {
         $users = [
-            'user1' => new JoindInUser(45128, 'username1', 'User Named One'),
-            'user2' => new JoindInUser(26764, 'username2', 'User Named Two'),
+            'user1'      => new JoindInUser(45128, 'username1', 'User Named One', false),
+            'user2'      => new JoindInUser(26764, 'username2', 'User Named Two', false),
+            'organizer1' => new JoindInUser(18486, 'organizer1', 'Organizer Primus', true),
+            'organizer2' => new JoindInUser(31686, 'organizer2', 'Organizer Secundus', true),
         ];
 
         foreach ($users as $userRef => $user) {
