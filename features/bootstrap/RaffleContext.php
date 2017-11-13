@@ -12,7 +12,8 @@ use Webmozart\Assert\Assert;
 
 class RaffleContext implements Context
 {
-    use FixturesTrait;
+    use JoindInFixturesTrait;
+    use RaffleFixturesTrait;
     use HelperTrait;
 
     /** @var KernelInterface */

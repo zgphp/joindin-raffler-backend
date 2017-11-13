@@ -11,7 +11,7 @@ use Webmozart\Assert\Assert;
 
 class JoindInContext implements Context
 {
-    use FixturesTrait;
+    use JoindInFixturesTrait;
     use HelperTrait;
 
     /** @var KernelInterface */
