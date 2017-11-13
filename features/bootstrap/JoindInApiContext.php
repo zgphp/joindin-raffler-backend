@@ -9,7 +9,7 @@ use Webmozart\Assert\Assert;
 
 class JoindInApiContext implements Context
 {
-    use FixturesTrait;
+    use JoindInFixturesTrait;
     use HelperTrait;
 
     /**
