@@ -46,7 +46,8 @@ trait JoindInFixturesTrait
     public function weHaveTheseUsersInTheSystem(TableNode $table)
     {
         foreach ($table as $row) {
-            $user = new JoindInUser((int) $row['id'], $row['username'], $row['displayName']);
+            $isOrganizer = 'true' === $row['organizer'] ? true : false;
+            $user        = new JoindInUser((int) $row['id'], $row['username'], $row['displayName'], $isOrganizer);
 
             $this->getEntityManager()->persist($user);
         }
