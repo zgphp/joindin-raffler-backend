@@ -12,9 +12,9 @@ Feature:
       | id | title             | eventId |
       | 10 | Talk on meetup #1 | 1       |
     And we have these users in the system
-      | id | username | displayName |
-      | 1  | User1    | User 1      |
-      | 2  | User2    | User 2      |
+      | id | username | displayName | organizer |
+      | 1  | User1    | User 1      | false     |
+      | 2  | User2    | User 2      | false     |
     And we have each user commenting on each talk
     And organizer picks to raffle meetups: "1"
 
