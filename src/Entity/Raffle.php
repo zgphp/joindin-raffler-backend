@@ -95,7 +95,7 @@ class Raffle implements \JsonSerializable
             foreach ($event->getTalks() as $talk) {
                 /** @var \App\Entity\JoindInComment $comment */
                 foreach ($talk->getComments() as $comment) {
-                    if (false === $this->userAlreadyWonOrIsNoShow($comment->getUser())) {
+                    if (true === $this->userIsEligibleForRaffle($comment->getUser())) {
                         $comments->add($comment);
                     }
                 }
@@ -156,23 +156,23 @@ class Raffle implements \JsonSerializable
      * Checks if that commenter is already a winner or a no show so we can easily filter out which comments are
      * eligible for raffling.
      */
-    private function userAlreadyWonOrIsNoShow(JoindInUser $user): bool
+    private function userIsEligibleForRaffle(JoindInUser $user): bool
     {
-        if (in_array($user->getId(), [18486, 31686])) {
-            return true;
+        if ($user->isOrganizer()) {
+            return false;
         }
         foreach ($this->winners as $winner) {
             if ($winner === $user) {
-                return true;
+                return false;
             }
         }
 
         foreach ($this->noShows as $noShow) {
             if ($noShow === $user) {
-                return true;
+                return false;
             }
         }
 
-        return false;
+        return true;
     }
 }
