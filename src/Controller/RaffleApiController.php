@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\JoindInUser;
 use App\Entity\Raffle;
 use App\Exception\NoCommentsToRaffleException;
+use App\Exception\NoEventsToRaffleException;
 use App\Repository\JoindInEventRepository;
 use App\Repository\JoindInUserRepository;
 use App\Repository\RaffleRepository;
@@ -41,24 +42,30 @@ class RaffleApiController
 
     public function start(Request $request): JsonResponse
     {
-        $eventIds = json_decode($request->getContent(), true)['events'];
+        try {
+            $eventIds = json_decode($request->getContent(), true)['events'];
 
-        $id = Uuid::uuid4()->toString();
+            $id = Uuid::uuid4()->toString();
 
-        $events = new ArrayCollection();
+            $events = new ArrayCollection();
 
-        foreach ($eventIds as $eventId) {
-            $event = $this->eventRepository->find($eventId);
-            $events->add($event);
+            foreach ($eventIds as $eventId) {
+                $event = $this->eventRepository->find($eventId);
+                $events->add($event);
+            }
+
+            $raffle = new Raffle($id, $events);
+
+            $this->entityManager->persist($raffle);
+
+            $this->entityManager->flush();
+
+            return new JsonResponse($raffle->getId());
+        } catch (NoEventsToRaffleException $ex) {
+            return new JsonResponse($ex->getMessage());
+        } catch (\Exception $ex) {
+            return new JsonResponse('Something went wrong. Please hang up and try again.');
         }
-
-        $raffle = new Raffle($id, $events);
-
-        $this->entityManager->persist($raffle);
-
-        $this->entityManager->flush();
-
-        return new JsonResponse($raffle->getId());
     }
 
     public function show(string $id): JsonResponse
