@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Entity\JoindInUser;
 use App\Entity\Raffle;
 use App\Exception\NoCommentsToRaffleException;
+use App\Exception\NoEventsToRaffleException;
 use Behat\Behat\Context\Context;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -47,6 +48,23 @@ class RaffleContext implements Context
 
         $this->getEntityManager()->persist($raffle);
         $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @Then we get an exception for a raffle with no meetups
+     */
+    public function weGetAnExceptionForARaffleWithNoMeetups()
+    {
+        try {
+            Raffle::create([]);
+
+            throw new Exception('Raffling was supposed to throw an error');
+        } catch (NoEventsToRaffleException $exception) {
+            //We expect this exception to happen as there are no comments eligible for raffling.
+            return;
+        } catch (Exception $exception) {
+            throw $exception;
+        }
     }
 
     /**

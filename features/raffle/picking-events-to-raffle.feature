@@ -20,3 +20,6 @@ Feature:
       | 3  | Meetup #3 | 2017-03-19 |
     When organizer picks to raffle meetups: "1,3"
     Then there should be 2 events on the raffle
+
+  Scenario: Organizer will try to start a raffle with no events
+    Then we get an exception for a raffle with no meetups
