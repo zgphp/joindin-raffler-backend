@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Exception\NoCommentsToRaffleException;
+use App\Exception\NoEventsToRaffleException;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -57,8 +58,19 @@ class Raffle implements \JsonSerializable
      */
     private $createdAt;
 
+    /**
+     * Raffle constructor.
+     *
+     * @param string                                  $id
+     * @param \Doctrine\Common\Collections\Collection $events
+     *
+     * @throws \App\Exception\NoEventsToRaffleException
+     */
     public function __construct(string $id, Collection $events)
     {
+        if ($events->isEmpty()) {
+            throw NoEventsToRaffleException::forRaffle($id);
+        }
         $this->id        = $id;
         $this->events    = $events;
         $this->createdAt = new DateTime();
