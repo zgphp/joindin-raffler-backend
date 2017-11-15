@@ -45,6 +45,20 @@ class RaffleApiContext implements Context
     }
 
     /**
+     * @Then we get an exception for a raffle with no meetups
+     */
+    public function weGetAnExceptionForARaffleWithNoMeetups()
+    {
+        $options = [
+            'json' => ['events' => []],
+        ];
+
+        $data = $this->apiPostJson('/raffle/start', $options);
+
+        Assert::contains($data, 'There were no events selected to raffle (RaffleID:');
+    }
+
+    /**
      * @When I pick a winner
      * @When I pick another winner
      */
