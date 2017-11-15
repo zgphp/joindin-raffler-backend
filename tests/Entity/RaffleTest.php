@@ -3,6 +3,7 @@
 namespace App\Tests\Entity;
 
 use App\Entity\Raffle;
+use App\Exception\NoEventsToRaffleException;
 use Doctrine\Common\Collections\Collection;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
@@ -33,6 +34,12 @@ class RaffleTest extends TestCase
     public function testCreate()
     {
         $this->markTestSkipped('Skipping');
+    }
+
+    public function testCannotCreateEmptyRaffle()
+    {
+        Raffle::create([]);
+        $this->expectException(NoEventsToRaffleException::class);
     }
 
     public function testGetId()
