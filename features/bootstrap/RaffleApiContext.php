@@ -39,8 +39,7 @@ class RaffleApiContext implements Context
             'json' => ['events' => explode(',', $eventIdList)],
         ];
 
-        $data = $this->apiPostJson('/raffle/start', $options);
-
+        $data           = $this->apiPostJson('/raffle/start', $options);
         $this->raffleId = $data;
     }
 
@@ -194,6 +193,14 @@ class RaffleApiContext implements Context
         $response = $this->apiPostJson('/raffle/'.$this->raffleId.'/pick');
 
         Assert::true($response['error']);
+    }
+
+    /**
+     * @Then we get an exception for a raffle with no comments
+     */
+    public function weGetAnExceptionForARaffleWithNoComments()
+    {
+        Assert::contains($this->raffleId, 'There are no comments to raffle (RaffleID:');
     }
 
     private function apiGetJson(string $url)

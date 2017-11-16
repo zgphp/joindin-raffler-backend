@@ -66,6 +66,8 @@ class RaffleApiController
             return new JsonResponse($raffle->getId());
         } catch (NoEventsToRaffleException $ex) {
             return new JsonResponse($ex->getMessage());
+        } catch (NoCommentsToRaffleException $ex) {
+            return new JsonResponse($ex->getMessage());
         } catch (\Exception $ex) {
             return new JsonResponse('Something went wrong. Please hang up and try again.');
         }

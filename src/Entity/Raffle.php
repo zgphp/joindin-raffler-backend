@@ -64,6 +64,7 @@ class Raffle implements \JsonSerializable
      * @param string                                  $id
      * @param \Doctrine\Common\Collections\Collection $events
      *
+     * @throws \App\Exception\NoCommentsToRaffleException
      * @throws \App\Exception\NoEventsToRaffleException
      */
     public function __construct(string $id, Collection $events)
