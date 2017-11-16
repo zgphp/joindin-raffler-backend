@@ -2,8 +2,12 @@
 
 namespace App\Tests\Entity;
 
+use App\Entity\JoindInEvent;
+use App\Entity\JoindInTalk;
 use App\Entity\Raffle;
+use App\Exception\NoCommentsToRaffleException;
 use App\Exception\NoEventsToRaffleException;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
@@ -21,14 +25,18 @@ class RaffleTest extends TestCase
     private $id;
     /** @var MockInterface|Collection */
     private $events;
+    /** @var MockInterface|\App\Entity\JoindInTalk */
+    private $talk;
     /** @var Raffle */
     private $raffle;
+    /** @var MockInterface|JoindInEvent  */
+    private $event1;
 
     public function setUp()
     {
         $this->id     = 'id';
-        $this->events = Mockery::mock(Collection::class);
-        $this->events->shouldReceive('isEmpty')->andReturn(false);
+        $this->event1 = Mockery::mock(JoindInEvent::class);
+        $this->events = new ArrayCollection([$this->event1]);
         $this->raffle = new Raffle($this->id, $this->events);
     }
 
@@ -61,6 +69,18 @@ class RaffleTest extends TestCase
     public function testGetCommentsEligibleForRaffling()
     {
         $this->markTestSkipped('Skipping');
+    }
+
+    public function testCannotStartARaffleWithNoCommentsInEvents()
+    {
+        $this->expectException(NoCommentsToRaffleException::class);
+
+        $talk = new JoindInTalk(1,'bla bla' , $this->event1);
+
+        $this->event1->shouldReceive('getTalks')
+            ->andReturn(new ArrayCollection( [$talk]));
+
+        $this->raffle->pick();
     }
 
     public function testPick()
