@@ -12,6 +12,12 @@ default:
                     kernel: '@kernel'
             filters:
                 tags: "@raffle && @api"
+        raffle_web:
+            contexts:
+                - RaffleWebContext:
+                    kernel: '@kernel'
+            filters:
+                tags: "@raffle && @web"
         joindin:
             contexts:
                 - JoindInContext:
@@ -30,3 +36,8 @@ default:
             kernel:
                 bootstrap: features/bootstrap/bootstrap.php
                 class: App\Kernel
+        Behat\MinkExtension:
+            base_url:  'http://test.raffler.loc:8000/'
+            sessions:
+                default:
+                    symfony2: ~

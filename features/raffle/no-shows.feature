@@ -1,4 +1,4 @@
-@raffle @api
+@raffle @api @web
 Feature:
   In order to give away cool prizes to our members that leave feedback
   As an organizer

@@ -4,11 +4,13 @@ Feature:
   As an organizer
   I need to pick a random person as a winner
 
+  @todoNotTestableInWebDueToGivenIssues
   Scenario: Organizer will get the only member that was eligible for a prize
     Given we have a raffle with a single comment coming from "User1"
     When I pick a winner
     Then we should get "User1" as a winner
 
+  @web
   Scenario: Organizer will get one of the members that was eligible for a prize
     Given we have these meetups in the system
       | id | title     | date       |
