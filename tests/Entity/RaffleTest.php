@@ -39,8 +39,8 @@ class RaffleTest extends TestCase
 
     public function testCannotCreateEmptyRaffle()
     {
-        Raffle::create([]);
         $this->expectException(NoEventsToRaffleException::class);
+        Raffle::create([]);
     }
 
     public function testGetId()
