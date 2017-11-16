@@ -28,6 +28,7 @@ class RaffleTest extends TestCase
     {
         $this->id     = 'id';
         $this->events = Mockery::mock(Collection::class);
+        $this->events->shouldReceive('isEmpty')->andReturn(false);
         $this->raffle = new Raffle($this->id, $this->events);
     }
 
