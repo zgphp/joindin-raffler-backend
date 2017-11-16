@@ -11,6 +11,7 @@ use Behat\Gherkin\Node\TableNode;
 trait JoindInFixturesTrait
 {
     /**
+     * @Given we have these uncommented meetups in the system
      * @Given we have these meetups in the system
      */
     public function weHaveTheseMeetupsInTheSystem(TableNode $table)

@@ -24,6 +24,7 @@ class RaffleContext implements Context
     private $raffleId;
     /** @var JoindInUser|null */
     private $picked;
+    private $exceptionHappened;
 
     public function __construct(KernelInterface $kernel)
     {
@@ -44,7 +45,13 @@ class RaffleContext implements Context
 
         $this->raffleId = Uuid::uuid4()->toString();
 
-        $raffle = new Raffle($this->raffleId, $events);
+        try {
+            $raffle = new Raffle($this->raffleId, $events);
+        } catch (\Exception $exception) {
+            $this->exceptionHappened = $exception;
+
+            return;
+        }
 
         $this->getEntityManager()->persist($raffle);
         $this->getEntityManager()->flush();
@@ -231,6 +238,14 @@ class RaffleContext implements Context
         } catch (Exception $exception) {
             throw $exception;
         }
+    }
+
+    /**
+     * @Then we get an exception for a raffle with no comments
+     */
+    public function weGetAnExceptionForARaffleWithNoComments()
+    {
+        Assert::notNull($this->exceptionHappened);
     }
 
     protected function getService(string $name)
