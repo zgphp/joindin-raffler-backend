@@ -72,6 +72,19 @@ class Raffle implements \JsonSerializable
         if ($events->isEmpty()) {
             throw NoEventsToRaffleException::forRaffle($id);
         }
+
+        $commentsCount = 0;
+        foreach ($events as $event) {
+            /** @var \App\Entity\JoindInTalk $talk */
+            foreach ($event->getTalks() as $talk) {
+                $commentsCount += $talk->getCommentCount();
+            }
+        }
+
+        if (0 === $commentsCount) {
+            throw NoCommentsToRaffleException::forRaffle($id);
+        }
+
         $this->id        = $id;
         $this->events    = $events;
         $this->createdAt = new DateTime();

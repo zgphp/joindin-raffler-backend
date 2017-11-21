@@ -5,101 +5,102 @@ namespace App\Tests\Entity;
 use App\Entity\JoindInEvent;
 use App\Entity\JoindInTalk;
 use App\Entity\Raffle;
-use App\Exception\NoCommentsToRaffleException;
-use App\Exception\NoEventsToRaffleException;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
-use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \App\Entity\Raffle
- * @group todo
+ * @group  todo
  */
 class RaffleTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
-    /** @var string */
-    private $id;
-    /** @var MockInterface|Collection */
-    private $events;
-    /** @var MockInterface|\App\Entity\JoindInTalk */
-    private $talk;
-    /** @var Raffle */
-    private $raffle;
-    /** @var MockInterface|JoindInEvent  */
-    private $event1;
 
-    public function setUp()
-    {
-        $this->id     = 'id';
-        $this->event1 = Mockery::mock(JoindInEvent::class);
-        $this->events = new ArrayCollection([$this->event1]);
-        $this->raffle = new Raffle($this->id, $this->events);
-    }
-
-    public function testCreate()
-    {
-        $this->markTestSkipped('Skipping');
-    }
-
+    /**
+     * @expectedException \App\Exception\NoEventsToRaffleException
+     */
     public function testCannotCreateEmptyRaffle()
     {
-        $this->expectException(NoEventsToRaffleException::class);
         Raffle::create([]);
     }
 
-    public function testGetId()
+    /**
+     * @expectedException \App\Exception\NoCommentsToRaffleException
+     */
+    public function testCannotStartRaffleWithNoCommentsInEvents()
     {
-        self::assertEquals($this->id, $this->raffle->getId());
+        // Arrange.
+        $talk1 = Mockery::mock(JoindInTalk::class);
+        $talk1->shouldReceive('getCommentCount')->andReturn(0);
+
+        $event1 = Mockery::mock(JoindInEvent::class);
+        $event1->shouldReceive('getTalks')->andReturn(new ArrayCollection([$talk1]));
+
+        $events = new ArrayCollection([$event1]);
+
+        // Act.
+
+        new Raffle('id', $events);
     }
 
-    public function testGetEvents()
+    /**
+     * @expectedException \App\Exception\NoCommentsToRaffleException
+     */
+    public function testCannotStartRaffleWhenThereAreNoTalksOnSelectedEvents()
     {
-        self::assertEquals($this->events, $this->raffle->getEvents());
+        // Arrange.
+        $event1 = new JoindInEvent(1, 'Meetup 1', new \DateTime());
+        $event2 = new JoindInEvent(2, 'Meetup 2', new \DateTime());
+        $event3 = new JoindInEvent(3, 'Meetup 3', new \DateTime());
+
+        $events = new ArrayCollection([$event1, $event2, $event3]);
+
+        // Act.
+
+        new Raffle('id', $events);
     }
 
-    public function testGetCreatedAt()
+    public function testRaffleWillBeCreated()
     {
-        $this->markTestSkipped('Skipping');
+        // Arrange.
+
+        $talk1 = Mockery::mock(JoindInTalk::class);
+        $talk1->shouldReceive('getCommentCount')->andReturn(1);
+
+        $event1 = new JoindInEvent(1, 'Meetup #1', new \DateTime());
+        $event1->addTalk($talk1);
+
+        $events = new ArrayCollection([$event1]);
+
+        // Act.
+
+        $raffle = new Raffle('id', $events);
+
+        // Assert.
+
+        $this->assertInstanceOf(Raffle::class, $raffle);
     }
 
-    public function testGetCommentsEligibleForRaffling()
+    public function testRaffleWillBeCreated2()
     {
-        $this->markTestSkipped('Skipping');
-    }
+        // Arrange.
 
-    public function testCannotStartARaffleWithNoCommentsInEvents()
-    {
-        $this->expectException(NoCommentsToRaffleException::class);
+        $talk1 = Mockery::mock(JoindInTalk::class);
+        $talk1->shouldReceive('getCommentCount')->andReturn(1);
 
-        $talk = new JoindInTalk(1,'bla bla' , $this->event1);
+        $event1 = Mockery::mock(JoindInEvent::class);
+        $event1->shouldReceive('getTalks')->andReturn(new ArrayCollection([$talk1]));
 
-        $this->event1->shouldReceive('getTalks')
-            ->andReturn(new ArrayCollection( [$talk]));
+        $events = new ArrayCollection([$event1]);
 
-        $this->raffle->pick();
-    }
+        // Act.
 
-    public function testPick()
-    {
-        $this->markTestSkipped('Skipping');
-    }
+        $raffle = new Raffle('id', $events);
 
-    public function testUserWon()
-    {
-        $this->markTestSkipped('Skipping');
-    }
+        // Assert.
 
-    public function testUserIsNoShow()
-    {
-        $this->markTestSkipped('Skipping');
-    }
-
-    public function testJsonSerialize()
-    {
-        $this->markTestSkipped('Skipping');
+        $this->assertInstanceOf(Raffle::class, $raffle);
     }
 }
