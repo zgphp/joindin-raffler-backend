@@ -27,4 +27,4 @@ Feature:
       | id    | title              | eventId |
       | 22817 | Fullstacking - 101 | 6674    |
     When I fetch meetup talk comments from Joind.in
-    Then there should be 1 comment in system
+    Then there should be 2 comment in system
