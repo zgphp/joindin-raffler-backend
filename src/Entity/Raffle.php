@@ -201,4 +201,23 @@ class Raffle implements \JsonSerializable
 
         return true;
     }
+
+    public function getCommentsNotEligibleForRaffling()
+    {
+        $comments = new ArrayCollection();
+
+        foreach ($this->events as $event) {
+            /** @var \App\Entity\JoindInTalk $talk */
+            foreach ($event->getTalks() as $talk) {
+                /** @var \App\Entity\JoindInComment $comment */
+                foreach ($talk->getComments() as $comment) {
+                    if (false === $this->userIsEligibleForRaffle($comment->getUser())) {
+                        $comments->add($comment);
+                    }
+                }
+            }
+        }
+
+        return $comments;
+    }
 }
