@@ -128,6 +128,19 @@ class RaffleApiController
         return new JsonResponse($comments);
     }
 
+    public function noneligibleComments(string $id): JsonResponse
+    {
+        $raffle = $this->loadRaffle($id);
+
+        $noneligibleComments = [];
+
+        foreach ($raffle->getCommentsNotEligibleForRaffling() as $comment) {
+            $noneligibleComments[] = $comment->jsonSerialize();
+        }
+
+        return new JsonResponse($noneligibleComments);
+    }
+
     private function loadRaffle(string $id): Raffle
     {
         return $this->raffleRepository->find($id);
