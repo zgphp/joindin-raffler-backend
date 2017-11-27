@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -43,7 +44,7 @@ class JoindInUser implements \JsonSerializable
     private $organizer;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="App\Entity\JoindInComment", mappedBy="user")
      */
     private $comments;
@@ -54,6 +55,7 @@ class JoindInUser implements \JsonSerializable
         $this->username    = $username;
         $this->displayName = $displayName;
         $this->organizer   = $isOrganizer;
+        $this->comments    = new ArrayCollection();
     }
 
     public function getId(): int

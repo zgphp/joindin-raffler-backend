@@ -186,6 +186,27 @@ class RaffleApiContext implements Context
     }
 
     /**
+     * @Then winners comments should not be eligible for further raffling
+     */
+    public function winnersCommentsShouldNotBeEligibleForFurtherRaffling()
+    {
+        $eligibleComments = $this->apiGetJson('/raffle/'.$this->raffleId.'/comments');
+
+        $noneligibleComments = $this->apiGetJson('/raffle/'.$this->raffleId.'/noneligible_comments');
+
+        $eligibleCommentsIds = [];
+        foreach ($eligibleComments as $comment) {
+            $eligibleCommentsIds[] = $comment['id'];
+        }
+
+        foreach ($noneligibleComments as $noneligibleComment) {
+            if (array_key_exists($noneligibleComment['id'], $eligibleCommentsIds)) {
+                throw new Exception('comment both eligible and non eligible');
+            }
+        }
+    }
+
+    /**
      * @Then we cannot continue raffling
      */
     public function weCannotContinueRaffling()

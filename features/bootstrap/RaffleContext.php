@@ -248,6 +248,20 @@ class RaffleContext implements Context
         Assert::notNull($this->exceptionHappened);
     }
 
+    /**
+     * @Then winners comments should not be eligible for further raffling
+     */
+    public function winnersCommentsShouldNotBeEligibleForFurtherRaffling()
+    {
+        if (null !== $this->picked) {
+            $winnersComments = $this->picked->getComments();
+            $raffle          = $this->loadRaffle($this->raffleId);
+            foreach ($winnersComments as $comment) {
+                Assert::false($raffle->getCommentsEligibleForRaffling()->contains($comment));
+            }
+        }
+    }
+
     protected function getService(string $name)
     {
         return $this->kernel->getContainer()->get($name);
