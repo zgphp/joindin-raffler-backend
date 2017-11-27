@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Entity\JoindInUser;
 use Behat\Behat\Context\Context;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Webmozart\Assert\Assert;
 
@@ -221,7 +222,7 @@ class RaffleApiContext implements Context
      */
     public function weGetAnExceptionForARaffleWithNoComments()
     {
-        Assert::contains($this->raffleId, 'There are no comments to raffle (RaffleID:');
+        Assert::eq($this->raffleId, '');
     }
 
     private function apiGetJson(string $url)
@@ -233,9 +234,13 @@ class RaffleApiContext implements Context
 
     private function apiPostJson(string $url, array $options = [])
     {
-        $response = $this->getGuzzle()->post($this->testApiUrl.$url, $options);
+        try {
+            $response = $this->getGuzzle()->post($this->testApiUrl.$url, $options);
 
-        return json_decode($response->getBody()->getContents(), true);
+            return json_decode($response->getBody()->getContents(), true);
+        } catch (ClientException $ex) {
+            return $ex->getMessage();
+        }
     }
 
     private function getGuzzle(): Client
