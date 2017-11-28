@@ -12,3 +12,6 @@ framework:
     #fragments: ~
     php_errors:
         log: true
+    session: ~
+    templating:
+        engines: ['twig']
