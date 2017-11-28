@@ -436,5 +436,8 @@
     },
     "behat/mink-browserkit-driver": {
         "version": "v1.3.2"
+    },
+    "symfony/templating": {
+        "version": "v3.4.0-rc2"
     }
 }
