@@ -490,5 +490,8 @@
     },
     "friendsofsymfony/user-bundle": {
         "version": "v2.0.1"
+    },
+    "symfony/validator": {
+        "version": "v3.4.1"
     }
 }

@@ -66,7 +66,8 @@ raffle_api_noneligible_comments:
     path: /api/raffle/{id}/noneligible_comments
     defaults: { _controller: 'App\Controller\RaffleApiController::noneligibleComments' }
 
-
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 # first, run composer req annotations
 #controllers:
 #    resource: ../src/Controller/
