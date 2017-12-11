@@ -45,6 +45,8 @@ jobs:
           name: PHPUnit
           command: ./vendor/bin/phpunit
 
+      - run: chmod 777 -R var/cache var/log
+
       - run:
           name: Behat
           command: ./vendor/bin/behat
