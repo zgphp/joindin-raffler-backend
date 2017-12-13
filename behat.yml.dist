@@ -24,9 +24,19 @@ default:
                     kernel: '@kernel'
             filters:
                 tags: "@fetch && @api"
+        FOS_web:
+            contexts:
+                - FOSWebContext:
+                    kernel: '@kernel'
+            filters:
+                tags: "@web && @login"
 
     extensions:
         Behat\Symfony2Extension:
             kernel:
                 bootstrap: features/bootstrap/bootstrap.php
                 class: App\Kernel
+        Behat\MinkExtension:
+            sessions:
+                default:
+                    symfony2: ~
