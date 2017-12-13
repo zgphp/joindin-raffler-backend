@@ -16,6 +16,26 @@ class FOSWebContext extends MinkContext implements Context
         $this->kernel = $kernel;
     }
 
+    /**
+     * @When I visit :url
+     */
+    public function iVisit(string $url)
+    {
+        $this->visit($url);
+    }
+
+    /**
+     * @Given there is no user with username :username
+     */
+    public function thereIsNoUserWithUsername($username)
+    {
+        $userManager = $this->getService('fos_user.user_manager');
+        $user        = $userManager->findUserByUsername($username);
+        if (null !== $user) {
+            $userManager->deleteUser($user);
+        }
+    }
+
     protected function getService(string $name)
     {
         return $this->kernel->getContainer()->get($name);
