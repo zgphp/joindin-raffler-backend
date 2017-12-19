@@ -62,6 +62,10 @@ jobs:
           key: cache-v4-{{ checksum "composer.lock" }}
 
       - run:
+          name: Disable xdebug
+          command: ./etc/circleci2/disable-xdebug.sh
+
+      - run:
           name: Composer install
           command: SYMFONY_ENV=test composer install --prefer-dist --no-interaction
 
