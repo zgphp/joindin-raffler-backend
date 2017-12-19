@@ -20,11 +20,15 @@ class RaffleApiContext implements Context
 
     /** @var string|null */
     private $raffleId;
+
     /** @var array|null */
     private $picked;
 
     /** @var string */
     private $testApiUrl = 'http://test.raffler.loc:8000/api';
+
+    /** @var int */
+    private $responseCode;
 
     public function __construct(KernelInterface $kernel)
     {
@@ -237,9 +241,13 @@ class RaffleApiContext implements Context
         try {
             $response = $this->getGuzzle()->post($this->testApiUrl.$url, $options);
 
+            $this->responseCode = $response->getStatusCode();
+
             return json_decode($response->getBody()->getContents(), true);
         } catch (ClientException $ex) {
-            return $ex->getMessage();
+            $this->responseCode = $ex->getCode();
+
+            return;
         }
     }
 
@@ -251,5 +259,19 @@ class RaffleApiContext implements Context
     protected function getService(string $name)
     {
         return $this->kernel->getContainer()->get($name);
+    }
+
+    /**
+     * @Then /^we get an http response with status code (\d+)$/
+     */
+    public function weGetAnHttpResponseWithCode(int $statusCode)
+    {
+        $options = [
+            'json' => ['events' => []],
+        ];
+
+        $this->apiPostJson('/raffle/start', $options);
+
+        Assert::eq($this->responseCode, $statusCode);
     }
 }

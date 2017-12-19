@@ -36,7 +36,7 @@ Feature:
     Then there should be 2 events on the raffle
 
   Scenario: Organizer will try to start a raffle with no events
-    Then we get an exception for a raffle with no meetups
+    Then we get an http response with status code 400
 
   Scenario: Organizer will try to start a raffle with events not having any comments
     Given we have these uncommented meetups in the system
