@@ -18,7 +18,7 @@
         "symfony/templating": "^3.4",
         "symfony/translation": "^3.4",
         "symfony/twig-bundle": "^3.4",
-        "symfony/validator": "^3,4",
+        "symfony/validator": "^3.4",
         "symfony/yaml": "^3.4"
     },
     "require-dev": {
