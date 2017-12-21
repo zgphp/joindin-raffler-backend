@@ -28,3 +28,9 @@ Feature:
       | 22817 | Fullstacking - 101 | 6674    |
     When I fetch meetup talk comments from Joind.in
     Then there should be 3 comment in system
+
+  Scenario: It fetches all ZGPHP data from Joind.in in one go
+    When I fetch all meetups with talks and their comments from Joindin in one go
+    Then there should be 27 ZgPHP meetups in system
+    Then there should be 49 talks in system
+    Then there should be 193 comment in system

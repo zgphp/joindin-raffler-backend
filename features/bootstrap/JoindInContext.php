@@ -84,4 +84,14 @@ class JoindInContext implements Context
     {
         return $this->kernel->getContainer()->get($name);
     }
+
+    /**
+     * @When I fetch all meetups with talks and their comments from Joindin in one go
+     */
+    public function iFetchAllMeetupsWithTalksAndTheirCommentsFromJoindIn()
+    {
+        $this->iFetchMeetupDataFromJoindIn();
+        $this->iFetchMeetupTalksFromJoindIn();
+        $this->iFetchMeetupTalkCommentsFromJoindIn();
+    }
 }
