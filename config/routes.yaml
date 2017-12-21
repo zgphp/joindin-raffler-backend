@@ -2,6 +2,10 @@ homepage:
     path: /
     defaults: { _controller: 'App\Controller\HomepageController::index' }
 
+joindin_fetch_all:
+    path: /api/joindin/fetch/all
+    defaults: { _controller: 'App\Controller\HomepageController::fetchJoindInData' }
+
 joindin_events_fetch:
     path: /api/joindin/events/fetch
     defaults: { _controller: 'App\Controller\JoindInEventController::fetch' }
