@@ -50,6 +50,14 @@ class JoindInApiContext implements Context
     }
 
     /**
+     * @When I fetch all meetups with talks and their comments from Joindin in one go
+     */
+    public function iFetchAllMeetupsWithTalksAndTheirCommentsFromJoindIn()
+    {
+        $this->apiGetJson('/joindin/fetch/all');
+    }
+
+    /**
      * @Then there should be :count ZgPHP meetups in system
      */
     public function thereShouldBeZgphpMeetupsInSystem(int $count)
