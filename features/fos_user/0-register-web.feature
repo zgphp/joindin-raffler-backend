@@ -4,14 +4,12 @@ Feature: Register new administrator
   As the system administrator
   I need to be able to register with the site
 
-  Scenario: As an ordinary visitor, I should be able to register with the site
-    Given there is no user with username "admin.primus"
-    And I am on "/register/"
-    When I fill in "fos_user_registration_form[email]" with "admin@prim.us"
-    And I fill in "fos_user_registration_form[username]" with "admin.primus"
-    And I fill in "fos_user_registration_form[plainPassword][first]" with "12345"
-    And I fill in "fos_user_registration_form[plainPassword][second]" with "12345"
-    And I press "Register"
-    Then I should be on "/register/confirmed"
-    And I should see text matching "Logged in as admin.primus"
-    And I should see text matching "Congrats admin.primus, your account is now activated."
+  Scenario: As an ordinary visitor, I should not be able to access the registration page
+    Given I am not logged in
+    And I visit "/register/"
+    Then I should be on "/login"
+
+  Scenario: As a system administrator, I should be able to access the registration page
+    Given I am authorized with ROLE_ADMIN
+    And I visit "/register/"
+    Then I should be on "/register/"
