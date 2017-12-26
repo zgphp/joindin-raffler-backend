@@ -226,4 +226,14 @@ class Raffle implements \JsonSerializable
 
         return $comments;
     }
+
+    public function getWinners()
+    {
+        return $this->winners;
+    }
+
+    public function getNoShows()
+    {
+        return $this->noShows;
+    }
 }
