@@ -1,4 +1,8 @@
 easy_admin:
     entities:
         # List the entity class name you want to manage
+        - App\Entity\JoindInEvent
+        - App\Entity\JoindInTalk
+        - App\Entity\JoindInComment
+        - App\Entity\JoindInUser
         - App\Entity\Raffle
