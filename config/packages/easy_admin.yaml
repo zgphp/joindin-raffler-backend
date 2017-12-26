@@ -4,12 +4,16 @@ easy_admin:
     entities:
         JoindInEvent:
             class: App\Entity\JoindInEvent
+            disabled_actions: ['new', 'edit']
         JoindInTalk:
             class: App\Entity\JoindInTalk
+            disabled_actions: ['new', 'edit']
         JoindInComment:
             class: App\Entity\JoindInComment
+            disabled_actions: ['new', 'edit']
         JoindInUser:
             class: App\Entity\JoindInUser
+            disabled_actions: ['new', 'edit']
         Raffle:
             class: App\Entity\Raffle
             disabled_actions: ['new']
