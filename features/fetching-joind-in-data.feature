@@ -33,4 +33,4 @@ Feature:
     When I fetch all meetups with talks and their comments from Joindin in one go
     Then there should be 27 ZgPHP meetups in system
     Then there should be 49 talks in system
-    Then there should be 193 comment in system
+    Then there should be 197 comment in system
