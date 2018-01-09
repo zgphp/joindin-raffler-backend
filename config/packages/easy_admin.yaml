@@ -1,8 +1,21 @@
 easy_admin:
+    list:
+        actions: ['search', 'delete', 'show']
     entities:
-        # List the entity class name you want to manage
-        - App\Entity\JoindInEvent
-        - App\Entity\JoindInTalk
-        - App\Entity\JoindInComment
-        - App\Entity\JoindInUser
-        - App\Entity\Raffle
+        JoindInEvent:
+            class: App\Entity\JoindInEvent
+        JoindInTalk:
+            class: App\Entity\JoindInTalk
+        JoindInComment:
+            class: App\Entity\JoindInComment
+        JoindInUser:
+            class: App\Entity\JoindInUser
+        Raffle:
+            class: App\Entity\Raffle
+            disabled_actions: ['new']
+            edit:
+                fields:
+                    - events
+                    - winners
+                    - noShows
+
