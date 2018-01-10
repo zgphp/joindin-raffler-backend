@@ -18,4 +18,13 @@ easy_admin:
                     - events
                     - winners
                     - noShows
+        Administrators:
+            class: App\Entity\User
+            list:
+              fields:
+                - username
+                - email
+                - enabled
+                - { property: 'roles', type: 'array'}
+                - { property: 'administrator',  type: 'toggle' }
 

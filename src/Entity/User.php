@@ -18,9 +18,27 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @var bool
+     *
+     * Flags this user as admin (adds ROLE_SUPER_ADMIN)
+     */
+    private $administrator;
+
     public function __construct()
     {
         parent::__construct();
         // your own logic
+    }
+
+    public function isAdministrator(): bool
+    {
+        return $this->isSuperAdmin();
+    }
+
+    public function setAdministrator($boolean)
+    {
+        $this->setSuperAdmin($boolean);
+        $this->administrator = $boolean;
     }
 }
