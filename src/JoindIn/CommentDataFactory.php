@@ -17,8 +17,8 @@ class CommentDataFactory
             (int) $input['rating'],
             new UserData(
                 $this->extractUserIdFromUri($input['user_uri']),
-                $input['username'],
-                $input['user_display_name']
+                (string) $input['username'],
+                (string) $input['user_display_name']
             ),
             $talk
         );
