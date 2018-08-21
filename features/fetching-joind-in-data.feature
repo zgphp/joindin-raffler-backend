@@ -10,7 +10,7 @@ Feature:
 
   Scenario: It fetches meetups from Joind.in
     When I fetch meetup data from Joind.in
-    Then there should be 28 ZgPHP meetups in system
+    Then there should be 30 ZgPHP meetups in system
 
   Scenario: It fetches talks from Joind.in meetups we have in our system
     Given we have these meetups in the system
@@ -31,6 +31,6 @@ Feature:
 
   Scenario: It fetches all ZGPHP data from Joind.in in one go
     When I fetch all meetups with talks and their comments from Joindin in one go
-    Then there should be 28 ZgPHP meetups in system
-    Then there should be 59 talks in system
-    Then there should be 237 comment in system
+    Then there should be 30 ZgPHP meetups in system
+    Then there should be 74 talks in system
+    Then there should be 289 comment in system
