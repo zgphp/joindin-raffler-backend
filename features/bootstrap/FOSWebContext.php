@@ -100,12 +100,14 @@ class FOSWebContext extends MinkContext implements Context
 
         $user = $fosUserManager->findUserByUsername('admin');
 
-        $token = new UsernamePasswordToken($user, $user->getPassword(), $providerKey, [$accessRole]);
+        if (null !== $user) {
+            $token = new UsernamePasswordToken($user, $user->getPassword(), $providerKey, [$accessRole]);
 
-        $session->set('_security_'.$providerKey, serialize($token));
-        $session->save();
+            $session->set('_security_'.$providerKey, serialize($token));
+            $session->save();
 
-        $cookie = new Cookie($session->getName(), $session->getId());
-        $client->getCookieJar()->set($cookie);
+            $cookie = new Cookie($session->getName(), $session->getId());
+            $client->getCookieJar()->set($cookie);
+        }
     }
 }
