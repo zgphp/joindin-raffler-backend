@@ -25,7 +25,7 @@ class JoindInEventTest extends TestCase
     /** @var JoindInEvent */
     private $joindInEvent;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->id           = 1;
         $this->name         = 'name';
@@ -33,42 +33,42 @@ class JoindInEventTest extends TestCase
         $this->joindInEvent = new JoindInEvent($this->id, $this->name, $this->date);
     }
 
-    public function testSetName()
+    public function testSetName(): void
     {
         $this->markTestSkipped('Skipping');
     }
 
-    public function testSetDate()
+    public function testSetDate(): void
     {
         $this->markTestSkipped('Skipping');
     }
 
-    public function testGetId()
+    public function testGetId(): void
     {
         self::assertEquals($this->id, $this->joindInEvent->getId());
     }
 
-    public function testGetName()
+    public function testGetName(): void
     {
         self::assertEquals($this->name, $this->joindInEvent->getName());
     }
 
-    public function testGetDate()
+    public function testGetDate(): void
     {
         self::assertEquals($this->date, $this->joindInEvent->getDate());
     }
 
-    public function testGetTalks()
+    public function testGetTalks(): void
     {
         $this->markTestSkipped('Skipping');
     }
 
-    public function testAddTalk()
+    public function testAddTalk(): void
     {
         $this->markTestSkipped('Skipping');
     }
 
-    public function testJsonSerialize()
+    public function testJsonSerialize(): void
     {
         $this->markTestSkipped('Skipping');
     }

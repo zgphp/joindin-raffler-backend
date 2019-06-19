@@ -27,7 +27,7 @@ class JoindInEventRetrievalTest extends TestCase
     /** @var JoindInEventRetrieval */
     private $joindInEventRetrieval;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->joindInClient         = Mockery::mock(JoindInClient::class);
         $this->entityManager         = Mockery::mock(EntityManagerInterface::class);
@@ -35,7 +35,7 @@ class JoindInEventRetrievalTest extends TestCase
         $this->joindInEventRetrieval = new JoindInEventRetrieval($this->joindInClient, $this->entityManager, $this->eventRepository);
     }
 
-    public function testFetch()
+    public function testFetch(): void
     {
         $this->markTestSkipped('Skipping');
     }

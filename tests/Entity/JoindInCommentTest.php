@@ -25,53 +25,53 @@ class JoindInCommentTest extends TestCase
     /** @var JoindInComment */
     private $joindInComment;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->user           = Mockery::mock(JoindInUser::class);
         $this->talk           = Mockery::mock(JoindInTalk::class);
         $this->joindInComment = new JoindInComment(1, 'comment', 5, $this->user, $this->talk);
     }
 
-    public function testGetId()
+    public function testGetId(): void
     {
         self::assertEquals(1, $this->joindInComment->getId());
     }
 
-    public function testGetComment()
+    public function testGetComment(): void
     {
         self::assertEquals('comment', $this->joindInComment->getComment());
     }
 
-    public function testGetRating()
+    public function testGetRating(): void
     {
         self::assertEquals(5, $this->joindInComment->getRating());
     }
 
-    public function testGetUser()
+    public function testGetUser(): void
     {
         self::assertEquals($this->user, $this->joindInComment->getUser());
     }
 
-    public function testGetTalk()
+    public function testGetTalk(): void
     {
         self::assertEquals($this->talk, $this->joindInComment->getTalk());
     }
 
-    public function testSetComment()
+    public function testSetComment(): void
     {
         self::assertEquals('comment', $this->joindInComment->getComment());
         $this->joindInComment->setComment('changed comment');
         self::assertEquals('changed comment', $this->joindInComment->getComment());
     }
 
-    public function testSetRating()
+    public function testSetRating(): void
     {
         self::assertEquals(5, $this->joindInComment->getRating());
         $this->joindInComment->setRating(4);
         self::assertEquals(4, $this->joindInComment->getRating());
     }
 
-    public function testSetUser()
+    public function testSetUser(): void
     {
         self::assertEquals($this->user, $this->joindInComment->getUser());
 
@@ -82,7 +82,7 @@ class JoindInCommentTest extends TestCase
         self::assertEquals($newUser, $this->joindInComment->getUser());
     }
 
-    public function testSetTalk()
+    public function testSetTalk(): void
     {
         self::assertEquals($this->talk, $this->joindInComment->getTalk());
 
@@ -93,7 +93,7 @@ class JoindInCommentTest extends TestCase
         self::assertEquals($newTalk, $this->joindInComment->getTalk());
     }
 
-    public function testJsonSerialize()
+    public function testJsonSerialize(): void
     {
         // Arrange.
         $this->user->shouldReceive('jsonSerialize')->once()->andReturn(['user serialized data']);

@@ -13,7 +13,7 @@ class EmptyFixtures extends AbstractFixture implements OrderedFixtureInterface
     /**
      * {@inheritdoc}
      */
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         //$obj = new \stdClass();
         //$manager->persist($obj);
@@ -25,7 +25,7 @@ class EmptyFixtures extends AbstractFixture implements OrderedFixtureInterface
     /**
      * {@inheritdoc}
      */
-    public function getOrder()
+    public function getOrder(): int
     {
         return 10;
     }

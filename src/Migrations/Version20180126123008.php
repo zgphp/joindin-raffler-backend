@@ -12,13 +12,13 @@ use Doctrine\DBAL\Schema\Schema;
  */
 class Version20180126123008 extends AbstractMigration
 {
-    public function up(Schema $schema)
+    public function up(Schema $schema): void
     {
         // this up() migration promotes four records as ZgPhp Meetup organizers
         $this->addSql('UPDATE joindinUsers SET organizer = TRUE WHERE id IN (27939, 31316, 47268, 26764)');
     }
 
-    public function down(Schema $schema)
+    public function down(Schema $schema): void
     {
         // this down() migration demotes four records representing ZgPhp Meetup organizers
         $this->abortIf('postgresql' !== $this->connection->getDatabasePlatform()->getName(),

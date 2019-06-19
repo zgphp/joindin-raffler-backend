@@ -11,7 +11,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class JoindInCommentsFixtures extends AbstractFixture implements OrderedFixtureInterface
 {
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $fullStacking101Talk = $this->getReference('october-talk-22817');
 
@@ -59,7 +59,7 @@ class JoindInCommentsFixtures extends AbstractFixture implements OrderedFixtureI
         $manager->flush();
     }
 
-    public function getOrder()
+    public function getOrder(): int
     {
         return 40;
     }

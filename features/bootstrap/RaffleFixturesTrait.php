@@ -15,7 +15,7 @@ trait RaffleFixturesTrait
     /**
      * @Given we have a raffle with a single comment coming from :userName
      */
-    public function weHaveARaffleWithASingleCommentComingFrom(string $userName)
+    public function weHaveARaffleWithASingleCommentComingFrom(string $userName): void
     {
         $event   = new JoindInEvent(1, 'Meetup #1', new DateTime('today'));
         $talk    = new JoindInTalk(1, 'Talk on meetup #1', $event);

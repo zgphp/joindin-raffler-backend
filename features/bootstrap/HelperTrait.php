@@ -17,7 +17,7 @@ trait HelperTrait
     /**
      * @BeforeScenario
      */
-    public function cleanDB(BeforeScenarioScope $scope)
+    public function cleanDB(BeforeScenarioScope $scope): void
     {
         // Remove all meetups, talks & comments.
         foreach ($this->getEventRepository()->findAll() as $joindInEvent) {
@@ -42,7 +42,13 @@ trait HelperTrait
      */
     public function castToUser(string $username): JoindInUser
     {
-        return $this->getUserRepository()->findOneByUsername($username);
+        $user = $this->getUserRepository()->findOneByUsername($username);
+
+        if (null === $user) {
+            throw new \RuntimeException('Cant find user with username: '.$username);
+        }
+
+        return $user;
     }
 
     protected function loadMultipleUsers(string $userNames): array

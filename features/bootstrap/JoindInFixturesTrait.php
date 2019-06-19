@@ -14,7 +14,7 @@ trait JoindInFixturesTrait
      * @Given we have these uncommented meetups in the system
      * @Given we have these meetups in the system
      */
-    public function weHaveTheseMeetupsInTheSystem(TableNode $table)
+    public function weHaveTheseMeetupsInTheSystem(TableNode $table): void
     {
         foreach ($table as $row) {
             $date  = new DateTime($row['date']);
@@ -28,7 +28,7 @@ trait JoindInFixturesTrait
     /**
      * @Given we have these talks in the system
      */
-    public function weHaveTheseTalksInTheSystem(TableNode $table)
+    public function weHaveTheseTalksInTheSystem(TableNode $table): void
     {
         foreach ($table as $row) {
             $event = $this->getEventRepository()->find($row['eventId']);
@@ -44,7 +44,7 @@ trait JoindInFixturesTrait
     /**
      * @Given we have these users in the system
      */
-    public function weHaveTheseUsersInTheSystem(TableNode $table)
+    public function weHaveTheseUsersInTheSystem(TableNode $table): void
     {
         foreach ($table as $row) {
             $isOrganizer = 'true' === $row['organizer'] ? true : false;
@@ -58,7 +58,7 @@ trait JoindInFixturesTrait
     /**
      * @Given we have each user commenting on each talk
      */
-    public function weHaveEachUserCommentingOnEachTalk()
+    public function weHaveEachUserCommentingOnEachTalk(): void
     {
         $users = $this->getUserRepository()->findAll();
         $talks = $this->getTalkRepository()->findAll();

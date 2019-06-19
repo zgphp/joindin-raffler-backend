@@ -25,7 +25,7 @@ class TalkDataTest extends TestCase
     /** @var TalkData */
     private $talkData;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->id       = 1;
         $this->title    = 'title';
@@ -33,17 +33,17 @@ class TalkDataTest extends TestCase
         $this->talkData = new TalkData($this->id, $this->title, $this->event);
     }
 
-    public function testGetId()
+    public function testGetId(): void
     {
         self::assertEquals($this->id, $this->talkData->getId());
     }
 
-    public function testGetTitle()
+    public function testGetTitle(): void
     {
         self::assertEquals($this->title, $this->talkData->getTitle());
     }
 
-    public function testGetEvent()
+    public function testGetEvent(): void
     {
         self::assertEquals($this->event, $this->talkData->getEvent());
     }

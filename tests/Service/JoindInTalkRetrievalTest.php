@@ -27,7 +27,7 @@ class JoindInTalkRetrievalTest extends TestCase
     /** @var JoindInTalkRetrieval */
     private $joindInTalkRetrieval;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->joindInClient        = Mockery::mock(JoindInClient::class);
         $this->entityManager        = Mockery::mock(EntityManagerInterface::class);
@@ -35,7 +35,7 @@ class JoindInTalkRetrievalTest extends TestCase
         $this->joindInTalkRetrieval = new JoindInTalkRetrieval($this->joindInClient, $this->entityManager, $this->talkRepository);
     }
 
-    public function testFetch()
+    public function testFetch(): void
     {
         $this->markTestSkipped('Skipping');
     }

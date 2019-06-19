@@ -16,12 +16,12 @@ class EventDataFactoryTest extends TestCase
     /** @var EventDataFactory */
     private $eventDataFactory;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->eventDataFactory = new EventDataFactory();
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $this->markTestSkipped('Skipping');
     }

@@ -28,7 +28,7 @@ class JoindInApiContext implements Context
     /**
      * @When I fetch meetup data from Joind.in
      */
-    public function iFetchMeetupDataFromJoindIn()
+    public function iFetchMeetupDataFromJoindIn(): void
     {
         $this->apiGetJson('/joindin/events/fetch');
     }
@@ -36,7 +36,7 @@ class JoindInApiContext implements Context
     /**
      * @When I fetch meetup talks from Joind.in
      */
-    public function iFetchMeetupTalksFromJoindIn()
+    public function iFetchMeetupTalksFromJoindIn(): void
     {
         $this->apiGetJson('/joindin/talks/fetch');
     }
@@ -44,7 +44,7 @@ class JoindInApiContext implements Context
     /**
      * @When I fetch meetup talk comments from Joind.in
      */
-    public function iFetchMeetupTalkCommentsFromJoindIn()
+    public function iFetchMeetupTalkCommentsFromJoindIn(): void
     {
         $this->apiGetJson('/joindin/comments/fetch');
     }
@@ -52,7 +52,7 @@ class JoindInApiContext implements Context
     /**
      * @When I fetch all meetups with talks and their comments from Joindin in one go
      */
-    public function iFetchAllMeetupsWithTalksAndTheirCommentsFromJoindIn()
+    public function iFetchAllMeetupsWithTalksAndTheirCommentsFromJoindIn(): void
     {
         $this->apiGetJson('/joindin/fetch/all');
     }
@@ -60,7 +60,7 @@ class JoindInApiContext implements Context
     /**
      * @Then there should be :count ZgPHP meetups in system
      */
-    public function thereShouldBeZgphpMeetupsInSystem(int $count)
+    public function thereShouldBeZgphpMeetupsInSystem(int $count): void
     {
         Assert::count($this->apiGetJson('/joindin/events/'), $count);
     }
@@ -68,7 +68,7 @@ class JoindInApiContext implements Context
     /**
      * @Then there should be :count talks in system
      */
-    public function thereShouldBeTalksInSystem(int $count)
+    public function thereShouldBeTalksInSystem(int $count): void
     {
         Assert::count($this->apiGetJson('/joindin/talks/'), $count);
     }
@@ -76,21 +76,26 @@ class JoindInApiContext implements Context
     /**
      * @Then there should be :count comment in system
      */
-    public function thereShouldBeCommentInSystem(int $count)
+    public function thereShouldBeCommentInSystem(int $count): void
     {
         $data = $this->apiGetJson('/joindin/comments/');
 
         Assert::count($data, $count);
     }
 
+    /** @return mixed */
     private function apiGetJson(string $url)
     {
+        /** @var Client $guzzle */
         $guzzle   = $this->getService(Client::class);
         $response = $guzzle->get($this->testApiUrl.$url);
 
         return json_decode($response->getBody()->getContents(), true);
     }
 
+    /**
+     * @return object
+     */
     protected function getService(string $name)
     {
         return $this->kernel->getContainer()->get($name);

@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class NoTest extends TestCase
 {
-    public function testNothing()
+    public function testNothing(): void
     {
         self::assertEquals(1, '1');
     }

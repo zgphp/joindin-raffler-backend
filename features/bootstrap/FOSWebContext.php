@@ -24,7 +24,7 @@ class FOSWebContext extends MinkContext implements Context
     /**
      * @When I visit :url
      */
-    public function iVisit(string $url)
+    public function iVisit(string $url): void
     {
         $this->visit($url);
     }
@@ -32,7 +32,7 @@ class FOSWebContext extends MinkContext implements Context
     /**
      * @Given there is no user with username :username
      */
-    public function thereIsNoUserWithUsername($username)
+    public function thereIsNoUserWithUsername(string $username): void
     {
         $userManager = $this->getService('fos_user.user_manager');
         $user        = $userManager->findUserByUsername($username);
@@ -41,6 +41,9 @@ class FOSWebContext extends MinkContext implements Context
         }
     }
 
+    /**
+     * @return object
+     */
     protected function getService(string $name)
     {
         return $this->kernel->getContainer()->get($name);
@@ -49,7 +52,7 @@ class FOSWebContext extends MinkContext implements Context
     /**
      * @Given I am not logged in
      */
-    public function iAmNotLoggedIn()
+    public function iAmNotLoggedIn(): void
     {
         $driver = $this->getSession()->getDriver();
         if (!$driver instanceof BrowserKitDriver) {
@@ -77,7 +80,7 @@ class FOSWebContext extends MinkContext implements Context
     /**
      * @Given I am authorized with :accessRole
      */
-    public function iAmAuthorizedWith($accessRole)
+    public function iAmAuthorizedWith(string $accessRole): void
     {
         $driver = $this->getSession()->getDriver();
         if (!$driver instanceof BrowserKitDriver) {

@@ -13,7 +13,7 @@ class Version20171108224445 extends AbstractMigration
     /**
      * @param Schema $schema
      */
-    public function up(Schema $schema)
+    public function up(Schema $schema): void
     {
         // this up() migration is modified to preserve the already present data in table, rename the column, and set
         // it to accept null values
@@ -26,7 +26,7 @@ class Version20171108224445 extends AbstractMigration
     /**
      * @param Schema $schema
      */
-    public function down(Schema $schema)
+    public function down(Schema $schema): void
     {
         // this down() migration is modified to preserve the already present data in table, revert the the column
         // name and null value acceptance, and to not try to recreate an existing 'public' schema

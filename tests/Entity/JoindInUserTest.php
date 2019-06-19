@@ -24,7 +24,7 @@ class JoindInUserTest extends TestCase
     /** @var bool */
     private $organizer;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->id          = 1;
         $this->username    = 'username';
@@ -33,53 +33,53 @@ class JoindInUserTest extends TestCase
         $this->joindInUser = new JoindInUser($this->id, $this->username, $this->displayName, $this->organizer);
     }
 
-    public function testSetUsername()
+    public function testSetUsername(): void
     {
         $this->markTestSkipped('Skipping');
     }
 
-    public function testSetDisplayName()
+    public function testSetDisplayName(): void
     {
         $this->markTestSkipped('Skipping');
     }
 
-    public function testPromoteToOrganizer()
+    public function testPromoteToOrganizer(): void
     {
         $this->joindInUser->promoteToOrganizer();
         self::assertEquals(true, $this->joindInUser->isOrganizer());
     }
 
-    public function testIsOrganizer()
+    public function testIsOrganizer(): void
     {
         self::assertEquals($this->organizer, $this->joindInUser->isOrganizer());
     }
 
-    public function testGetId()
+    public function testGetId(): void
     {
         self::assertEquals($this->id, $this->joindInUser->getId());
     }
 
-    public function testGetUsername()
+    public function testGetUsername(): void
     {
         self::assertEquals($this->username, $this->joindInUser->getUsername());
     }
 
-    public function testGetDisplayName()
+    public function testGetDisplayName(): void
     {
         self::assertEquals($this->displayName, $this->joindInUser->getDisplayName());
     }
 
-    public function testJsonSerialize()
+    public function testJsonSerialize(): void
     {
         $this->markTestSkipped('Skipping');
     }
 
-    public function testGetComments()
+    public function testGetComments(): void
     {
         $this->markTestSkipped('Skipping');
     }
 
-    public function testAddComment()
+    public function testAddComment(): void
     {
         $this->markTestSkipped('Skipping');
     }

@@ -12,7 +12,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class JoindInEventsFixtures extends AbstractFixture implements OrderedFixtureInterface
 {
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $list = [
             'october'   => new JoindInEvent(6674, 'ZgPHP 2017/10', new DateTime('2017-10-19')),
@@ -36,7 +36,7 @@ class JoindInEventsFixtures extends AbstractFixture implements OrderedFixtureInt
     /**
      * {@inheritdoc}
      */
-    public function getOrder()
+    public function getOrder(): int
     {
         return 10;
     }
