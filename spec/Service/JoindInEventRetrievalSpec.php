@@ -70,9 +70,10 @@ class JoindInEventRetrievalSpec extends ObjectBehavior
         EntityManager $entityManager,
         JoindInEventRepository $eventRepository,
         EventData $eventData,
-        JoindInEvent $storedJoindInEvent,
-        DateTime $date
+        JoindInEvent $storedJoindInEvent
     ) {
+        $date=new \DateTime();
+
         $joindInClient->fetchZgPhpEvents()
             ->shouldBeCalled()
             ->willReturn([$eventData]);
