@@ -34,7 +34,7 @@ class RaffleContext implements Context
     /**
      * @When organizer picks to raffle meetups: :eventIdList
      */
-    public function organizerPicksToRaffleMeetups(string $eventIdList)
+    public function organizerPicksToRaffleMeetups(string $eventIdList): void
     {
         $eventIds = explode(',', $eventIdList);
 
@@ -60,7 +60,7 @@ class RaffleContext implements Context
     /**
      * @Then we get an exception for a raffle with no meetups
      */
-    public function weGetAnExceptionForARaffleWithNoMeetups()
+    public function weGetAnExceptionForARaffleWithNoMeetups(): void
     {
         try {
             Raffle::create([]);
@@ -78,7 +78,7 @@ class RaffleContext implements Context
      * @When I pick a winner
      * @When I pick another winner
      */
-    public function wePick()
+    public function wePick(): void
     {
         $raffle = $this->loadRaffle($this->raffleId);
 
@@ -88,7 +88,7 @@ class RaffleContext implements Context
     /**
      * @When I confirm him or her as a winner
      */
-    public function iConfirmHimOrHerAsAWinner()
+    public function iConfirmHimOrHerAsAWinner(): void
     {
         $raffle = $this->loadRaffle($this->raffleId);
 
@@ -104,7 +104,7 @@ class RaffleContext implements Context
     /**
      * @When I mark him or her as a no show
      */
-    public function iMarkHimOrHerAsANoShow()
+    public function iMarkHimOrHerAsANoShow(): void
     {
         $raffle = $this->loadRaffle($this->raffleId);
 
@@ -120,7 +120,7 @@ class RaffleContext implements Context
     /**
      * @When user :user wins
      */
-    public function userWins(JoindInUser $user)
+    public function userWins(JoindInUser $user): void
     {
         $raffle = $this->loadRaffle($this->raffleId);
 
@@ -132,7 +132,7 @@ class RaffleContext implements Context
     /**
      * @When user :user is no show
      */
-    public function userIsNoShow(JoindInUser $user)
+    public function userIsNoShow(JoindInUser $user): void
     {
         $raffle = $this->loadRaffle($this->raffleId);
 
@@ -144,7 +144,7 @@ class RaffleContext implements Context
     /**
      * @Then there should be :count events on the raffle
      */
-    public function thereShouldBeEventsOnTheRaffle(int $count)
+    public function thereShouldBeEventsOnTheRaffle(int $count): void
     {
         $raffle = $this->loadRaffle($this->raffleId);
 
@@ -154,7 +154,7 @@ class RaffleContext implements Context
     /**
      * @Then there should be :count comments on the raffle
      */
-    public function thereShouldBeCommentsOnTheRaffle(int $count)
+    public function thereShouldBeCommentsOnTheRaffle(int $count): void
     {
         $raffle = $this->loadRaffle($this->raffleId);
 
@@ -164,7 +164,7 @@ class RaffleContext implements Context
     /**
      * @Then we should get one of :userNames as a winner
      */
-    public function weShouldGetOneOfAsAWinner(string $userNames)
+    public function weShouldGetOneOfAsAWinner(string $userNames): void
     {
         $users = $this->loadMultipleUsers($userNames);
 
@@ -180,7 +180,7 @@ class RaffleContext implements Context
     /**
      * @Then :user user should be :count times in the list
      */
-    public function userShouldBeTimesInTheList(JoindInUser $user, int $count)
+    public function userShouldBeTimesInTheList(JoindInUser $user, int $count): void
     {
         $raffle = $this->loadRaffle($this->raffleId);
         $found  = 0;
@@ -197,7 +197,7 @@ class RaffleContext implements Context
     /**
      * @Then we should get back one of the members that left feedback
      */
-    public function weShouldGetBackOneOfTheMembersThatLeftFeedback()
+    public function weShouldGetBackOneOfTheMembersThatLeftFeedback(): void
     {
         Assert::notEmpty($this->picked);
     }
@@ -205,7 +205,7 @@ class RaffleContext implements Context
     /**
      * @Then we should get :user as a winner
      */
-    public function weShouldGetAsAWinner(JoindInUser $user)
+    public function weShouldGetAsAWinner(JoindInUser $user): void
     {
         Assert::eq($user, $this->picked);
     }
@@ -214,7 +214,7 @@ class RaffleContext implements Context
      * @Then we should have :count eligible comment for next prize
      * @Then we should have :count eligible comments for next prize
      */
-    public function weShouldHaveEligibleCommentForNextPrize(int $count)
+    public function weShouldHaveEligibleCommentForNextPrize(int $count): void
     {
         $raffle = $this->loadRaffle($this->raffleId);
 
@@ -224,7 +224,7 @@ class RaffleContext implements Context
     /**
      * @Then we cannot continue raffling
      */
-    public function weCannotContinueRaffling()
+    public function weCannotContinueRaffling(): void
     {
         try {
             $raffle = $this->loadRaffle($this->raffleId);
@@ -243,7 +243,7 @@ class RaffleContext implements Context
     /**
      * @Then we get an exception for a raffle with no comments
      */
-    public function weGetAnExceptionForARaffleWithNoComments()
+    public function weGetAnExceptionForARaffleWithNoComments(): void
     {
         Assert::notNull($this->exceptionHappened);
     }
@@ -251,7 +251,7 @@ class RaffleContext implements Context
     /**
      * @Then winners comments should not be eligible for further raffling
      */
-    public function winnersCommentsShouldNotBeEligibleForFurtherRaffling()
+    public function winnersCommentsShouldNotBeEligibleForFurtherRaffling(): void
     {
         if (null !== $this->picked) {
             $winnersComments = $this->picked->getComments();
@@ -262,6 +262,9 @@ class RaffleContext implements Context
         }
     }
 
+    /**
+     * @return object
+     */
     protected function getService(string $name)
     {
         return $this->kernel->getContainer()->get($name);

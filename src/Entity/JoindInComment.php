@@ -59,22 +59,22 @@ class JoindInComment implements \JsonSerializable
         $this->talk    = $talk;
     }
 
-    public function setComment(string $comment)
+    public function setComment(string $comment): void
     {
         $this->comment = $comment;
     }
 
-    public function setRating(int $rating)
+    public function setRating(int $rating): void
     {
         $this->rating = $rating;
     }
 
-    public function setUser(JoindInUser $user)
+    public function setUser(JoindInUser $user): void
     {
         $this->user = $user;
     }
 
-    public function setTalk(JoindInTalk $talk)
+    public function setTalk(JoindInTalk $talk): void
     {
         $this->talk = $talk;
     }

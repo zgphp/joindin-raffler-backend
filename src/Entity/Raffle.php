@@ -147,12 +147,12 @@ class Raffle implements \JsonSerializable
         return $comments[0]->getUser();
     }
 
-    public function userWon(JoindInUser $user)
+    public function userWon(JoindInUser $user): void
     {
         $this->winners->add($user);
     }
 
-    public function userIsNoShow(JoindInUser $user)
+    public function userIsNoShow(JoindInUser $user): void
     {
         $this->noShows->add($user);
     }
@@ -208,7 +208,7 @@ class Raffle implements \JsonSerializable
         return true;
     }
 
-    public function getCommentsNotEligibleForRaffling()
+    public function getCommentsNotEligibleForRaffling(): \Doctrine\Common\Collections\ArrayCollection
     {
         $comments = new ArrayCollection();
 
@@ -227,12 +227,12 @@ class Raffle implements \JsonSerializable
         return $comments;
     }
 
-    public function getWinners()
+    public function getWinners(): \Doctrine\Common\Collections\Collection
     {
         return $this->winners;
     }
 
-    public function getNoShows()
+    public function getNoShows(): \Doctrine\Common\Collections\Collection
     {
         return $this->noShows;
     }

@@ -36,7 +36,7 @@ class User extends BaseUser
         return $this->isSuperAdmin();
     }
 
-    public function setAdministrator($boolean)
+    public function setAdministrator($boolean): void
     {
         $this->setSuperAdmin($boolean);
         $this->administrator = $boolean;

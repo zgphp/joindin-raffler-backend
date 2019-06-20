@@ -11,7 +11,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class UserFixtures extends AbstractFixture implements OrderedFixtureInterface
 {
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $admin = new User();
         $admin->setUsername('admin');
@@ -26,7 +26,7 @@ class UserFixtures extends AbstractFixture implements OrderedFixtureInterface
         $manager->flush();
     }
 
-    public function getOrder()
+    public function getOrder(): int
     {
         return 10;
     }

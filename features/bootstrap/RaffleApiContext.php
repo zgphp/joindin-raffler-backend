@@ -34,7 +34,7 @@ class RaffleApiContext implements Context
     /**
      * @When organizer picks to raffle meetups: :eventIdList
      */
-    public function organizerPicksToRaffleMeetups(string $eventIdList)
+    public function organizerPicksToRaffleMeetups(string $eventIdList): void
     {
         $options = [
             'json' => ['events' => explode(',', $eventIdList)],
@@ -47,7 +47,7 @@ class RaffleApiContext implements Context
     /**
      * @Then we get an exception for a raffle with no meetups
      */
-    public function weGetAnExceptionForARaffleWithNoMeetups()
+    public function weGetAnExceptionForARaffleWithNoMeetups(): void
     {
         $options = [
             'json' => ['events' => []],
@@ -62,7 +62,7 @@ class RaffleApiContext implements Context
      * @When I pick a winner
      * @When I pick another winner
      */
-    public function wePick()
+    public function wePick(): void
     {
         $this->picked = $this->apiPostJson('/raffle/'.$this->raffleId.'/pick');
     }
@@ -70,7 +70,7 @@ class RaffleApiContext implements Context
     /**
      * @When I confirm him or her as a winner
      */
-    public function iConfirmHimOrHerAsAWinner()
+    public function iConfirmHimOrHerAsAWinner(): void
     {
         $url = '/raffle/'.$this->raffleId.'/winner/'.$this->picked['id'];
 
@@ -80,7 +80,7 @@ class RaffleApiContext implements Context
     /**
      * @When I mark him or her as a no show
      */
-    public function iMarkHimOrHerAsANoShow()
+    public function iMarkHimOrHerAsANoShow(): void
     {
         $url = '/raffle/'.$this->raffleId.'/no_show/'.$this->picked['id'];
 
@@ -90,7 +90,7 @@ class RaffleApiContext implements Context
     /**
      * @When user :user wins
      */
-    public function userWins(JoindInUser $user)
+    public function userWins(JoindInUser $user): void
     {
         $url = '/raffle/'.$this->raffleId.'/winner/'.$user->getId();
 
@@ -100,7 +100,7 @@ class RaffleApiContext implements Context
     /**
      * @When user :user is no show
      */
-    public function userIsNoShow(JoindInUser $user)
+    public function userIsNoShow(JoindInUser $user): void
     {
         $url = '/raffle/'.$this->raffleId.'/no_show/'.$user->getId();
 
@@ -110,7 +110,7 @@ class RaffleApiContext implements Context
     /**
      * @Then there should be :count events on the raffle
      */
-    public function thereShouldBeEventsOnTheRaffle(int $count)
+    public function thereShouldBeEventsOnTheRaffle(int $count): void
     {
         $data = $this->apiGetJson('/raffle/'.$this->raffleId);
 
@@ -120,7 +120,7 @@ class RaffleApiContext implements Context
     /**
      * @Then there should be :count comments on the raffle
      */
-    public function thereShouldBeCommentsOnTheRaffle(int $count)
+    public function thereShouldBeCommentsOnTheRaffle(int $count): void
     {
         Assert::count($this->apiGetJson('/raffle/'.$this->raffleId.'/comments'), $count);
     }
@@ -128,7 +128,7 @@ class RaffleApiContext implements Context
     /**
      * @Then we should get one of :userNames as a winner
      */
-    public function weShouldGetOneOfAsAWinner(string $userNames)
+    public function weShouldGetOneOfAsAWinner(string $userNames): void
     {
         $users = $this->loadMultipleUsers($userNames);
 
@@ -144,7 +144,7 @@ class RaffleApiContext implements Context
     /**
      * @Then we should get back one of the members that left feedback
      */
-    public function weShouldGetBackOneOfTheMembersThatLeftFeedback()
+    public function weShouldGetBackOneOfTheMembersThatLeftFeedback(): void
     {
         Assert::notNull($this->picked);
     }
@@ -152,7 +152,7 @@ class RaffleApiContext implements Context
     /**
      * @Then :user user should be :count times in the list
      */
-    public function userShouldBeTimesInTheList(JoindInUser $user, int $count)
+    public function userShouldBeTimesInTheList(JoindInUser $user, int $count): void
     {
         $data = $this->apiGetJson('/raffle/'.$this->raffleId.'/comments');
 
@@ -170,7 +170,7 @@ class RaffleApiContext implements Context
     /**
      * @Then we should get :user as a winner
      */
-    public function weShouldGetAsAWinner(JoindInUser $user)
+    public function weShouldGetAsAWinner(JoindInUser $user): void
     {
         Assert::eq($user->getId(), $this->picked['id']);
     }
@@ -179,7 +179,7 @@ class RaffleApiContext implements Context
      * @Then we should have :count eligible comment for next prize
      * @Then we should have :count eligible comments for next prize
      */
-    public function weShouldHaveEligibleCommentForNextPrize(int $count)
+    public function weShouldHaveEligibleCommentForNextPrize(int $count): void
     {
         $data = $this->apiGetJson('/raffle/'.$this->raffleId.'/comments');
 
@@ -189,7 +189,7 @@ class RaffleApiContext implements Context
     /**
      * @Then winners comments should not be eligible for further raffling
      */
-    public function winnersCommentsShouldNotBeEligibleForFurtherRaffling()
+    public function winnersCommentsShouldNotBeEligibleForFurtherRaffling(): void
     {
         $eligibleComments = $this->apiGetJson('/raffle/'.$this->raffleId.'/comments');
 
@@ -210,7 +210,7 @@ class RaffleApiContext implements Context
     /**
      * @Then we cannot continue raffling
      */
-    public function weCannotContinueRaffling()
+    public function weCannotContinueRaffling(): void
     {
         $response = $this->apiPostJson('/raffle/'.$this->raffleId.'/pick');
 
@@ -220,11 +220,12 @@ class RaffleApiContext implements Context
     /**
      * @Then we get an exception for a raffle with no comments
      */
-    public function weGetAnExceptionForARaffleWithNoComments()
+    public function weGetAnExceptionForARaffleWithNoComments(): void
     {
         Assert::eq($this->raffleId, '');
     }
 
+    /** @return mixed */
     private function apiGetJson(string $url)
     {
         $response = $this->getGuzzle()->get($this->testApiUrl.$url);
@@ -232,6 +233,7 @@ class RaffleApiContext implements Context
         return json_decode($response->getBody()->getContents(), true);
     }
 
+    /** @return mixed */
     private function apiPostJson(string $url, array $options = [])
     {
         try {
@@ -248,6 +250,9 @@ class RaffleApiContext implements Context
         return $this->getService(Client::class);
     }
 
+    /**
+     * @return object
+     */
     protected function getService(string $name)
     {
         return $this->kernel->getContainer()->get($name);

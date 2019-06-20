@@ -30,7 +30,7 @@ class JoindInCommentRetrievalTest extends TestCase
     /** @var JoindInCommentRetrieval */
     private $joindInCommentRetrieval;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->joindInClient           = Mockery::mock(JoindInClient::class);
         $this->entityManager           = Mockery::mock(EntityManagerInterface::class);
@@ -44,7 +44,7 @@ class JoindInCommentRetrievalTest extends TestCase
         );
     }
 
-    public function testFetch()
+    public function testFetch(): void
     {
         $this->markTestSkipped('Skipping');
     }

@@ -68,7 +68,7 @@ class JoindInUser implements \JsonSerializable
         return $this->username;
     }
 
-    public function setUsername(string $username)
+    public function setUsername(string $username): void
     {
         $this->username = $username;
     }
@@ -78,7 +78,7 @@ class JoindInUser implements \JsonSerializable
         return $this->displayName;
     }
 
-    public function setDisplayName(string $displayName)
+    public function setDisplayName(string $displayName): void
     {
         $this->displayName = $displayName;
     }
@@ -103,7 +103,7 @@ class JoindInUser implements \JsonSerializable
     /**
      * @param JoindInComment $comment
      */
-    public function addComment(JoindInComment $comment)
+    public function addComment(JoindInComment $comment): void
     {
         $this->comments->add($comment);
     }
@@ -116,7 +116,7 @@ class JoindInUser implements \JsonSerializable
         return $this->organizer;
     }
 
-    public function promoteToOrganizer()
+    public function promoteToOrganizer(): void
     {
         $this->organizer = true;
     }

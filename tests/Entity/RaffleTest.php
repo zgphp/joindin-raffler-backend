@@ -21,7 +21,7 @@ class RaffleTest extends TestCase
     /**
      * @expectedException \App\Exception\NoEventsToRaffleException
      */
-    public function testCannotCreateEmptyRaffle()
+    public function testCannotCreateEmptyRaffle(): void
     {
         Raffle::create([]);
     }
@@ -29,7 +29,7 @@ class RaffleTest extends TestCase
     /**
      * @expectedException \App\Exception\NoCommentsToRaffleException
      */
-    public function testCannotStartRaffleWithNoCommentsInEvents()
+    public function testCannotStartRaffleWithNoCommentsInEvents(): void
     {
         // Arrange.
         $talk1 = Mockery::mock(JoindInTalk::class);
@@ -48,7 +48,7 @@ class RaffleTest extends TestCase
     /**
      * @expectedException \App\Exception\NoCommentsToRaffleException
      */
-    public function testCannotStartRaffleWhenThereAreNoTalksOnSelectedEvents()
+    public function testCannotStartRaffleWhenThereAreNoTalksOnSelectedEvents(): void
     {
         // Arrange.
         $event1 = new JoindInEvent(1, 'Meetup 1', new \DateTime());
@@ -62,7 +62,7 @@ class RaffleTest extends TestCase
         new Raffle('id', $events);
     }
 
-    public function testRaffleWillBeCreated()
+    public function testRaffleWillBeCreated(): void
     {
         // Arrange.
 
@@ -83,7 +83,7 @@ class RaffleTest extends TestCase
         $this->assertInstanceOf(Raffle::class, $raffle);
     }
 
-    public function testRaffleWillBeCreated2()
+    public function testRaffleWillBeCreated2(): void
     {
         // Arrange.
 

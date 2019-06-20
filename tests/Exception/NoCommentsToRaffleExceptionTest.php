@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  */
 class NoCommentsToRaffleExceptionTest extends TestCase
 {
-    public function testForRaffle()
+    public function testForRaffle(): void
     {
         $this->assertInstanceOf(NoCommentsToRaffleException::class, NoCommentsToRaffleException::forRaffle('123'));
     }

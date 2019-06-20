@@ -53,12 +53,12 @@ class JoindInEvent implements \JsonSerializable
         $this->talks = new ArrayCollection();
     }
 
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
 
-    public function setDate(DateTime $date)
+    public function setDate(DateTime $date): void
     {
         $this->date = $date;
     }
@@ -83,7 +83,7 @@ class JoindInEvent implements \JsonSerializable
         return $this->talks;
     }
 
-    public function addTalk(JoindInTalk $talk)
+    public function addTalk(JoindInTalk $talk): void
     {
         $this->talks->add($talk);
     }

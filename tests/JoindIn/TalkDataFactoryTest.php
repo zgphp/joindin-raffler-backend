@@ -16,12 +16,12 @@ class TalkDataFactoryTest extends TestCase
     /** @var TalkDataFactory */
     private $talkDataFactory;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->talkDataFactory = new TalkDataFactory();
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $this->markTestSkipped('Skipping');
     }

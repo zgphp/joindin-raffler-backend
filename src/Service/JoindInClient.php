@@ -25,6 +25,7 @@ class JoindInClient
     /** @var CommentDataFactory */
     private $commentDataFactory;
 
+    /** @var string */
     private $baseUrl = 'https://api.joind.in/v2.1';
 
     public function __construct(

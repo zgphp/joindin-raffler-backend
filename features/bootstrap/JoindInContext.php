@@ -25,8 +25,9 @@ class JoindInContext implements Context
     /**
      * @When I fetch meetup data from Joind.in
      */
-    public function iFetchMeetupDataFromJoindIn()
+    public function iFetchMeetupDataFromJoindIn(): void
     {
+        /** @var JoindInEventRetrieval $service */
         $service = $this->getService(JoindInEventRetrieval::class);
 
         $service->fetch();
@@ -35,8 +36,9 @@ class JoindInContext implements Context
     /**
      * @When I fetch meetup talks from Joind.in
      */
-    public function iFetchMeetupTalksFromJoindIn()
+    public function iFetchMeetupTalksFromJoindIn(): void
     {
+        /** @var JoindInTalkRetrieval $service */
         $service = $this->getService(JoindInTalkRetrieval::class);
 
         foreach ($this->getEventRepository()->findAll() as $event) {
@@ -47,8 +49,9 @@ class JoindInContext implements Context
     /**
      * @When I fetch meetup talk comments from Joind.in
      */
-    public function iFetchMeetupTalkCommentsFromJoindIn()
+    public function iFetchMeetupTalkCommentsFromJoindIn(): void
     {
+        /** @var JoindInCommentRetrieval $service */
         $service = $this->getService(JoindInCommentRetrieval::class);
 
         foreach ($this->getTalkRepository()->findAll() as $talk) {
@@ -59,7 +62,7 @@ class JoindInContext implements Context
     /**
      * @Then there should be :count ZgPHP meetups in system
      */
-    public function thereShouldBeZgphpMeetupsInSystem(int $count)
+    public function thereShouldBeZgphpMeetupsInSystem(int $count): void
     {
         Assert::count($this->getEventRepository()->findAll(), $count);
     }
@@ -67,7 +70,7 @@ class JoindInContext implements Context
     /**
      * @Then there should be :count talks in system
      */
-    public function thereShouldBeTalksInSystem(int $count)
+    public function thereShouldBeTalksInSystem(int $count): void
     {
         Assert::count($this->getTalkRepository()->findAll(), $count);
     }
@@ -75,11 +78,14 @@ class JoindInContext implements Context
     /**
      * @Then there should be :count comment in system
      */
-    public function thereShouldBeCommentInSystem(int $count)
+    public function thereShouldBeCommentInSystem(int $count): void
     {
         Assert::count($this->getCommentRepository()->findAll(), $count);
     }
 
+    /**
+     * @return object
+     */
     protected function getService(string $name)
     {
         return $this->kernel->getContainer()->get($name);
@@ -88,7 +94,7 @@ class JoindInContext implements Context
     /**
      * @When I fetch all meetups with talks and their comments from Joindin in one go
      */
-    public function iFetchAllMeetupsWithTalksAndTheirCommentsFromJoindIn()
+    public function iFetchAllMeetupsWithTalksAndTheirCommentsFromJoindIn(): void
     {
         $this->iFetchMeetupDataFromJoindIn();
         $this->iFetchMeetupTalksFromJoindIn();

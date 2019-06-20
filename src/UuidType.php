@@ -41,7 +41,7 @@ class UuidType extends Type
      * @param array                                     $fieldDeclaration
      * @param \Doctrine\DBAL\Platforms\AbstractPlatform $platform
      */
-    public function getSqlDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
+    public function getSqlDeclaration(array $fieldDeclaration, AbstractPlatform $platform): string
     {
         return $platform->getGuidTypeDeclarationSQL($fieldDeclaration);
     }
@@ -63,7 +63,7 @@ class UuidType extends Type
      * @param UuidInterface|null                        $value
      * @param \Doctrine\DBAL\Platforms\AbstractPlatform $platform
      */
-    public function convertToDatabaseValue($value, AbstractPlatform $platform)
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
         if (empty($value)) {
             return null;
@@ -81,7 +81,7 @@ class UuidType extends Type
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return static::NAME;
     }
@@ -93,7 +93,7 @@ class UuidType extends Type
      *
      * @return bool
      */
-    public function requiresSqlCommentHint(AbstractPlatform $platform)
+    public function requiresSqlCommentHint(AbstractPlatform $platform): bool
     {
         return true;
     }

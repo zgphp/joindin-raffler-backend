@@ -30,7 +30,7 @@ class JoindInClientTest extends TestCase
     /** @var JoindInClient */
     private $joindInClient;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->client             = Mockery::mock(Client::class);
         $this->eventDataFactory   = Mockery::mock(EventDataFactory::class);
@@ -39,17 +39,17 @@ class JoindInClientTest extends TestCase
         $this->joindInClient      = new JoindInClient($this->client, $this->eventDataFactory, $this->talkDataFactory, $this->commentDataFactory);
     }
 
-    public function testFetchZgPhpEvents()
+    public function testFetchZgPhpEvents(): void
     {
         $this->markTestSkipped('Skipping');
     }
 
-    public function testFetchTalksForEvent()
+    public function testFetchTalksForEvent(): void
     {
         $this->markTestSkipped('Skipping');
     }
 
-    public function testFetchCommentsForTalk()
+    public function testFetchCommentsForTalk(): void
     {
         $this->markTestSkipped('Skipping');
     }

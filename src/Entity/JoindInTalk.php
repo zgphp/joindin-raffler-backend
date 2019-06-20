@@ -62,12 +62,12 @@ class JoindInTalk implements \JsonSerializable
         $this->comments = new ArrayCollection();
     }
 
-    public function setTitle(string $title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
 
-    public function setEvent(JoindInEvent $event)
+    public function setEvent(JoindInEvent $event): void
     {
         $this->event = $event;
     }
@@ -97,7 +97,7 @@ class JoindInTalk implements \JsonSerializable
         return $this->comments;
     }
 
-    public function addComment(JoindInComment $comment)
+    public function addComment(JoindInComment $comment): void
     {
         $this->comments->add($comment);
     }

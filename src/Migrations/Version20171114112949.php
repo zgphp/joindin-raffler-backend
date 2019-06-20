@@ -14,7 +14,7 @@ class Version20171114112949 extends AbstractMigration
     /**
      * @param Schema $schema
      */
-    public function up(Schema $schema)
+    public function up(Schema $schema): void
     {
         // this up() migration promotes two records as ZgPhp Meetup organizers
         $this->addSql('UPDATE joindinUsers SET organizer = TRUE WHERE id IN (18486, 31686)');
@@ -23,7 +23,7 @@ class Version20171114112949 extends AbstractMigration
     /**
      * @param Schema $schema
      */
-    public function down(Schema $schema)
+    public function down(Schema $schema): void
     {
         // this down() migration demotes two records representing ZgPhp Meetup organizers
         $this->abortIf('postgresql' !== $this->connection->getDatabasePlatform()->getName(),

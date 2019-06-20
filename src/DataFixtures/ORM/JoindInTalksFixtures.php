@@ -11,7 +11,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class JoindInTalksFixtures extends AbstractFixture implements OrderedFixtureInterface
 {
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $octoberMeetup = $this->getReference('event-october');
 
@@ -29,7 +29,7 @@ class JoindInTalksFixtures extends AbstractFixture implements OrderedFixtureInte
         $manager->flush();
     }
 
-    public function getOrder()
+    public function getOrder(): int
     {
         return 20;
     }

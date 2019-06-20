@@ -11,7 +11,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class JoindInUsersFixtures extends AbstractFixture implements OrderedFixtureInterface
 {
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $users = [
             'user1'      => new JoindInUser(45128, 'username1', 'User Named One', false),
@@ -28,7 +28,7 @@ class JoindInUsersFixtures extends AbstractFixture implements OrderedFixtureInte
         $manager->flush();
     }
 
-    public function getOrder()
+    public function getOrder(): int
     {
         return 30;
     }

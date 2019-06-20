@@ -22,7 +22,7 @@ class UserDataTest extends TestCase
     /** @var UserData */
     private $userData;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->id          = 1;
         $this->username    = 'username';
@@ -30,17 +30,17 @@ class UserDataTest extends TestCase
         $this->userData    = new UserData($this->id, $this->username, $this->displayName);
     }
 
-    public function testGetId()
+    public function testGetId(): void
     {
         self::assertEquals($this->id, $this->userData->getId());
     }
 
-    public function testGetUsername()
+    public function testGetUsername(): void
     {
         self::assertEquals($this->username, $this->userData->getUsername());
     }
 
-    public function testGetDisplayName()
+    public function testGetDisplayName(): void
     {
         self::assertEquals($this->displayName, $this->userData->getDisplayName());
     }

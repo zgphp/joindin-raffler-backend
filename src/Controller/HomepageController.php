@@ -53,7 +53,7 @@ class HomepageController
         return new Response('OK');
     }
 
-    public function fetchJoindInData()
+    public function fetchJoindInData(): \Symfony\Component\HttpFoundation\Response
     {
         try {
             $this->joindInEventRetrieval->fetch();

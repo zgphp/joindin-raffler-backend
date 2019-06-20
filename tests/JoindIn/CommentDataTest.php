@@ -24,49 +24,49 @@ class CommentDataTest extends TestCase
     /** @var CommentData */
     private $commentData;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->userData    = new UserData(100001, 'username', 'Vanja Horvat');
         $this->talk        = new JoindInTalk(30000, 'Developing xyz', Mockery::mock(JoindInEvent::class));
         $this->commentData = new CommentData(1, 'comment', 5, $this->userData, $this->talk);
     }
 
-    public function testGetId()
+    public function testGetId(): void
     {
         self::assertEquals(1, $this->commentData->getId());
     }
 
-    public function testGetComment()
+    public function testGetComment(): void
     {
         self::assertEquals('comment', $this->commentData->getComment());
     }
 
-    public function testGetRating()
+    public function testGetRating(): void
     {
         self::assertEquals(5, $this->commentData->getRating());
     }
 
-    public function testGetUserData()
+    public function testGetUserData(): void
     {
         self::assertEquals($this->userData, $this->commentData->getUserData());
     }
 
-    public function testGetUserId()
+    public function testGetUserId(): void
     {
         self::assertEquals(100001, $this->commentData->getUserId());
     }
 
-    public function testGetUserName()
+    public function testGetUserName(): void
     {
         self::assertEquals('username', $this->commentData->getUserName());
     }
 
-    public function testGetUserDisplayName()
+    public function testGetUserDisplayName(): void
     {
         self::assertEquals('Vanja Horvat', $this->commentData->getUserDisplayName());
     }
 
-    public function testGetTalk()
+    public function testGetTalk(): void
     {
         self::assertEquals($this->talk, $this->commentData->getTalk());
     }
