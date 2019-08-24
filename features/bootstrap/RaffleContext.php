@@ -241,6 +241,22 @@ class RaffleContext implements Context
     }
 
     /**
+     * @Then /^we get an http response with status code (\d+)$/
+     */
+    public function weGetAnHttpResponseWithCode(int $statusCode)
+    {
+//        $options = [
+//            'json' => ['events' => []],
+//        ];
+//
+//        $this->apiPostJson('/raffle/start', $options);
+//
+//        Assert::eq($this->responseCode, $statusCode);
+
+        $this->weGetAnExceptionForARaffleWithNoMeetups();
+    }
+
+    /**
      * @Then we get an exception for a raffle with no comments
      */
     public function weGetAnExceptionForARaffleWithNoComments()
